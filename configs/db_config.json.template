@@ -1,0 +1,22 @@
+{
+  "production_database": {
+    "host": "YOUR_DATABASE_HOST",
+    "port": 5432,
+    "database": "jobscraps",
+    "username": "YOUR_USERNAME", 
+    "password": "YOUR_PASSWORD"
+  },
+  "working_database": {
+    "host": "YOUR_DATABASE_HOST",
+    "port": 5432,
+    "database": "jobscraps_working",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD"
+  },
+  "connection": {
+    "connect_timeout": 30,
+    "command_timeout": 300,
+    "retry_attempts": 3,
+    "retry_delay": 5
+  }
+}

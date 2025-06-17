@@ -1,0 +1,155 @@
+# config/delete_companies.txt
+%amazon%
+%aspen%
+%behavioral%
+%blooming%
+%Chick-fil-A%
+%church%
+%cinnabon%
+%college%
+%Commonwealth%
+%dental%
+%dentist%
+%Department of Revenue%
+%department of%
+%district%
+%Dunkin%
+%government%
+%homeless%
+%institute of%
+%jefferson county%
+%Latinx%
+%Lockheed%
+%physician%
+%planet fitness%
+%school%
+%sheriff%
+%State of%
+%Summit County%
+%the arc%
+%the buckle%
+%tri-state%
+%U.S. Army%
+%U.S. Marine Corps%
+%universal%
+%universit%
+%usaf%
+%USDA%
+%usmc%
+%veterin%
+%vets%
+%women%
+%Yahoo%
+%ymca%
+%Youtube%
+24 Hour Fitness
+American Eagle Outfitters
+Auto-Chlor System
+AutoNation
+AutoZone
+Bad Daddy's Burger Bar
+Bank of America
+beBee Careers
+ByteDance
+Carl's Jr.
+Catholic
+Ceva Santé Animale
+CVS Health
+Denver Health
+Denver Water
+Diocese of Corpus Christi
+Discovery Place
+DISH
+Dollar Tree Stores
+Dow Jones
+DSW Designer Shoe Warehouse
+Five Below
+Foot Locker
+GameStop
+Humane Society of Boulder Valley
+JCPenney
+lenscrafters
+Little Caesars Pizza
+NASDAQ
+Navy Federal Credit Union
+Nebraska Furniture Mart Inc.
+Oracle
+Papa Johns
+Petco
+petsmart
+Planet Fitness
+Qdoba
+Red Bull
+Robinhood
+S&P Global
+SERVPRO of South Bend, NE/W. St. Joseph County
+Shelby County, AL
+Snohomish County
+Somerset County
+Spirit Halloween
+State Air Resources Board
+Thayer County Health Services
+The City of Lynchburg
+TikTok
+Uber
+uc %
+UFC GYM
+Ulta Beauty
+UNICEF
+United Nations
+Upslope Brewing Company
+Vail
+Vail Resorts
+Virgin Pulse
+Virginia Cancer Specialists
+Virginia Garcia Memorial Health Center
+VirtualVocations
+Visionworks
+Walgreens
+WELLS
+Wells Fargo
+Wendy's
+West Valley Medical Center
+Westchester Medical Center Health Network
+Western Union
+Wetzel's Pretzels
+WeWork
+Williamson County Adult Probation
+Kroger
+Advance Auto Parts
+King Soopers
+%crypto%
+%coin%
+%Kraken%
+UChicago Medicine
+H&M GROUP
+%comcast%
+%xfinity%
+%dish%
+%directv%
+%defense%
+%Pfizer%
+%Fanatics%
+%aflac%
+%commission%only%
+%cutco%
+%doordash%
+%energy%consultant%
+%farmers%insurance%
+%home%improvement%sales%
+%instacart%
+%lyft%
+%make%money%fast%
+%no%experience%necessary%
+%primerica%
+%recruiting%
+%solar%sales%
+%staffing%
+%state%farm%agent%
+%talent%solutions%
+%temp%agency%
+%uber%
+%vector%marketing%
+%work%from%home%opportunity%
+%workforce%
+%world%financial%group%

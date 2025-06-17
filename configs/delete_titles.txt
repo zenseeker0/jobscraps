@@ -1,0 +1,592 @@
+# config/delete_titles.txt
+% shift %
+%.net%
+%1st shift%
+%2nd shift%
+%3rd shift%
+%academic%"
+%account executive%
+%account manager%
+%accountant%
+%accounting%
+%Accounts Payable%
+%Accounts Receivable%
+%acquisition%
+%activities%
+%actuary%
+%administrative%
+%admissions%
+%adult%
+%aero%
+%afterhours%
+%air force%
+%airbnb%
+%am shift%
+%apartment%
+%applied research%
+%apprentice%
+%Archaeologist%
+%Area Field Manager%
+%Area Manager%
+%army%
+%asic%
+%assistant%manager%
+%athletic%
+%attendant%
+%attorney%
+%audio%
+%autism%
+%autocad%
+%automotive%
+%aviation%
+%back end%
+%back office%
+%back-end%
+%backend%
+%backroom%
+%bakery%
+%bank%
+%banquet%
+%barback%
+%Barber%
+%barista%
+%bartend%
+%bartender%
+%bcba%
+%beauty%
+%behavior%
+%benefit%
+%beverage%
+%bilingual%
+%biller%
+%billing%
+%Binder%
+%Bioinform%
+%biological%
+%biomedical%
+%biopharma%
+%blockchain%
+%booking%
+%bookkeeper%
+%Boom Operator%
+%Bottle Server%
+%branch%
+%Brand Ambassador%
+%brew%
+%bridge%
+%broker%
+%Budtender%
+%Business development%
+%butcher%
+%buyer%
+%cabinet%
+%call center%
+%cancer%
+%cannabis%
+%captain%
+%cardiac%
+%cardio%
+%Care Associate%
+%Care Manager%
+%Caregiver%
+%carpenter%
+%Cartographer%
+%case manage%
+%cash%
+%cashier%
+%casino%
+%catering%
+%cath %
+%CDL%
+%charge rn%
+%chef%
+%chemist%
+%chief%
+%child support%
+%civil engineer%
+%civil%
+%claims%
+%cleaner%
+%clear%
+%clerk%
+%clinic%
+%closing%
+%cloth%
+%cnc%
+%Co-Manager%
+%coach%
+%collections%
+%combat%
+%comcast%
+%commission%
+%commission%only%
+%Communications Coordinator%
+%Communications Specialist%
+%compensation%
+%concession%
+%Concierge%
+%conflict%
+%Construction Manager%
+%construction%
+%contact%
+%contract%
+%contracts%
+%control%
+%controller%
+%Cook%
+%counsel%
+%courier%
+%Court Administrator%
+%Court Interpreter%
+%court%
+%courts%
+%Credit Analyst%
+%Crew Member%
+%Crew%
+%crisis%
+%crypto%
+%csr%
+%ct tech%
+%cte%
+%culinary%
+%Customer Relations%
+%customer%acquisition%
+%cyber%
+%daycare%
+%decorator%
+%defense%
+%Delivery%Driver%
+%dental%
+%dentist%
+%deputy%
+%devops%
+%DevSecOps%
+%diagnostic%
+%diesel%
+%dietary%
+%Dietitian%
+%director%
+%directv%
+%disability%
+%dish%
+%dish%
+%Dishwasher%
+%Dispatcher%
+%Dispensary%
+%dispute%
+%District Manager%
+%doctor%
+%donor%
+%Door Installer%
+%door%to%door%
+%Driver%
+%economist%
+%educat%
+%electric%
+%electron%
+%elementary%
+%embedded%
+%emergency%
+%empathetic%
+%EMS%
+%EMT%
+%enforcement%
+%Entomologist%
+%environment%
+%Equipment Operator%
+%equity%
+%Esthetician%
+%estimator%
+%event%
+%executive%
+%fabricator%
+%facebook%
+%facilities%
+%facility%
+%family%
+%fast food%
+%federal%
+%fedramp%
+%finance%
+%financial%
+%fire%
+%firmware%
+%firmware%
+%fitness%
+%flagger%
+%unlimited%
+%floor%
+%floral%
+%food safety%
+%food service%
+%food%
+%Foreman%
+%forensic%
+%forklift%
+%fp&a%
+%fraud%
+%front desk%
+%front end%
+%front office%
+%front-end%
+%frontend%
+%frontline%
+%full stack%
+%full-stack%
+%fullstack%
+%furniture%
+%fw%
+%game%
+%gaming%
+%Genealogist%
+%General Counsel%
+%general manager%
+%geologist%
+%geospatial%
+%Geotechnical%
+%GIS Analyst%
+%GIS Specialist%
+%golf%
+%governance%
+%government%
+%graduat%
+%Grant Writer%
+%grants%
+%graphic artist%
+%graphic design%
+%graphics%
+%groomer%
+%grounds%
+%group%
+%gsoc%
+%GTM%
+%guard%
+%guest service%
+%hazmat%
+%head of%
+%high school%
+%highway%
+%home c%
+%Home Health%
+%hospice%
+%hospital%
+%hostess%
+%hotel%
+%hourly%
+%hous%manager%
+%house cleaning%
+%Housekeeper%
+%housekeeping%
+%housing%
+%HR Business%
+%HR Generalist%
+%HR Manager%
+%HR%Assistant%
+%HRIS%
+%hse%
+%hsse%
+%human%
+%HVAC%
+%IAM%
+%Identity and Access Management%
+%immediate%start%
+%Immunology%
+%In%Home%
+%industrial%
+%infant%
+%infection%
+%Info Sec%
+%information security%
+%infosec%
+%inside sales%
+%Insurance%Agent%
+%insurance%sales%
+%intake coord%
+%intake%
+%Interior Design%
+%intern%
+%investment%
+%irrigation%
+%Janitor%
+%java%
+%journeyman%
+%K-10%
+%K-12%
+%Key Holder%
+%kindergarten%
+%kitchen%
+%labor%
+%lactation%
+%landscap%
+%laser%
+%laundry%
+%lawyer%
+%Leasing%
+%Legal Assistant%
+%legislat%
+%lender%
+%lending%
+%librarian%
+%licensed%
+%litigation%
+%loan%
+%Logistician%
+%lpn%
+%lube%
+%lvn%
+%m&a%
+%machine operator%
+%Machine Operator%
+%machinery%
+%machinist%
+%magnetic%
+%maintenance%
+%mammog%
+%manufact%engineer%
+%marijuana%
+%marine%
+%marketing%representative%
+%material%
+%mechanic%
+%med tech%
+%Mediator%
+%medicaid%
+%medical%
+%medicare%
+%member service%
+%Member Specialist%
+%memory%
+%mental health%
+%merchandis%
+%merchandiser%
+%mergers%
+%middle school%
+%military%
+%missile%
+%mission%
+%money%
+%mortgage%
+%motion graphics%
+%MRI%
+%MRI%
+%nanny%
+%nat%acc%
+%natural%
+%navy%
+%netsuite%
+%network%
+%neuro%
+%night shift%
+%night%
+%no%experience%required%
+%notary%
+%nuclear%
+%nurse%
+%nursing%
+%OB/GYN%
+%officer%
+%ologist%
+%on call%
+%on-call%
+%oncolog%
+%oncolog%
+%optic%
+%oracle%
+%outreach%
+%outside sales%
+%overnight%
+%pacu%
+%paid%
+%paperwork%
+%paralegal%
+%paramedic%
+%part time%
+%part-time%
+%Party Chief%
+%Pastry%
+%pathologist%
+%patient%
+%payment%
+%payroll%
+%pba%
+%pca%
+%pci%
+%pediatric%
+%people%
+%Personal%Assistant%
+%Personal%Trainer%
+%pharma%
+%Phlebotomist%
+%php%
+%phys%
+%physician%
+%Pile Driver%
+%Pipefitter%
+%Plan %Manager%
+%plasma%
+%plumbi%
+%pm shift%
+%Point of Care%
+%police%
+%police%
+%policy%
+%portfolio%
+%practice%
+%pre-k%
+%preschool%
+%president%
+%prn%
+%probation%
+%procure%
+%professor%
+%programmer%
+%property%
+%psych%
+%psycho%
+%public relations%
+%public sector%
+%puller%
+%pursuit%
+%qa engineer%
+%qmap%
+%r&d%
+%radio%
+%radiolo%
+%Real Estate Agent%
+%realtor%
+%receiving%
+%receptionist%
+%Recruiter%
+%recruiting%
+%referral%
+%referal%
+%refriger%
+%Regional Manager%
+%registration%
+%reimbursement%
+%reinsurance%
+%relationship%
+%required%
+%respiratory%
+%restaurant%
+%restoration%
+%rideshare%
+%risk analys%
+%risk assess%
+%rn
+%roofing%
+%russia%
+%safety%
+%sales manager%
+%life%insurance%
+%sanitation%
+%scada%
+%school%
+%scientist%
+%scrum master%
+%seafood%
+%seamstress%
+%seasonal%
+%security%
+%senior living%
+%serve%
+%servers%
+%schedul%
+%sheriff%
+%shift lead%
+%shift%
+%social work%
+%social%
+%software develop%
+%software engineer%
+%sonographer%
+%spring%
+%staffing%
+%statistical%
+%Statistician%
+%stocking%
+%store manager%
+%store%
+%structural%
+%stylist%
+%subst%
+%summer%
+%superintendent%
+%Superintendent%
+%supervisor%
+%surgeon%
+%surgical%
+%talent%
+%taste%
+%tax%
+%team%member%
+%Technician%
+%Teller%
+%temp%
+%territory%
+%Therapeutic%
+%therapist%
+%Therapy%
+%threat%
+%tiktok%
+%trading%
+%traffic%
+%translator%
+%transmission%
+%trauma%
+%treasury%
+%tri-state%
+%tutor%
+%UI Designer%
+%UI/UX%
+%ultrasound%
+%underwriter%
+%universit%
+%usaf%
+%usmc%
+%UX Designer%
+%valet%
+%vehicle%
+%veterinarian%
+%virtual assistant%
+%voltage%
+%vp%
+%waitstaff%
+%Warehouse Associate%
+%water%
+%wax%
+%wealth%
+%wedding%
+%Weeder%
+%Welder%
+%welding%
+%winter%
+%work%from%home%opportunity%
+%x-ray%
+%xfinity%
+%yacht%
+%yoga%
+%youth%
+%youtube%
+care%
+host
+office%
+oil%
+Plant%
+Porter
+production%
+research%
+retail%
+Revenue%
+risk%
+RN %
+rn%
+robot%
+shop%
+SOC %
+test%
+thermal%
+%bi-lingual%
+trust%
+waste%
+water%
