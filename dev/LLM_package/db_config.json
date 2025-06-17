@@ -1,0 +1,33 @@
+{
+  "production_database": {
+    "host": "192.168.1.31",
+    "port": 5432,
+    "database": "jobscraps",
+    "username": "jonesy",
+    "password": "placeholder"
+  },
+  "working_database": {
+    "host": "192.168.1.31",
+    "port": 5432,
+    "database": "jobscraps_working",
+    "username": "jonesy",
+    "password": "placeholder"
+  },
+  "connection": {
+    "connect_timeout": 30,
+    "command_timeout": 300,
+    "retry_attempts": 3,
+    "retry_delay": 5,
+    "pool_size": 5,
+    "max_overflow": 10
+  },
+  "ssl": {
+    "enabled": false,
+    "require": false
+  },
+  "logging": {
+    "log_queries": false,
+    "log_slow_queries": true,
+    "slow_query_threshold": 5.0
+  }
+}
