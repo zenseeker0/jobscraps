@@ -192,3 +192,17 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# JobScraps specific
+configs/db_config.json
+configs/*_prod.json
+outputs/Raw Results/*.csv
+outputs/exports/*.csv
+outputs/exports/*.xlsx
+outputs/logs/*.log
+outputs/logs/*.tsv
+backups/DatabaseBackups/*.sql.gz
+backups/DatabaseBackups/backup_manifest.json
+*.xlsx
+!*template*.xlsx
+duplicate_evals.xlsx
+parsed_jobscraper_log.tsv
