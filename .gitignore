@@ -223,3 +223,6 @@ sql/
 *.csv
 duplicate_evals.xlsx
 parsed_jobscraper_log.tsv
+
+.DS_Store
+**/.DS_Store
