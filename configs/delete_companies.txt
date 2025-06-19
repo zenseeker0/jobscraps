@@ -1,49 +1,87 @@
-# config/delete_companies.txt
+%aflac%
 %amazon%
+%Army%
 %aspen%
 %behavioral%
 %blooming%
 %Chick-fil-A%
 %church%
 %cinnabon%
+%coin%
 %college%
+%comcast%
+%commission%only%
 %Commonwealth%
+%crypto%
+%cutco%
+%defense%
 %dental%
 %dentist%
 %Department of Revenue%
 %department of%
+%directv%
+%dish%
 %district%
+%doordash%
 %Dunkin%
+%energy%consultant%
+%Fanatics%
+%farmers%insurance%
 %government%
+%home%improvement%sales%
 %homeless%
+%instacart%
 %institute of%
 %jefferson county%
+%Kraken%
 %Latinx%
 %Lockheed%
+%lowe's%
+%lyft%
+%make%money%fast%
+%no%experience%necessary%
+%Pfizer%
 %physician%
 %planet fitness%
+%primerica%
+%Probation%
+%recruiting%
 %school%
 %sheriff%
+%solar%sales%
+%staffing%
 %State of%
+%state%farm%agent%
 %Summit County%
+%talent%solutions%
+%temp%agency%
 %the arc%
 %the buckle%
 %tri-state%
 %U.S. Army%
 %U.S. Marine Corps%
+%uber%
 %universal%
 %universit%
 %usaf%
 %USDA%
 %usmc%
+%vector%marketing%
 %veterin%
 %vets%
 %women%
+%work%from%home%opportunity%
+%workforce%
+%world%financial%group%
+%xfinity%
 %Yahoo%
 %ymca%
 %Youtube%
 24 Hour Fitness
+Advance Auto Parts
+Alea Partners
 American Eagle Outfitters
+apple
 Auto-Chlor System
 AutoNation
 AutoZone
@@ -66,8 +104,11 @@ DSW Designer Shoe Warehouse
 Five Below
 Foot Locker
 GameStop
+H&M GROUP
 Humane Society of Boulder Valley
 JCPenney
+King Soopers
+Kroger
 lenscrafters
 Little Caesars Pizza
 NASDAQ
@@ -77,6 +118,7 @@ Oracle
 Papa Johns
 Petco
 petsmart
+Pixel Plus
 Planet Fitness
 Qdoba
 Red Bull
@@ -93,17 +135,20 @@ The City of Lynchburg
 TikTok
 Uber
 uc %
+UChicago Medicine
 UFC GYM
 Ulta Beauty
 UNICEF
 United Nations
 Upslope Brewing Company
+urban outfitters
 Vail
 Vail Resorts
 Virgin Pulse
 Virginia Cancer Specialists
 Virginia Garcia Memorial Health Center
 VirtualVocations
+visa
 Visionworks
 Walgreens
 WELLS
@@ -114,42 +159,3 @@ Westchester Medical Center Health Network
 Western Union
 Wetzel's Pretzels
 WeWork
-Williamson County Adult Probation
-Kroger
-Advance Auto Parts
-King Soopers
-%crypto%
-%coin%
-%Kraken%
-UChicago Medicine
-H&M GROUP
-%comcast%
-%xfinity%
-%dish%
-%directv%
-%defense%
-%Pfizer%
-%Fanatics%
-%aflac%
-%commission%only%
-%cutco%
-%doordash%
-%energy%consultant%
-%farmers%insurance%
-%home%improvement%sales%
-%instacart%
-%lyft%
-%make%money%fast%
-%no%experience%necessary%
-%primerica%
-%recruiting%
-%solar%sales%
-%staffing%
-%state%farm%agent%
-%talent%solutions%
-%temp%agency%
-%uber%
-%vector%marketing%
-%work%from%home%opportunity%
-%workforce%
-%world%financial%group%

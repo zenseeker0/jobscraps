@@ -1,9 +1,9 @@
-# config/delete_titles.txt
 % shift %
 %.net%
 %1st shift%
 %2nd shift%
 %3rd shift%
+%911%
 %academic%"
 %account executive%
 %account manager%
@@ -13,50 +13,68 @@
 %Accounts Receivable%
 %acquisition%
 %activities%
+%actuar%
 %actuary%
 %administrative%
 %admissions%
 %adult%
 %aero%
 %afterhours%
+%agile%
+%aide%
 %air force%
 %airbnb%
+%airforce%
 %am shift%
+%Ambassador%
+%animator%
 %apartment%
 %applied research%
+%apply%now%
+%apply%today%
 %apprentice%
+%apps dev%
+%apps supervisor%
+%arborist%
 %Archaeologist%
 %Area Field Manager%
 %Area Manager%
 %army%
 %asic%
 %assistant%manager%
+%assisted%
 %athletic%
 %attendant%
 %attorney%
 %audio%
+%Authorization%
 %autism%
 %autocad%
 %automotive%
 %aviation%
+%award%
 %back end%
 %back office%
 %back-end%
 %backend%
 %backroom%
+%baker%
 %bakery%
 %bank%
 %banquet%
+%Bar%
 %barback%
 %Barber%
 %barista%
 %bartend%
 %bartender%
+%Bathroom%
 %bcba%
 %beauty%
 %behavior%
 %benefit%
 %beverage%
+%bi-lingual%
 %bilingual%
 %biller%
 %billing%
@@ -66,10 +84,14 @@
 %biomedical%
 %biopharma%
 %blockchain%
+%Board%
 %booking%
 %bookkeeper%
 %Boom Operator%
+%Botox%
 %Bottle Server%
+%Boutique%
+%Box truck%
 %branch%
 %Brand Ambassador%
 %brew%
@@ -83,6 +105,7 @@
 %call center%
 %cancer%
 %cannabis%
+%Canvas%
 %captain%
 %cardiac%
 %cardio%
@@ -92,39 +115,51 @@
 %carpenter%
 %Cartographer%
 %case manage%
+%Case%
+%Casework%
 %cash%
 %cashier%
 %casino%
 %catering%
 %cath %
 %CDL%
+%Certified%
 %charge rn%
 %chef%
 %chemist%
 %chief%
 %child support%
+%Child%
+%Chinese%
+%chiro%
 %civil engineer%
 %civil%
 %claims%
 %cleaner%
 %clear%
 %clerk%
+%Client manager%
 %clinic%
 %closing%
 %cloth%
 %cnc%
 %Co-Manager%
 %coach%
+%Collection%
 %collections%
+%Collision%
 %combat%
 %comcast%
 %commission%
 %commission%only%
 %Communications Coordinator%
 %Communications Specialist%
+%Community%
 %compensation%
+%Competitive%
 %concession%
 %Concierge%
+%Conductor%
 %conflict%
 %Construction Manager%
 %construction%
@@ -146,11 +181,15 @@
 %crisis%
 %crypto%
 %csr%
+%csr%
 %ct tech%
 %cte%
 %culinary%
+%Custodian%
 %Customer Relations%
 %customer%acquisition%
+%customer%repr%
+%customer%service%
 %cyber%
 %daycare%
 %decorator%
@@ -158,6 +197,7 @@
 %Delivery%Driver%
 %dental%
 %dentist%
+%Dependency%
 %deputy%
 %devops%
 %DevSecOps%
@@ -165,6 +205,8 @@
 %diesel%
 %dietary%
 %Dietitian%
+%Dining%
+%Direct support%
 %director%
 %directv%
 %disability%
@@ -188,9 +230,11 @@
 %embedded%
 %emergency%
 %empathetic%
+%Employee%
 %EMS%
 %EMT%
 %enforcement%
+%engineering%manager%
 %Entomologist%
 %environment%
 %Equipment Operator%
@@ -199,6 +243,7 @@
 %estimator%
 %event%
 %executive%
+%Experience%
 %fabricator%
 %facebook%
 %facilities%
@@ -207,6 +252,9 @@
 %fast food%
 %federal%
 %fedramp%
+%Fiber%
+%Field service engineer%
+%fighter%
 %finance%
 %financial%
 %fire%
@@ -214,7 +262,6 @@
 %firmware%
 %fitness%
 %flagger%
-%unlimited%
 %floor%
 %floral%
 %food safety%
@@ -234,6 +281,7 @@
 %full stack%
 %full-stack%
 %fullstack%
+%Furnace%
 %furniture%
 %fw%
 %game%
@@ -262,6 +310,7 @@
 %GTM%
 %guard%
 %guest service%
+%Guest%
 %hazmat%
 %head of%
 %high school%
@@ -299,19 +348,25 @@
 %information security%
 %infosec%
 %inside sales%
+%Insurance%
 %Insurance%Agent%
 %insurance%sales%
 %intake coord%
 %intake%
+%Intelligence analyst%
+%Intelligence%
 %Interior Design%
 %intern%
 %investment%
+%investor%
 %irrigation%
 %Janitor%
 %java%
 %journeyman%
+%judicial%
 %K-10%
 %K-12%
+%Key holder%
 %Key Holder%
 %kindergarten%
 %kitchen%
@@ -323,30 +378,43 @@
 %lawyer%
 %Leasing%
 %Legal Assistant%
+%Legal%
 %legislat%
 %lender%
 %lending%
 %librarian%
+%Library%
 %licensed%
+%life%insurance%
+%Linux%
+%Liquid%
+%Listing%
 %litigation%
 %loan%
 %Logistician%
 %lpn%
 %lube%
 %lvn%
+%M.d.s%
 %m&a%
 %machine operator%
 %Machine Operator%
 %machinery%
 %machinist%
 %magnetic%
+%Mainframe%
 %maintenance%
 %mammog%
+%manager%retail%
+%Managing partner%
+%Manhattan%
 %manufact%engineer%
 %marijuana%
 %marine%
+%marketing%manager%
 %marketing%representative%
 %material%
+%Mds%
 %mechanic%
 %med tech%
 %Mediator%
@@ -390,6 +458,7 @@
 %on-call%
 %oncolog%
 %oncolog%
+%Ontology%
 %optic%
 %oracle%
 %outreach%
@@ -412,21 +481,26 @@
 %pca%
 %pci%
 %pediatric%
+%pension%
 %people%
 %Personal%Assistant%
 %Personal%Trainer%
 %pharma%
 %Phlebotomist%
+%photographer%
 %php%
 %phys%
 %physician%
+%picker%
 %Pile Driver%
 %Pipefitter%
 %Plan %Manager%
 %plasma%
+%Plumber%
 %plumbi%
 %pm shift%
 %Point of Care%
+%Point of sale%
 %police%
 %police%
 %policy%
@@ -454,12 +528,13 @@
 %radiolo%
 %Real Estate Agent%
 %realtor%
+%receiver%
 %receiving%
 %receptionist%
 %Recruiter%
 %recruiting%
-%referral%
 %referal%
+%referral%
 %refriger%
 %Regional Manager%
 %registration%
@@ -474,24 +549,28 @@
 %risk analys%
 %risk assess%
 %rn
+%Rodent%
 %roofing%
 %russia%
 %safety%
 %sales manager%
-%life%insurance%
+%sales%rep%
+%Sandwich%
 %sanitation%
 %scada%
+%schedul%
 %school%
+%science%
 %scientist%
 %scrum master%
 %seafood%
 %seamstress%
 %seasonal%
 %security%
+%Selling%
 %senior living%
 %serve%
 %servers%
-%schedul%
 %sheriff%
 %shift lead%
 %shift%
@@ -500,10 +579,13 @@
 %software develop%
 %software engineer%
 %sonographer%
+%Sourcing%
+%Spanish%
 %spring%
 %staffing%
 %statistical%
 %Statistician%
+%stocker%
 %stocking%
 %store manager%
 %store%
@@ -519,6 +601,7 @@
 %talent%
 %taste%
 %tax%
+%Teacher%
 %team%member%
 %Technician%
 %Teller%
@@ -528,11 +611,14 @@
 %therapist%
 %Therapy%
 %threat%
+%Tier 2%
+%Tier 3%
 %tiktok%
 %trading%
 %traffic%
 %translator%
 %transmission%
+%Transporter%
 %trauma%
 %treasury%
 %tri-state%
@@ -542,7 +628,10 @@
 %ultrasound%
 %underwriter%
 %universit%
+%Unix%
+%unlimited%
 %usaf%
+%Used car%
 %usmc%
 %UX Designer%
 %valet%
@@ -553,6 +642,9 @@
 %vp%
 %waitstaff%
 %Warehouse Associate%
+%Warehouse worker%
+%Warehouse%
+%Warranty%
 %water%
 %wax%
 %wealth%
@@ -560,6 +652,7 @@
 %Weeder%
 %Welder%
 %welding%
+%Window%
 %winter%
 %work%from%home%opportunity%
 %x-ray%
@@ -568,10 +661,22 @@
 %yoga%
 %youth%
 %youtube%
+air%
+architect%
+Auto %
+bell%
 care%
+center%
+city%
+cna%
+delivery%
+foster%
+founding%
 host
+hr%
 office%
 oil%
+parts%
 Plant%
 Porter
 production%
@@ -584,9 +689,10 @@ rn%
 robot%
 shop%
 SOC %
+spa%
 test%
 thermal%
-%bi-lingual%
 trust%
+utility%
 waste%
 water%

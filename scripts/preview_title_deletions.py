@@ -2,14 +2,20 @@
 # preview_title_deletions.py
 #
 # Preview the impact of --delete-by-titles before executing the actual deletion
-# Shows which jobs would be deleted based on patterns in delete_titles.txt
+# Shows which jobs would be deleted based on patterns in delete_titles_test.txt
 
 import os
+import sys
 import csv
 import pandas as pd
 import argparse
 from datetime import datetime
 from typing import List, Dict
+
+# Add parent directory to path to import from scraper.py
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+sys.path.insert(0, PARENT_DIR)
 
 # Import classes from scraper.py
 from scraper import DatabaseConfig, JobDatabase
@@ -18,16 +24,18 @@ from scraper import DatabaseConfig, JobDatabase
 class TitleDeletionPreview:
     """Preview title-based job deletions without actually deleting anything."""
     
-    def __init__(self, db_config_path: str = "/Users/jonesy/gitlocal/jobscrape/config/db_config.json"):
+    def __init__(self, db_config_path: str = None):
         """Initialize with production database connection.
         
         Args:
             db_config_path: Path to database configuration file
         """
+        if db_config_path is None:
+            db_config_path = os.path.join(PARENT_DIR, "configs", "db_config.json")
         self.db = JobDatabase(db_config_path, "production")
         print(f"✓ Connected to production database for preview")
     
-    def preview_title_deletions(self, patterns_file: str = "/Users/jonesy/gitlocal/jobscrape/config/delete_titles.txt"):
+    def preview_title_deletions(self, patterns_file: str = None):
         """Preview which jobs would be deleted by title patterns.
         
         Args:
@@ -36,6 +44,8 @@ class TitleDeletionPreview:
         Returns:
             Tuple of (DataFrame with preview results, list of patterns with no matches)
         """
+        if patterns_file is None:
+            patterns_file = os.path.join(PARENT_DIR, "configs", "delete_titles_test.txt")
         if not os.path.exists(patterns_file):
             print(f"❌ Patterns file {patterns_file} not found")
             return pd.DataFrame(), []
@@ -120,10 +130,10 @@ class TitleDeletionPreview:
         """
         if filename is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"title_deletion_preview_{timestamp}.csv"
+            filename = os.path.join(PARENT_DIR, "outputs", "testing", f"title_deletion_preview_{timestamp}.csv")
         
         # Ensure output directory exists
-        output_dir = os.path.dirname(filename) if os.path.dirname(filename) else "."
+        output_dir = os.path.dirname(filename)
         os.makedirs(output_dir, exist_ok=True)
         
         # Sort by title for easier review
@@ -365,7 +375,14 @@ class TitleDeletionPreview:
         print(f"\n👀 SAMPLE OF JOBS TO BE DELETED (showing {len(unique_jobs)} of {df['id'].nunique()}):")
         print("-" * 100)
         
-    def simulate_company_deletion(self, companies_file: str = "/Users/jonesy/gitlocal/jobscrape/config/delete_companies.txt") -> pd.DataFrame:
+        for idx, job in unique_jobs.iterrows():
+            print(f"\nJob ID: {job['id']}")
+            print(f"Title: {job['title']}")
+            print(f"Company: {job['company'] if job['company'] else '(No company)'}")
+            print(f"Search Query: {job['search_query']}")
+            print(f"Matched by pattern: '{job['title_match_criteria']}'")
+    
+    def simulate_company_deletion(self, companies_file: str = None) -> pd.DataFrame:
         """Simulate deletion of jobs by company patterns and return remaining jobs.
         
         Args:
@@ -374,6 +391,8 @@ class TitleDeletionPreview:
         Returns:
             DataFrame with jobs that would remain after company deletion
         """
+        if companies_file is None:
+            companies_file = os.path.join(PARENT_DIR, "configs", "delete_companies_test.txt")
         try:
             if not os.path.exists(companies_file):
                 print(f"❌ Company patterns file {companies_file} not found")
@@ -419,17 +438,41 @@ class TitleDeletionPreview:
                 try:
                     pattern_lower = pattern.lower()
                     
-                    # Convert SQL LIKE pattern to regex pattern
-                    regex_pattern = pattern_lower.replace('%', '.*')
-                    
-                    # Find jobs matching this company pattern
-                    matching_jobs = all_jobs_df[
-                        all_jobs_df['company'].fillna('').str.lower().str.contains(
-                            regex_pattern, 
-                            regex=True, 
-                            na=False
-                        )
-                    ]['id'].tolist()
+                    # SQL LIKE patterns use % as wildcard, regex uses .*
+                    # Convert SQL pattern to pandas string matching
+                    if pattern_lower.startswith('%') and pattern_lower.endswith('%'):
+                        # %pattern% - contains
+                        search_str = pattern_lower[1:-1]
+                        matching_jobs = all_jobs_df[
+                            all_jobs_df['company'].fillna('').str.lower().str.contains(
+                                search_str, 
+                                regex=False, 
+                                na=False
+                            )
+                        ]['id'].tolist()
+                    elif pattern_lower.startswith('%'):
+                        # %pattern - ends with
+                        search_str = pattern_lower[1:]
+                        matching_jobs = all_jobs_df[
+                            all_jobs_df['company'].fillna('').str.lower().str.endswith(
+                                search_str, 
+                                na=False
+                            )
+                        ]['id'].tolist()
+                    elif pattern_lower.endswith('%'):
+                        # pattern% - starts with
+                        search_str = pattern_lower[:-1]
+                        matching_jobs = all_jobs_df[
+                            all_jobs_df['company'].fillna('').str.lower().str.startswith(
+                                search_str, 
+                                na=False
+                            )
+                        ]['id'].tolist()
+                    else:
+                        # exact match
+                        matching_jobs = all_jobs_df[
+                            all_jobs_df['company'].fillna('').str.lower() == pattern_lower
+                        ]['id'].tolist()
                     
                     if matching_jobs:
                         company_pattern_matches += 1
@@ -506,14 +549,40 @@ class TitleDeletionPreview:
             
             pattern_lower = pattern.lower()
             
-            # Find matches in remaining jobs
-            matching_jobs = remaining_jobs_df[
-                remaining_jobs_df['title'].fillna('').str.lower().str.contains(
-                    pattern_lower.replace('%', '.*'),
-                    regex=True,
-                    na=False
-                )
-            ]
+            # Find matches in remaining jobs using same logic as delete_jobs_by_field
+            if pattern_lower.startswith('%') and pattern_lower.endswith('%'):
+                # %pattern% - contains
+                search_str = pattern_lower[1:-1]
+                matching_jobs = remaining_jobs_df[
+                    remaining_jobs_df['title'].fillna('').str.lower().str.contains(
+                        search_str,
+                        regex=False,
+                        na=False
+                    )
+                ]
+            elif pattern_lower.startswith('%'):
+                # %pattern - ends with
+                search_str = pattern_lower[1:]
+                matching_jobs = remaining_jobs_df[
+                    remaining_jobs_df['title'].fillna('').str.lower().str.endswith(
+                        search_str,
+                        na=False
+                    )
+                ]
+            elif pattern_lower.endswith('%'):
+                # pattern% - starts with
+                search_str = pattern_lower[:-1]
+                matching_jobs = remaining_jobs_df[
+                    remaining_jobs_df['title'].fillna('').str.lower().str.startswith(
+                        search_str,
+                        na=False
+                    )
+                ]
+            else:
+                # exact match
+                matching_jobs = remaining_jobs_df[
+                    remaining_jobs_df['title'].fillna('').str.lower() == pattern_lower
+                ]
             
             if not matching_jobs.empty:
                 patterns_with_matches += 1
@@ -559,42 +628,48 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
+  # From scripts directory:
   python preview_title_deletions.py
   python preview_title_deletions.py --show-analysis
-  python preview_title_deletions.py --output-file my_preview.csv
-  python preview_title_deletions.py --patterns-file custom_patterns.txt --show-analysis
+  python preview_title_deletions.py --output-file ../outputs/testing/my_preview.csv
+  python preview_title_deletions.py --patterns-file ../configs/custom_patterns.txt --show-analysis
   python preview_title_deletions.py --simulate-company-deletion --show-analysis
-  python preview_title_deletions.py --simulate-company-deletion --companies-file custom_companies.txt
+  
+  # From project root:
+  python scripts/preview_title_deletions.py
+  python scripts/preview_title_deletions.py --show-analysis
         """
     )
     
     parser.add_argument('--patterns-file', 
-                       default='/Users/jonesy/gitlocal/jobscrape/config/delete_titles.txt',
-                       help='Path to file containing title patterns (default: config/delete_titles.txt)')
+                       help=f'Path to file containing title patterns (default: {os.path.join("configs", "delete_titles_test.txt")})')
     parser.add_argument('--output-file', 
-                       help='Output CSV filename (default: auto-generated with timestamp)')
+                       help=f'Output CSV filename (default: {os.path.join("outputs", "testing", "title_deletion_preview_[timestamp].csv")})')
     parser.add_argument('--db-config', 
-                       default='/Users/jonesy/gitlocal/jobscrape/config/db_config.json',
-                       help='Path to database configuration file')
+                       help=f'Path to database configuration file (default: {os.path.join("configs", "db_config.json")})')
     parser.add_argument('--show-analysis', action='store_true',
                        help='Show detailed analysis (pattern summary, top companies, etc.)')
     parser.add_argument('--simulate-company-deletion', action='store_true',
                        help='Simulate running --delete-by-company first, then analyze title deletions on remaining jobs')
     parser.add_argument('--companies-file', 
-                       default='/Users/jonesy/gitlocal/jobscrape/config/delete_companies.txt',
-                       help='Path to file containing company patterns for simulation (default: config/delete_companies.txt)')
+                       help=f'Path to file containing company patterns for simulation (default: {os.path.join("configs", "delete_companies_test.txt")})')
     
     args = parser.parse_args()
     
-    preview = TitleDeletionPreview(args.db_config)
+    # Handle default paths
+    db_config_path = args.db_config if args.db_config else None
+    patterns_file = args.patterns_file if args.patterns_file else None
+    companies_file = args.companies_file if args.companies_file else None
+    
+    preview = TitleDeletionPreview(db_config_path)
     
     try:
         print("=" * 70)
         print("🔍 TITLE DELETION PREVIEW")
         print("=" * 70)
-        print(f"📁 Patterns file: {args.patterns_file}")
+        print(f"📁 Patterns file: {patterns_file or os.path.join(PARENT_DIR, 'configs', 'delete_titles_test.txt')}")
         if args.simulate_company_deletion:
-            print(f"📁 Companies file: {args.companies_file}")
+            print(f"📁 Companies file: {companies_file or os.path.join(PARENT_DIR, 'configs', 'delete_companies_test.txt')}")
         print(f"🗄️  Database: Production (jobscraps)")
         print(f"⚠️  This is a PREVIEW ONLY - no jobs will be deleted")
         print()
@@ -602,9 +677,9 @@ Examples:
         # Generate preview (with or without company simulation)
         if args.simulate_company_deletion:
             df, patterns_with_no_matches = preview.preview_title_deletions_with_simulation(
-                args.patterns_file, args.companies_file)
+                patterns_file, companies_file)
         else:
-            df, patterns_with_no_matches = preview.preview_title_deletions(args.patterns_file)
+            df, patterns_with_no_matches = preview.preview_title_deletions(patterns_file)
         
         if not df.empty:
             # Save to CSV
@@ -615,6 +690,7 @@ Examples:
                 preview.show_top_companies_affected(df)
                 preview.show_search_query_breakdown(df)
                 preview.analyze_pattern_overlap(df)
+                preview.show_sample_jobs(df)
                 preview.show_patterns_with_no_matches(patterns_with_no_matches)
             
             print(f"\n" + "=" * 70)
@@ -622,10 +698,16 @@ Examples:
             print(f"📊 {df['id'].nunique():,} unique jobs would be deleted")
             if args.simulate_company_deletion:
                 print(f"🎭 This simulation shows title deletion impact AFTER company deletion")
-                print(f"🚀 To proceed: first run python scraper.py --delete-by-company")
-                print(f"🚀 Then run: python scraper.py --delete-by-title")
+                print(f"🚀 To proceed (from project root):")
+                print(f"   python scraper.py --delete-by-company")
+                print(f"   python scraper.py --delete-by-title")
+                print(f"🚀 Or from scripts directory:")
+                print(f"   python ../scraper.py --delete-by-company")
+                print(f"   python ../scraper.py --delete-by-title")
             else:
-                print(f"🚀 To proceed with deletion, run: python scraper.py --delete-by-title")
+                print(f"🚀 To proceed with deletion:")
+                print(f"   From project root: python scraper.py --delete-by-title")
+                print(f"   From scripts dir: python ../scraper.py --delete-by-title")
             print(f"💡 For detailed analysis, run with --show-analysis flag")
             print("=" * 70)
         else:

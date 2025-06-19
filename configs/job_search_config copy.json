@@ -1,0 +1,789 @@
+{
+  "jobs": [
+    {
+      "name": "Professional Services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "USA",
+        "google_search_term": "Professional Services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "USA",
+        "google_search_term": "Product Training jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "USA",
+        "google_search_term": "Implementation jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "USA",
+        "google_search_term": "Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "USA",
+        "google_search_term": "Data Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success",
+        "location": "Longmont, CO",
+        "google_search_term": "Customer Success jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success",
+        "location": "Longmont, CO",
+        "google_search_term": "Customer Success jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success",
+        "location": "USA",
+        "google_search_term": "Customer Success jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Business Analyst jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Business Analyst jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "USA",
+        "google_search_term": "Business Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "USA",
+        "google_search_term": "Onboarding jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Operations Analyst jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Operations Analyst jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "USA",
+        "google_search_term": "Operations Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "USA",
+        "google_search_term": "managed services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Insights Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Insights Analyst",
+        "location": "USA",
+        "google_search_term": "Customer Insights Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Account Manager (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "USA",
+        "google_search_term": "Technical Account Manager jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "USA",
+        "google_search_term": "Technical Content jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation Specialist (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation Specialist",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation Specialist jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation Specialist (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation Specialist",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation Specialist jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation Specialist (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation Specialist",
+        "location": "USA",
+        "google_search_term": "Implementation Specialist jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Experience Manager (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Experience Manager",
+        "location": "Longmont, CO",
+        "google_search_term": "Customer Experience Manager jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Experience Manager (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Experience Manager",
+        "location": "Longmont, CO",
+        "google_search_term": "Customer Experience Manager jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Experience Manager (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Experience Manager",
+        "location": "USA",
+        "google_search_term": "Customer Experience Manager jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Success Manager (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Success Manager",
+        "location": "USA",
+        "google_search_term": "Technical Success Manager jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "USA",
+        "google_search_term": "Data Visualization jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Partner Enablement",
+        "location": "Longmont, CO",
+        "google_search_term": "Partner Enablement jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Partner Enablement",
+        "location": "Longmont, CO",
+        "google_search_term": "Partner Enablement jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Partner Enablement",
+        "location": "USA",
+        "google_search_term": "Partner Enablement jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "USA",
+        "google_search_term": "Solutions Engineer jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    }
+  ],
+  "global": {
+    "description_format": "markdown",
+    "enforce_annual_salary": true,
+    "verbose": 2,
+    "distance": 25
+  }
+}
