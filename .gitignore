@@ -193,16 +193,33 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 # JobScraps specific
-configs/db_config.json
-configs/*_prod.json
-outputs/Raw Results/*.csv
-outputs/exports/*.csv
-outputs/exports/*.xlsx
-outputs/logs/*.log
-outputs/logs/*.tsv
 backups/DatabaseBackups/*.sql.gz
 backups/DatabaseBackups/backup_manifest.json
-*.xlsx
+
+configs/delete*
+configs/db_config.json
+configs/*_prod.json
+
+# no changes to data/
+
+dev/
+
+outputs/
+
+# outputs/Raw Results/*.csv
+# outputs/exports/*.csv
+# outputs/exports/*.xlsx
+# outputs/logs/*.log
+# outputs/logs/*.tsv
+
+scripts/
+
+sql/
+
+
+
 !*template*.xlsx
+*.xlsx
+*.csv
 duplicate_evals.xlsx
 parsed_jobscraper_log.tsv
