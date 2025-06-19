@@ -261,8 +261,8 @@ def process_log_file(input_file: str, output_file: str, batch_start_num: int = 1
         print("No valid batches found (all had < 5 searches)")
 
 def main():
-    input_file = "jobscraper.log"  # Input log file
-    output_file = "parsed_jobscraper_log.tsv"  # Output tab-separated file 
+    input_file = "/Users/jonesy/gitlocal/jobscraps/outputs/logs/jobscraper.log"  # Input log file
+    output_file = "/Users/jonesy/gitlocal/jobscraps/outputs/exports/parsed_jobscraper_log.tsv"  # Output tab-separated file 
     batch_start_num = 1  # Change this to start batch numbering from a different number
     
     try:

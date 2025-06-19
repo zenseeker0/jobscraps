@@ -9,7 +9,6 @@
 
 import os
 import sys
-import csv
 import json
 import logging
 import shutil
@@ -37,12 +36,19 @@ warnings.filterwarnings('ignore',
                        category=UserWarning, 
                        module='pandas')
 
+# Get the directory where scraper.py is located
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Setup logging
+LOG_DIR = os.path.join(SCRIPT_DIR, "outputs", "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("./outputs/logs/jobscraper.log"),
+        logging.FileHandler(os.path.join(LOG_DIR, "jobscraper.log")),
         logging.StreamHandler()
     ]
 )
@@ -52,7 +58,7 @@ logger = logging.getLogger(__name__)
 class DatabaseConfig:
     """Class to handle database configuration loading."""
     
-    def __init__(self, config_path: str = "./configs/db_config.json", 
+    def __init__(self, config_path: str = None, 
                  database_type: str = "production"):
         """Initialize with configuration file path and database type.
         
@@ -60,6 +66,8 @@ class DatabaseConfig:
             config_path: Path to the database configuration file
             database_type: Either 'production' or 'working' to select database config
         """
+        if config_path is None:
+            config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
         self.config_path = config_path
         self.database_type = database_type
         self.config = self._load_config()
@@ -117,7 +125,7 @@ class DatabaseConfig:
 class JobDatabase:
     """Class to handle database operations for job data."""
     
-    def __init__(self, config_path: str = "./configs/db_config.json",
+    def __init__(self, config_path: str = None,
                  database_type: str = "production"):
         """Initialize the database connection.
         
@@ -125,6 +133,8 @@ class JobDatabase:
             config_path: Path to the database configuration file
             database_type: Either 'production' or 'working' to select database config
         """
+        if config_path is None:
+            config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
         self.db_config = DatabaseConfig(config_path, database_type)
         self.database_type = database_type
         self.conn = None
@@ -174,7 +184,7 @@ class JobDatabase:
         """
         try:
             # Create backup directory
-            backup_dir = "./backups/DatabaseBackups"
+            backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
             os.makedirs(backup_dir, exist_ok=True)
             
             # Get connection parameters
@@ -269,7 +279,7 @@ class JobDatabase:
         Args:
             backup_info: Dictionary containing backup information
         """
-        manifest_path = "./backups/DatabaseBackups/backup_manifest.json"
+        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
         
         try:
             # Load existing manifest
@@ -305,7 +315,7 @@ class JobDatabase:
         Returns:
             Dictionary with retention summary
         """
-        backup_dir = "./backups/DatabaseBackups"
+        backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
         manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         
         try:
@@ -388,7 +398,7 @@ class JobDatabase:
         Returns:
             List of backup information dictionaries
         """
-        manifest_path = "./backups/DatabaseBackups/backup_manifest.json"
+        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
         
         try:
             if not os.path.exists(manifest_path):
@@ -416,7 +426,7 @@ class JobDatabase:
         Returns:
             True if restore was successful, False otherwise
         """
-        backup_path = f"./backups/DatabaseBackups/{backup_filename}"
+        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
         
         if not os.path.exists(backup_path):
             logger.error(f"Backup file not found: {backup_path}")
@@ -468,7 +478,7 @@ class JobDatabase:
         Returns:
             True if backup is valid, False otherwise
         """
-        backup_path = f"./backups/DatabaseBackups/{backup_filename}"
+        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
         
         if not os.path.exists(backup_path):
             logger.error(f"Backup file not found: {backup_path}")
@@ -915,7 +925,7 @@ class JobDatabase:
             print(f"✓ Database backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
             
             # Also create CSV backup for backwards compatibility
-            backup_dir = "/Users/jonesy/gitlocal/jobscrape/Backups"
+            backup_dir = os.path.join(SCRIPT_DIR, "backups")
             os.makedirs(backup_dir, exist_ok=True)
             
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -1088,87 +1098,39 @@ class DuplicateManager:
         # Fallback: return first job if no other criteria distinguishes them
         return candidates[0]
     
-    def create_excel_report(self, duplicate_groups: List[List[Dict]], filename: str = "duplicate_evals.xlsx") -> None:
-        """Create Excel report of duplicate groups with evaluation.
+    def delete_duplicate_jobs_directly(self, ids_to_delete: List[str]) -> int:
+        """Delete duplicate jobs directly from database without creating files.
         
         Args:
-            duplicate_groups: List of duplicate job groups
-            filename: Name of the Excel file to create
+            ids_to_delete: List of job IDs to delete
+            
+        Returns:
+            Number of jobs deleted
         """
-        # Prepare data for Excel
-        report_data = []
-        
-        for group_num, group in enumerate(duplicate_groups, 1):
-            best_job = self._select_best_job(group)
+        if not ids_to_delete:
+            return 0
             
-            for job in group:
-                description = job.get('description', '') or ''
-                description_len = len(description)
-                description_top = description[:250] if description else ''
-                
-                dupe_eval = "Keep" if job['id'] == best_job['id'] else "Delete"
-                
-                report_data.append({
-                    'group_num': group_num,
-                    'dupe_eval': dupe_eval,
-                    'id': job['id'],
-                    'site': job['site'],
-                    'title': job['title'],
-                    'company': job['company'],
-                    'location': job.get('location', ''),
-                    'min_amount': job.get('min_amount', ''),
-                    'max_amount': job.get('max_amount', ''),
-                    'is_remote': job.get('is_remote', ''),
-                    'job_url': job.get('job_url', ''),
-                    'description_len': description_len,
-                    'description_top': description_top
-                })
-        
-        # Create DataFrame and save to Excel
-        df = pd.DataFrame(report_data)
-        
-        # Reorder columns to match specification
-        column_order = [
-            'group_num', 'dupe_eval', 'id', 'site', 'title', 'company', 'location',
-            'min_amount', 'max_amount', 'is_remote', 'job_url', 'description_len', 'description_top'
-        ]
-        df = df[column_order]
-        
         try:
-            abs_filename = os.path.abspath(filename)
-            
-            try:
-                import openpyxl
-                engine = 'openpyxl'
-            except ImportError:
-                try:
-                    import xlsxwriter
-                    engine = 'xlsxwriter'
-                except ImportError:
-                    engine = None
-            
-            if engine:
-                with pd.ExcelWriter(abs_filename, engine=engine) as writer:
-                    df.to_excel(writer, sheet_name='duplicate_evals', index=False)
-            else:
-                df.to_excel(abs_filename, sheet_name='duplicate_evals', index=False)
-            
-            logger.info(f"Excel report created: {abs_filename}")
-            print(f"Excel report created: {abs_filename}")
-            print(f"Total duplicate groups: {len(duplicate_groups)}")
-            print(f"Total duplicate jobs processed: {len(report_data)}")
-            
+            with self.db.conn.cursor() as cursor:
+                cursor.execute("DELETE FROM scraped_jobs WHERE id = ANY(%s)", (ids_to_delete,))
+                rows_deleted = cursor.rowcount
+                self.db.conn.commit()
+                
+            logger.info(f"Deleted {rows_deleted} duplicate jobs directly")
+            return rows_deleted
         except Exception as e:
-            logger.error(f"Error creating Excel report: {str(e)}")
-            print(f"Error creating Excel report: {str(e)}")
+            logger.error(f"Error deleting duplicate jobs directly: {str(e)}")
+            return 0
     
-    def create_delete_ids_file(self, ids_to_delete: List[str], filename: str = "configs/delete_ids.txt") -> None:
+    def create_delete_ids_file(self, ids_to_delete: List[str], filename: str = None) -> None:
         """Create/overwrite file with IDs to delete.
         
         Args:
             ids_to_delete: List of job IDs to delete
             filename: Name of the file to create/overwrite
         """
+        if filename is None:
+            filename = os.path.join(SCRIPT_DIR, "configs", "delete_ids.txt")
         try:
             config_dir = os.path.dirname(filename)
             if config_dir and not os.path.exists(config_dir):
@@ -1188,12 +1150,14 @@ class DuplicateManager:
 class JobSearchConfig:
     """Class to handle job search configuration from file."""
     
-    def __init__(self, config_path: str = "./configs/job_search_config.json"):
+    def __init__(self, config_path: str = None):
         """Initialize with configuration file path.
         
         Args:
             config_path: Path to the configuration file
         """
+        if config_path is None:
+            config_path = os.path.join(SCRIPT_DIR, "configs", "job_search_config.json")
         self.config_path = config_path
         self.config = self._load_config()
         
@@ -1257,8 +1221,8 @@ class JobSearchConfig:
 class JobScraper:
     """Main class for scraping jobs using JobSpy."""
     
-    def __init__(self, config_path: str = "./configs/job_search_config.json", 
-                 db_config_path: str = "./configs/db_config.json",
+    def __init__(self, config_path: str = None, 
+                 db_config_path: str = None,
                  database_type: str = "production"):
         """Initialize the job scraper.
         
@@ -1267,6 +1231,10 @@ class JobScraper:
             db_config_path: Path to the database configuration file
             database_type: Either 'production' or 'working' to select database config
         """
+        if config_path is None:
+            config_path = os.path.join(SCRIPT_DIR, "configs", "job_search_config.json")
+        if db_config_path is None:
+            db_config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
         self.config = JobSearchConfig(config_path)
         self.db = JobDatabase(db_config_path, database_type)
         self.duplicate_manager = DuplicateManager(self.db)
@@ -1350,13 +1318,6 @@ class JobScraper:
                 
                 logger.info(f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new.")
                 
-                # Save raw results as CSV for backup
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                csv_filename = f"./Raw Results/raw_results_{job_name.replace(' ', '_')}_{timestamp}.csv"
-                os.makedirs("./Raw Results", exist_ok=True)
-                jobs_df.to_csv(csv_filename, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
-                logger.info(f"Raw results saved to {csv_filename}")
-                
             except Exception as e:
                 logger.error(f"Error searching for {job_name}: {str(e)}", exc_info=True)
         
@@ -1381,8 +1342,31 @@ class JobScraper:
         else:
             logger.info("Working database scraping completed (no backup needed)")
     
+    def _process_duplicates_auto(self) -> int:
+        """Process duplicates for auto-clean workflow (in-memory, no file creation).
+        
+        Returns:
+            Number of duplicate jobs deleted
+        """
+        try:
+            duplicate_groups, ids_to_delete, ids_to_keep = self.duplicate_manager.identify_duplicates()
+            
+            if not duplicate_groups:
+                logger.info("No duplicate groups found during auto-clean")
+                return 0
+            
+            # Delete duplicates directly without creating files
+            deleted_count = self.duplicate_manager.delete_duplicate_jobs_directly(ids_to_delete)
+            
+            logger.info(f"Auto-clean duplicate processing: {len(duplicate_groups)} groups, {deleted_count} duplicates removed")
+            return deleted_count
+            
+        except Exception as e:
+            logger.error(f"Error during auto-clean duplicate processing: {e}")
+            return 0
+    
     def process_duplicates(self) -> None:
-        """Process duplicates using the updated approach."""
+        """Process duplicates manually (creates delete_ids.txt file only)."""
         # Warn if running data cleaning against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running duplicate processing against PRODUCTION database!")
@@ -1404,15 +1388,14 @@ class JobScraper:
             print("No duplicate groups found.")
             return
         
-        self.duplicate_manager.create_excel_report(duplicate_groups)
+        # Only create delete_ids.txt file (no Excel report)
         self.duplicate_manager.create_delete_ids_file(ids_to_delete)
         
         print(f"\n=== PROCESSING SUMMARY ===")
         print(f"Duplicate groups found: {len(duplicate_groups)}")
         print(f"IDs targeted for deletion: {len(ids_to_delete)}")
         print(f"IDs to keep (best from each group): {len(ids_to_keep)}")
-        print(f"Excel report: duplicate_evals.xlsx")
-        print(f"Delete IDs file: config/delete_ids.txt")
+        print(f"Delete IDs file: {os.path.join('configs', 'delete_ids.txt')}")
     
     def clear_jobs(self) -> None:
         """Clear all data from the scraped_jobs table."""
@@ -1450,8 +1433,10 @@ class JobScraper:
         rows_deleted = self.db.delete_jobs_before_date(date_str)
         logger.info(f"Deleted {rows_deleted} jobs scraped before {date_str}")
     
-    def delete_jobs_by_ids(self, ids_file: str = "./configs/delete_ids.txt") -> None:
+    def delete_jobs_by_ids(self, ids_file: str = None) -> None:
         """Delete jobs by their IDs from a file."""
+        if ids_file is None:
+            ids_file = os.path.join(SCRIPT_DIR, "configs", "delete_ids.txt")
         # Warn if running data deletion against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data deletion against PRODUCTION database!")
@@ -1486,8 +1471,10 @@ class JobScraper:
         rows_deleted = self.db.delete_jobs_by_salary(min_threshold, max_threshold)
         logger.info(f"Deleted {rows_deleted} jobs with low salaries")
     
-    def delete_jobs_by_company(self, companies_file: str = "./configs/delete_companies.txt") -> None:
+    def delete_jobs_by_company(self, companies_file: str = None) -> None:
         """Delete jobs by company names from a file."""
+        if companies_file is None:
+            companies_file = os.path.join(SCRIPT_DIR, "configs", "delete_companies.txt")
         # Warn if running data cleaning against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
@@ -1504,8 +1491,10 @@ class JobScraper:
         rows_deleted = self.db.delete_jobs_by_field('company', companies_file)
         logger.info(f"Deleted {rows_deleted} jobs matching companies from {companies_file}")
     
-    def delete_jobs_by_title(self, titles_file: str = "./configs/delete_titles.txt") -> None:
+    def delete_jobs_by_title(self, titles_file: str = None) -> None:
         """Delete jobs by job titles from a file."""
+        if titles_file is None:
+            titles_file = os.path.join(SCRIPT_DIR, "configs", "delete_titles.txt")
         # Warn if running data cleaning against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
@@ -1729,8 +1718,8 @@ class JobScraper:
                     print(f"   Jobs remaining after title filter: {remaining_after_title:,} ({step_time:.1f}s)")
                     
                     step_start = time.time()
-                    print("4. Processing duplicates (slowest step)...")
-                    working_scraper.process_duplicates()
+                    print("4. Processing duplicates (in-memory processing)...")
+                    duplicates_deleted = working_scraper._process_duplicates_auto()
                     
                     # Get final counts
                     final_count = working_scraper.db.get_all_jobs().shape[0]
@@ -1739,7 +1728,7 @@ class JobScraper:
                     duplicate_time = time.time() - step_start
                     total_time = time.time() - start_time
                     
-                    print(f"   Duplicate processing completed ({duplicate_time:.1f}s)")
+                    print(f"   Duplicate processing completed: {duplicates_deleted} duplicates removed ({duplicate_time:.1f}s)")
                     
                     print(f"\n=== CLEANING COMPLETE ===")
                     print(f"Initial jobs: {initial_count:,}")
@@ -1803,11 +1792,11 @@ def parse_args():
     action_group.add_argument('--delete-before-date', metavar='YYYY-MM-DD', 
                              help='Delete jobs scraped before specified date (YYYY-MM-DD)')
     action_group.add_argument('--delete-by-ids', nargs='?', const='default', metavar='FILE', 
-                             help='Delete jobs using IDs from specified file (default: config/delete_ids.txt)')
+                             help=f'Delete jobs using IDs from specified file (default: {os.path.join("configs", "delete_ids.txt")})')
     action_group.add_argument('--delete-by-company', nargs='?', const='default', metavar='FILE', 
-                             help='Delete jobs matching company patterns from specified file (default: config/delete_companies.txt)')
+                             help=f'Delete jobs matching company patterns from specified file (default: {os.path.join("configs", "delete_companies.txt")})')
     action_group.add_argument('--delete-by-title', nargs='?', const='default', metavar='FILE', 
-                             help='Delete jobs matching title patterns from specified file (default: config/delete_titles.txt)')
+                             help=f'Delete jobs matching title patterns from specified file (default: {os.path.join("configs", "delete_titles.txt")})')
     action_group.add_argument('--delete-by-salary', nargs='?', const='default', metavar='MIN,MAX',
                              help='Delete jobs with low salaries (default: 70000,90000)')
     action_group.add_argument('--backup-reset', action='store_true', 
@@ -1829,10 +1818,10 @@ def parse_args():
     action_group.add_argument('--cleanup-backups', action='store_true',
                              help='Force cleanup of old backups')
     
-    parser.add_argument('--config', metavar='FILE', default='./configs/job_search_config.json',
-                       help='Path to job search configuration file (default: ./configs/job_search_config.json)')
-    parser.add_argument('--db-config', metavar='FILE', default='./configs/db_config.json',
-                       help='Path to database configuration file (default: ./configs/db_config.json)')
+    parser.add_argument('--config', metavar='FILE',
+                       help=f'Path to job search configuration file (default: {os.path.join("configs", "job_search_config.json")})')
+    parser.add_argument('--db-config', metavar='FILE',
+                       help=f'Path to database configuration file (default: {os.path.join("configs", "db_config.json")})')
     parser.add_argument('--working', action='store_true',
                        help='Use working database configuration (working_database section in config)')
     parser.add_argument('--no-auto-clean', action='store_true',
@@ -1880,13 +1869,22 @@ def main():
         elif args.delete_before_date:
             scraper.delete_jobs_before_date(args.delete_before_date)
         elif args.delete_by_ids is not None:
-            ids_file = args.delete_by_ids if args.delete_by_ids != 'default' else "./configs/delete_ids.txt"
+            if args.delete_by_ids == 'default':
+                ids_file = None  # Will use default
+            else:
+                ids_file = args.delete_by_ids
             scraper.delete_jobs_by_ids(ids_file)
         elif args.delete_by_company is not None:
-            companies_file = args.delete_by_company if args.delete_by_company != 'default' else "./configs/delete_companies.txt"
+            if args.delete_by_company == 'default':
+                companies_file = None  # Will use default
+            else:
+                companies_file = args.delete_by_company
             scraper.delete_jobs_by_company(companies_file)
         elif args.delete_by_title is not None:
-            titles_file = args.delete_by_title if args.delete_by_title != 'default' else "./configs/delete_titles.txt"
+            if args.delete_by_title == 'default':
+                titles_file = None  # Will use default
+            else:
+                titles_file = args.delete_by_title
             scraper.delete_jobs_by_title(titles_file)
         elif args.delete_by_salary is not None:
             if args.delete_by_salary == 'default':

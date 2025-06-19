@@ -1,0 +1,23 @@
+{
+    "jobs": [
+        {
+            "name": "Test Software Engineer Search",
+            "enabled": true,
+            "parameters": {
+                "site_name": [
+                    "indeed"
+                ],
+                "search_term": "software engineer",
+                "location": "San Francisco, CA",
+                "results_wanted": 2,
+                "hours_old": 24,
+                "country_indeed": "USA"
+            }
+        }
+    ],
+    "global": {
+        "description_format": "markdown",
+        "enforce_annual_salary": true,
+        "verbose": 2
+    }
+}

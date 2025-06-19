@@ -1,0 +1,4570 @@
+{
+  "jobs": [
+    {
+      "name": "Analyst (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "USA",
+        "google_search_term": "Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "USA",
+        "google_search_term": "Analyst No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "USA",
+        "google_search_term": "Data Visualization jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "USA",
+        "google_search_term": "Data Visualization No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "USA",
+        "google_search_term": "Data Specialization jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "USA",
+        "google_search_term": "Data Specialization No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "USA",
+        "google_search_term": "Professional Services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "USA",
+        "google_search_term": "Professional Services No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "USA",
+        "google_search_term": "Implementation jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "USA",
+        "google_search_term": "Implementation No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "USA",
+        "google_search_term": "Onboarding jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "USA",
+        "google_search_term": "Onboarding No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "USA",
+        "google_search_term": "managed services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "USA",
+        "google_search_term": "managed services No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "USA",
+        "google_search_term": "Product Training jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "USA",
+        "google_search_term": "Product Training No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "USA",
+        "google_search_term": "Technical Content jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "USA",
+        "google_search_term": "Technical Content No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "USA",
+        "google_search_term": "Solutions Engineer jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "USA",
+        "google_search_term": "Solutions Engineer No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "USA",
+        "google_search_term": "xlookup jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "USA",
+        "google_search_term": "xlookup No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "USA",
+        "google_search_term": "vlookup jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "USA",
+        "google_search_term": "vlookup No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 720,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Analyst No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "USA",
+        "google_search_term": "Analyst jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst No Degree",
+        "location": "USA",
+        "google_search_term": "Analyst No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Visualization No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization",
+        "location": "USA",
+        "google_search_term": "Data Visualization jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Visualization (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Visualization No Degree",
+        "location": "USA",
+        "google_search_term": "Data Visualization No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Specialization No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization",
+        "location": "USA",
+        "google_search_term": "Data Specialization jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Specialization (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Specialization No Degree",
+        "location": "USA",
+        "google_search_term": "Data Specialization No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services",
+        "location": "USA",
+        "google_search_term": "Professional Services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services No Degree",
+        "location": "USA",
+        "google_search_term": "Professional Services No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Implementation No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation",
+        "location": "USA",
+        "google_search_term": "Implementation jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Implementation No Degree",
+        "location": "USA",
+        "google_search_term": "Implementation No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Onboarding No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding",
+        "location": "USA",
+        "google_search_term": "Onboarding jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Onboarding (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Onboarding No Degree",
+        "location": "USA",
+        "google_search_term": "Onboarding No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "managed services No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services",
+        "location": "USA",
+        "google_search_term": "managed services jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "managed services (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "managed services No Degree",
+        "location": "USA",
+        "google_search_term": "managed services No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Product Training No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training",
+        "location": "USA",
+        "google_search_term": "Product Training jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training No Degree",
+        "location": "USA",
+        "google_search_term": "Product Training No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Content No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content",
+        "location": "USA",
+        "google_search_term": "Technical Content jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Content (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Content No Degree",
+        "location": "USA",
+        "google_search_term": "Technical Content No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Engineer No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "USA",
+        "google_search_term": "Solutions Engineer jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer No Degree",
+        "location": "USA",
+        "google_search_term": "Solutions Engineer No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "xlookup No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup",
+        "location": "USA",
+        "google_search_term": "xlookup jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "xlookup (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "xlookup No Degree",
+        "location": "USA",
+        "google_search_term": "xlookup No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Longmont, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Longmont, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Longmont, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Longmont, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Local, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Boulder, CO",
+        "country_indeed": "USA",
+        "is_remote": false,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (Boulder, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "Boulder, CO",
+        "google_search_term": "vlookup No Degree jobs in the last week near Boulder, CO Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (USA, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup",
+        "location": "USA",
+        "google_search_term": "vlookup jobs in the USA in the last week Remote",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "vlookup (USA, Remote, No Degree)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "vlookup No Degree",
+        "location": "USA",
+        "google_search_term": "vlookup No Degree jobs in the USA in the last week Remote No Degree",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    }
+  ],
+  "global": {
+    "description_format": "markdown",
+    "enforce_annual_salary": true,
+    "verbose": 2,
+    "distance": 25
+  }
+}
