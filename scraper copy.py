@@ -566,47 +566,22 @@ class JobDatabase:
             )
             ''')
             
-            # Ensure pg_trgm extension exists (for text similarity and pattern matching)
-            cursor.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm")
-            
-            # Create indexes - Updated to match schema and optimize for degree requirement queries
+            # Create indexes
             index_queries = [
-                # Basic field indexes
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_title ON scraped_jobs(title)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_company ON scraped_jobs(company)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_location ON scraped_jobs(location)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_site ON scraped_jobs(site)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_is_remote ON scraped_jobs(is_remote)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_posted ON scraped_jobs(date_posted)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_scraped ON scraped_jobs(date_scraped)",
-                
-                # Search query indexes
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_search_query ON scraped_jobs(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_search_query_lower ON scraped_jobs(LOWER(search_query))",
-                
-                # Composite indexes for common query patterns
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_title_company ON scraped_jobs(title, company)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_company_location ON scraped_jobs(company, location)",
-                
-                # TEXT SEARCH OPTIMIZATION - Critical for degree requirement queries
-                # GIN index with pg_trgm for efficient ILIKE pattern matching on description
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)",
-                
-                # Search history indexes
-                "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
-                "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)"
+                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_posted ON scraped_jobs(date_posted)",
+                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_location ON scraped_jobs(location)",
+                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_is_remote ON scraped_jobs(is_remote)",
+                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_scraped ON scraped_jobs(date_scraped)"
             ]
             
             for query in index_queries:
-                try:
-                    cursor.execute(query)
-                    logger.debug(f"Successfully created/verified index: {query.split('idx_')[1].split(' ')[0] if 'idx_' in query else 'extension'}")
-                except Exception as e:
-                    logger.warning(f"Index creation warning: {e}")
-                    # Continue with other indexes even if one fails
+                cursor.execute(query)
             
             self.conn.commit()
-            logger.info("Database tables and indexes created/verified successfully")
         
     def insert_jobs(self, jobs_df: pd.DataFrame, search_query: str) -> int:
         """Insert new jobs into the database, maintaining uniqueness by ID.
