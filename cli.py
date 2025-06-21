@@ -1,7 +1,13 @@
 import typer
+from typer import rich_utils
 from typing import Optional
 
 from scraper import JobScraper
+
+# darken help colors for better visibility in light mode
+rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN = "bold sky_blue3"
+rich_utils.STYLE_METAVAR = "bold yellow3"
+rich_utils.STYLE_USAGE = "yellow3"
 
 app = typer.Typer(help="Command line interface for JobScraper")
 
@@ -11,16 +17,19 @@ def main(ctx: typer.Context,
          db_config: Optional[str] = typer.Option(None, "--db-config", help="Path to database configuration file"),
          working: bool = typer.Option(False, "--working", help="Use working database configuration"),
          no_auto_clean: bool = typer.Option(False, "--no-auto-clean", help="Skip automatic cleaning when creating working copy")):
-    """Initialize scraper and run scraping if no command is provided."""
+    """Initialize scraper for subcommands and show help when none is provided."""
     ctx.ensure_object(dict)
+
+    if ctx.invoked_subcommand is None:
+        typer.echo(ctx.get_help())
+        raise typer.Exit()
+
     scraper = JobScraper(config_path=config,
                          db_config_path=db_config,
                          database_type="working" if working else "production")
     ctx.obj["scraper"] = scraper
     ctx.obj["no_auto_clean"] = no_auto_clean
     ctx.call_on_close(scraper.close)
-    if ctx.invoked_subcommand is None:
-        scraper.run()
 
 @app.command()
 def scrape(ctx: typer.Context):
