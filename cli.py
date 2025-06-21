@@ -6,6 +6,7 @@ from scraper import JobScraper
 
 # darken help colors for better visibility in light mode
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN = "bold sky_blue3"
+rich_utils.STYLE_OPTION = "bold sky_blue3"
 rich_utils.STYLE_METAVAR = "bold yellow3"
 rich_utils.STYLE_USAGE = "yellow3"
 
