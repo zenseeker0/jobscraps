@@ -26,6 +26,7 @@ DROP INDEX IF EXISTS public.idx_scraped_jobs_search_query_lower;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_search_query;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_location;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_is_remote;
+DROP INDEX IF EXISTS public.idx_scraped_jobs_description_gin;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_date_scraped;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_date_posted;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_company_location;
@@ -238,6 +239,13 @@ CREATE INDEX idx_scraped_jobs_date_posted ON public.scraped_jobs USING btree (da
 --
 
 CREATE INDEX idx_scraped_jobs_date_scraped ON public.scraped_jobs USING btree (date_scraped);
+
+
+--
+-- Name: idx_scraped_jobs_description_gin; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_scraped_jobs_description_gin ON public.scraped_jobs USING gin (description public.gin_trgm_ops);
 
 
 --
