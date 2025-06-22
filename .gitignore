@@ -196,8 +196,8 @@ cython_debug/
 backups/DatabaseBackups/*.sql.gz
 backups/DatabaseBackups/backup_manifest.json
 
-configs/delete*
-configs/db_config.json
+configs/filters/delete*
+configs/db/db_config.json
 configs/*_prod.json
 
 # no changes to data/
@@ -226,3 +226,4 @@ parsed_jobscraper_log.tsv
 **/.DS_Store
 
 **/*.bkp.json
+

@@ -33,8 +33,16 @@ General guidelines for maintaining the **JobScraps** repository.
     
 - `cli.py` – command-line interface for common operations.
     
-- `configs/` – database and job search configuration files.
+- `configs/` – configuration files organized into subfolders:
+  - `db/` – database connection details
+  - `filters/` – deletion filter lists
+  - `search/` – job search configurations
+  - `testing/` – sample configs for development
     
 - `dev/` – maintenance and setup scripts.
     
 - `backups/` and `outputs/` – generated data (gitignored).
+
+### Spell Checking
+
+Configuration `.txt` files inside `configs/` and `backups/` contain search patterns. Do **not** spellcheck or modify the words in these files.

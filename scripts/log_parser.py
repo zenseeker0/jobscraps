@@ -8,6 +8,9 @@ Handles multiple batch runs within a single log file
 import re
 import ast
 import csv
+import json
+import os
+import argparse
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
@@ -260,10 +263,28 @@ def process_log_file(input_file: str, output_file: str, batch_start_num: int = 1
     else:
         print("No valid batches found (all had < 5 searches)")
 
-def main():
-    input_file = "/Users/jonesy/gitlocal/jobscraps/outputs/logs/jobscraper.log"  # Input log file
-    output_file = "/Users/jonesy/gitlocal/jobscraps/outputs/exports/parsed_jobscraper_log.tsv"  # Output tab-separated file 
-    batch_start_num = 1  # Change this to start batch numbering from a different number
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Parse JobScraper log file")
+    parser.add_argument("--input", dest="input_file", help="Path to log file")
+    parser.add_argument("--output", dest="output_file", help="Output TSV path")
+    parser.add_argument("--start", dest="batch_start_num", type=int, default=1,
+                        help="Starting batch number")
+
+    args = parser.parse_args()
+
+    config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)),
+                               "configs", "log_parser_config.json")
+    if os.path.exists(config_path):
+        with open(config_path, "r") as f:
+            cfg = json.load(f)
+    else:
+        cfg = {}
+
+    input_file = args.input_file or cfg.get("input_file",
+                                           "outputs/logs/jobscraper.log")
+    output_file = args.output_file or cfg.get(
+        "output_file", "outputs/exports/parsed_jobscraper_log.tsv")
+    batch_start_num = args.batch_start_num
     
     try:
         process_log_file(input_file, output_file, batch_start_num)

@@ -1,5 +1,12 @@
 #!/bin/bash
-# /Users/jonesy/gitlocal/jobscrape/compare_databases.sh
+
+# Load connection details from config
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+CONFIG_FILE="$PROJECT_ROOT/configs/db/db_config.json"
+DB_HOST=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['host'])" 2>/dev/null)
+DB_PORT=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['port'])" 2>/dev/null)
+DB_USER=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['username'])" 2>/dev/null)
 
 echo "📊 JobScraps Database Comparison"
 echo "=================================="
@@ -12,7 +19,7 @@ run_comparison() {
     
     # Production database stats
     echo "🗄️  Production Database (jobscraps):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         'jobscraps' as database,
         COUNT(*) as total_jobs,
@@ -24,7 +31,7 @@ run_comparison() {
     
     echo ""
     echo "🧹 Working Database (jobscraps_working):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT 
         'jobscraps_working' as database,
         COUNT(*) as total_jobs,
@@ -37,7 +44,7 @@ run_comparison() {
     echo ""
     echo "💾 DATABASE SIZE COMPARISON"
     echo "--------------------------"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         datname as database_name,
         pg_size_pretty(pg_database_size(datname)) as size_pretty,
@@ -49,7 +56,7 @@ run_comparison() {
     echo ""
     echo "📋 TABLE SIZE BREAKDOWN (Production)"
     echo "-----------------------------------"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         tablename,
         pg_size_pretty(pg_total_relation_size('public.'||tablename)) as size_pretty,
@@ -61,7 +68,7 @@ run_comparison() {
     echo ""
     echo "📋 TABLE SIZE BREAKDOWN (Working)"
     echo "--------------------------------"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT 
         tablename,
         pg_size_pretty(pg_total_relation_size('public.'||tablename)) as size_pretty,
@@ -75,8 +82,8 @@ run_comparison() {
     echo "=================================="
     
     # Get counts for calculation
-    PROD_COUNT=$(psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "SELECT COUNT(*) FROM scraped_jobs;" -t -A 2>/dev/null || echo "0")
-    WORK_COUNT=$(psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "SELECT COUNT(*) FROM scraped_jobs;" -t -A 2>/dev/null || echo "0")
+    PROD_COUNT=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "SELECT COUNT(*) FROM scraped_jobs;" -t -A 2>/dev/null || echo "0")
+    WORK_COUNT=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "SELECT COUNT(*) FROM scraped_jobs;" -t -A 2>/dev/null || echo "0")
     
     if [ "$PROD_COUNT" -gt 0 ] && [ "$WORK_COUNT" -gt 0 ]; then
         REMOVED=$((PROD_COUNT - WORK_COUNT))
@@ -100,7 +107,7 @@ detailed_analysis() {
     echo "============================"
     
     echo "💼 Jobs by Salary Range (Production):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         CASE 
             WHEN min_amount = 0 OR min_amount IS NULL THEN 'No Salary Listed'
@@ -126,7 +133,7 @@ detailed_analysis() {
     
     echo ""
     echo "💼 Jobs by Salary Range (Working - After Cleaning):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT 
         CASE 
             WHEN min_amount = 0 OR min_amount IS NULL THEN 'No Salary Listed'
@@ -158,7 +165,7 @@ top_companies() {
     echo "========================"
     
     echo "Production Database - Top 10 Companies by Job Count:"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         company,
         COUNT(*) as job_count,
@@ -172,7 +179,7 @@ top_companies() {
     
     echo ""
     echo "Working Database - Top 10 Companies by Job Count:"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT 
         company,
         COUNT(*) as job_count,

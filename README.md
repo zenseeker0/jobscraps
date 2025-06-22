@@ -17,8 +17,8 @@ A comprehensive job scraping and data management system built with Python, Postg
 
 3. **Configure database**
    ```bash
-   cp configs/db_config.json.template configs/db_config.json
-   # Edit configs/db_config.json with your PostgreSQL details
+   cp configs/db/db_config.json.template configs/db/db_config.json
+   # Edit configs/db/db_config.json with your PostgreSQL details
    ```
 
 4. **Verify setup**
@@ -47,11 +47,11 @@ A comprehensive job scraping and data management system built with Python, Postg
 ```
 jobscraps/
 ├── scraper.py              # Main application with intelligent backup system
-├── configs/                # Configuration files
-│   ├── db_config.json     # Unified database configuration
-│   ├── job_search_config.json # JobSpy search parameters
-│   ├── delete_companies.txt   # Company filter patterns
-│   └── delete_titles.txt      # Job title filter patterns
+├── configs/
+│   ├── db/            # Database configuration
+│   ├── search/        # Job search parameters
+│   ├── filters/       # Deletion filter patterns
+│   └── testing/       # Sample configs for development
 ├── scripts/                # Helper utilities  
 ├── data/                   # Schemas and samples
 ├── outputs/                # Logs and analysis (gitignored)
@@ -83,7 +83,7 @@ python scraper.py --working --delete-by-title
 # Analyze duplicates (non-destructive, creates delete_ids.txt)
 python scraper.py --process-duplicates
 
-# Review and edit configs/delete_ids.txt as needed
+# Review and edit configs/filters/delete_ids.txt as needed
 
 # Apply deletions (destructive, requires "Y")
 python scraper.py --delete-by-ids

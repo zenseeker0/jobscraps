@@ -1,0 +1,4 @@
+{
+  "input_file": "outputs/logs/jobscraper.log",
+  "output_file": "outputs/exports/parsed_jobscraper_log.tsv"
+}

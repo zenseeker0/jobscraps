@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
-# /Users/jonesy/gitlocal/jobscrape/verify_setup.py
+
+import os
 
 import json
 import psycopg2
 import sys
 from typing import Dict, List
 
-def load_config(config_path: str = "/Users/jonesy/gitlocal/jobscrape/config/db_config.json") -> Dict:
+DEFAULT_CONFIG = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    "configs",
+    "db",
+    "db_config.json",
+)
+
+def load_config(config_path: str = DEFAULT_CONFIG) -> Dict:
     """Load database configuration."""
     try:
         with open(config_path, 'r') as f:
