@@ -67,7 +67,7 @@ class DatabaseConfig:
             database_type: Either 'production' or 'working' to select database config
         """
         if config_path is None:
-            config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
+            config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.config_path = config_path
         self.database_type = database_type
         self.config = self._load_config()
@@ -134,7 +134,7 @@ class JobDatabase:
             database_type: Either 'production' or 'working' to select database config
         """
         if config_path is None:
-            config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
+            config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.db_config = DatabaseConfig(config_path, database_type)
         self.database_type = database_type
         self.conn = None
@@ -1155,7 +1155,7 @@ class DuplicateManager:
             filename: Name of the file to create/overwrite
         """
         if filename is None:
-            filename = os.path.join(SCRIPT_DIR, "configs", "delete_ids.txt")
+            filename = os.path.join(SCRIPT_DIR, "configs", "filters", "delete_ids.txt")
         try:
             config_dir = os.path.dirname(filename)
             if config_dir and not os.path.exists(config_dir):
@@ -1182,7 +1182,7 @@ class JobSearchConfig:
             config_path: Path to the configuration file
         """
         if config_path is None:
-            config_path = os.path.join(SCRIPT_DIR, "configs", "job_search_config.json")
+            config_path = os.path.join(SCRIPT_DIR, "configs", "search", "job_search_config.json")
         self.config_path = config_path
         self.config = self._load_config()
         
@@ -1257,9 +1257,9 @@ class JobScraper:
             database_type: Either 'production' or 'working' to select database config
         """
         if config_path is None:
-            config_path = os.path.join(SCRIPT_DIR, "configs", "job_search_config.json")
+            config_path = os.path.join(SCRIPT_DIR, "configs", "search", "job_search_config.json")
         if db_config_path is None:
-            db_config_path = os.path.join(SCRIPT_DIR, "configs", "db_config.json")
+            db_config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.config = JobSearchConfig(config_path)
         self.db = JobDatabase(db_config_path, database_type)
         self.duplicate_manager = DuplicateManager(self.db)
@@ -1420,7 +1420,7 @@ class JobScraper:
         print(f"Duplicate groups found: {len(duplicate_groups)}")
         print(f"IDs targeted for deletion: {len(ids_to_delete)}")
         print(f"IDs to keep (best from each group): {len(ids_to_keep)}")
-        print(f"Delete IDs file: {os.path.join('configs', 'delete_ids.txt')}")
+        print(f"Delete IDs file: {os.path.join('configs', 'filters', 'delete_ids.txt')}")
     
     def clear_jobs(self) -> None:
         """Clear all data from the scraped_jobs table."""
@@ -1461,7 +1461,7 @@ class JobScraper:
     def delete_jobs_by_ids(self, ids_file: str = None) -> None:
         """Delete jobs by their IDs from a file."""
         if ids_file is None:
-            ids_file = os.path.join(SCRIPT_DIR, "configs", "delete_ids.txt")
+            ids_file = os.path.join(SCRIPT_DIR, "configs", "filters", "delete_ids.txt")
         # Warn if running data deletion against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data deletion against PRODUCTION database!")
@@ -1499,7 +1499,7 @@ class JobScraper:
     def delete_jobs_by_company(self, companies_file: str = None) -> None:
         """Delete jobs by company names from a file."""
         if companies_file is None:
-            companies_file = os.path.join(SCRIPT_DIR, "configs", "delete_companies.txt")
+            companies_file = os.path.join(SCRIPT_DIR, "configs", "filters", "delete_companies.txt")
         # Warn if running data cleaning against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
@@ -1519,7 +1519,7 @@ class JobScraper:
     def delete_jobs_by_title(self, titles_file: str = None) -> None:
         """Delete jobs by job titles from a file."""
         if titles_file is None:
-            titles_file = os.path.join(SCRIPT_DIR, "configs", "delete_titles.txt")
+            titles_file = os.path.join(SCRIPT_DIR, "configs", "filters", "delete_titles.txt")
         # Warn if running data cleaning against production database
         if self.db.database_type == "production":
             print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
@@ -1782,14 +1782,21 @@ class JobScraper:
                 print("1. Check for other connections and close them")
                 print("2. Restart your PostgreSQL container if needed")
             elif "permission denied" in str(e).lower():
-                print("Permission denied - make sure your 'jonesy' user has CREATEDB privileges")
+                user = self.db.db_config.get_connection_params().get("user", "")
+                print(f"Permission denied - make sure user '{user}' has CREATEDB privileges")
                 print("Run this as a superuser:")
-                print("ALTER USER jonesy CREATEDB;")
+                print(f"ALTER USER {user} CREATEDB;")
             elif "does not exist" in str(e).lower():
                 print("Template database not found. Available maintenance databases may be limited.")
             else:
+                conn_params = self.db.db_config.get_connection_params()
+                host = conn_params.get("host", "localhost")
+                port = conn_params.get("port", 5432)
+                user = conn_params.get("user", "")
                 print("Try creating the database manually:")
-                print(f"psql -h 192.168.1.31 -p 5432 -U jonesy -d template1 -c \"CREATE DATABASE jobscraps_working WITH TEMPLATE {source_db} OWNER jonesy;\"")
+                print(
+                    f"psql -h {host} -p {port} -U {user} -d template1 -c \"CREATE DATABASE jobscraps_working WITH TEMPLATE {source_db} OWNER {user};\""
+                )
                 
         except Exception as e:
             logger.error(f"Unexpected error creating working copy: {e}")

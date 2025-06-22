@@ -30,7 +30,7 @@
 
 **Configuration Sources:**
 
-- `config/db_config.json` → PostgreSQL connection parameters (unified config with production_database and working_database sections)
+- `configs/db/db_config.json` → PostgreSQL connection parameters (unified config with production_database and working_database sections)
 - `config/job_search_config.json` → JobSpy scraping parameters
 - `config/delete_companies.txt` → Company filtering patterns
 - `config/delete_titles.txt` → Job title filtering patterns
@@ -325,7 +325,7 @@ sequenceDiagram
 - **New Features:**
     - `database_type` parameter ("production" or "working")
     - Backwards compatibility with legacy `database` config format
-- **Dependencies:** `config/db_config.json` (unified configuration)
+- **Dependencies:** `configs/db/db_config.json` (unified configuration)
 
 **`JobDatabase`** _(Significantly Enhanced)_
 

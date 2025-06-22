@@ -1,12 +1,31 @@
 #!/usr/bin/env python3
-# /Users/jonesy/gitlocal/jobscrape/verify_setup.py
+
+import os
+import argparse
 
 import json
 import psycopg2
 import sys
 from typing import Dict, List
 
-def load_config(config_path: str = "/Users/jonesy/gitlocal/jobscrape/config/db_config.json") -> Dict:
+DEFAULT_CONFIG = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    "configs",
+    "db",
+    "db_config.json",
+)
+
+
+def get_config_path(arg_path: str | None) -> str:
+    """Resolve configuration path from CLI argument or environment."""
+    if arg_path:
+        return arg_path
+    env_path = os.getenv("DB_CONFIG")
+    if env_path:
+        return env_path
+    return DEFAULT_CONFIG
+
+def load_config(config_path: str = DEFAULT_CONFIG) -> Dict:
     """Load database configuration."""
     try:
         with open(config_path, 'r') as f:
@@ -174,13 +193,22 @@ def check_existing_tables(config: Dict) -> bool:
         print(f"❌ Error checking tables: {e}")
         return False
 
-def main():
+def main() -> None:
     """Run all verification tests."""
     print("🔍 JobScraps PostgreSQL Setup Verification")
     print("=" * 50)
-    
+
+    parser = argparse.ArgumentParser(description="Verify JobScraps database setup")
+    parser.add_argument(
+        "--config",
+        "-c",
+        help="Path to db_config.json",
+        default=None,
+    )
+    args = parser.parse_args()
+
     # Load configuration
-    config = load_config()
+    config = load_config(get_config_path(args.config))
     if not config:
         sys.exit(1)
     
