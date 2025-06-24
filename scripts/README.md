@@ -2,7 +2,7 @@
 
 Utility scripts for JobScraps data management:
 
-- **cli.py**: Command-line interface utilities
+- **db_stats_cli.py**: Database statistics CLI (legacy)
 - **csv_to_config.py**: Convert CSV data to configuration files
 - **log_parser.py**: Parse and analyze application logs
   (uses `configs/log_parser_config.json` for defaults)
