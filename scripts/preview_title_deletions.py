@@ -18,7 +18,7 @@ PARENT_DIR = os.path.dirname(SCRIPT_DIR)
 sys.path.insert(0, PARENT_DIR)
 
 # Import classes from scraper.py
-from scraper import DatabaseConfig, JobDatabase
+from database import DatabaseConfig, JobDatabase
 
 
 class TitleDeletionPreview:
