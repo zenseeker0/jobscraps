@@ -14,13 +14,9 @@ General guidelines for maintaining the **JobScraps** repository.
 ## Coding Conventions
 
 - Follow PEP 8 formatting (use 4-space indentation).
-    
+
 - Add type hints to public functions and classes.
-    
-- Prefer `logging` over `print` for output.
-    
 - Keep functions small and readable.
-    
 
 ## Git and PR Workflow
 

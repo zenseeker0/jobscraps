@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# cli.py - Command-line interface for JobSpy
+# db_stats_cli.py - Legacy database interface for JobSpy
 
 import typer
 import sqlite3
