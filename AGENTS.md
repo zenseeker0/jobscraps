@@ -26,7 +26,7 @@ General guidelines for maintaining the **JobScraps** repository.
 ## Repository Structure
 
 - `scraper.py` – main scraping script with backup management.
-    
+- `database/` – database configuration, connections, and backups.
 - `cli.py` – command-line interface for common operations.
     
 - `configs/` – configuration files organized into subfolders:

@@ -47,6 +47,7 @@ A comprehensive job scraping and data management system built with Python, Postg
 ```
 jobscraps/
 ├── scraper.py              # Main application with intelligent backup system
+├── database/               # Database access and backup utilities
 ├── configs/
 │   ├── db/            # Database configuration
 │   ├── search/        # Job search parameters
@@ -167,11 +168,11 @@ python scraper.py --cleanup-backups           # Force retention cleanup
 
 This project is actively maintained and being modularized for better maintainability:
 
-**Current Architecture** (single file):
-- `scraper.py` - All functionality in one comprehensive script
+**Current Architecture**:
+- `scraper.py` - Main application orchestrator
+- `database/` - Database operations and backup management
 
 **Planned Modular Architecture**:
-- `database/` - Database operations and backup management
 - `duplicate_detection/` - Duplicate detection and ranking
 - `config/` - Configuration management
 - `scraping/` - Core JobSpy integration
