@@ -5,7 +5,11 @@
 ### **Module Structure**
 
 - **`scraper.py`** - Main application controller and orchestrator with intelligent backup system
-- **`migration_script.py`** - SQLite to PostgreSQL data migration utility
+- **`cli.py`** - Typer-based command line interface
+- **`database/`** - Database utilities
+  - `config.py` - Load database configuration
+  - `core.py` - Core database operations
+  - `backup.py` - Backup and retention logic
 - **`verify_setup.py`** - PostgreSQL setup verification and troubleshooting
 - **`compare_databases.sh`** - Database comparison and efficiency analysis
 - **`workflow_scripts.sh`** - Bash automation for common workflows
@@ -330,6 +334,7 @@ sequenceDiagram
 **`JobDatabase`** _(Significantly Enhanced)_
 
 - **Purpose:** PostgreSQL operations, connection management, and integrated backup system
+- **Inherits:** `BackupMixin` for shared backup utilities
 - **Core Data Methods:**
     - `insert_jobs()` - Batch insert with duplicate detection
     - `get_duplicate_groups()` - Identify duplicate jobs across sites
