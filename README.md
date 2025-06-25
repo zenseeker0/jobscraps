@@ -182,6 +182,20 @@ This project is actively maintained. Major components include:
 - `data_cleaner.py` and `duplicate_manager.py` - Data quality utilities
 - `database/` - Connection and backup helpers
 
+## 🛠 Database Migration
+
+A migration script `sql/migrate_search_history_sessions.sql` upgrades the
+`search_history` table with session tracking fields. Execute the statements in
+that file to:
+
+1. Add new columns with defaults.
+2. Backfill `session_id` and `session_sequence` using `ROW_NUMBER`.
+3. Enforce `NOT NULL` constraints and create indexes, including GIN indexes on
+   the JSONB breakdown columns.
+
+Run the commands in order against your PostgreSQL database to update existing
+installations.
+
 ## 📄 License
 
 MIT License - see LICENSE file for details.
