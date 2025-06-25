@@ -191,6 +191,7 @@ class JobScraper:
             
             # Connect to a maintenance database (not the source database)
             conn_params = self.db.db_config.get_connection_params()
+            user = conn_params.get("user", "")
             
             # Try connecting to maintenance databases in order of preference
             maintenance_databases = ['template1', 'postgres', 'template0']
@@ -216,7 +217,9 @@ class JobScraper:
                 logger.info(f"Dropped existing working database if it existed")
                 
                 # Create new working database from template
-                cursor.execute(f"CREATE DATABASE {working_db} WITH TEMPLATE {source_db} OWNER jonesy")
+                cursor.execute(
+                    f"CREATE DATABASE {working_db} WITH TEMPLATE {source_db} OWNER {user}"
+                )
                 logger.info(f"Created working database: {working_db}")
             
             conn.close()
