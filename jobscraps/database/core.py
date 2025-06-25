@@ -14,7 +14,7 @@ from psycopg2 import sql
 from .config import DatabaseConfig
 from .backup import BackupMixin
 
-SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logger = logging.getLogger(__name__)
 
 
