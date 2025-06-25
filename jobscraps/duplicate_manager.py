@@ -6,6 +6,7 @@ import logging
 from typing import List, Dict, Tuple
 
 from jobscraps.database import JobDatabase
+from .console_interface import console
 
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 logger = logging.getLogger(__name__)
@@ -144,9 +145,9 @@ class DuplicateManager:
                 for job_id in ids_to_delete:
                     f.write(f"{job_id}\n")
             logger.info("Created %s with %d IDs", filename, len(ids_to_delete))
-            print(f"Created {filename} with {len(ids_to_delete)} IDs to delete")
+            console.print(f"Created {filename} with {len(ids_to_delete)} IDs to delete")
         except Exception as e:
             logger.error("Error creating delete IDs file: %s", e)
-            print(f"Error creating delete IDs file: {e}")
+            console.print(f"Error creating delete IDs file: {e}")
 
 __all__ = ["DuplicateManager"]

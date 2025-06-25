@@ -6,6 +6,7 @@ import logging
 from datetime import datetime
 import pandas as pd
 from typing import Dict, List
+from ..console_interface import console
 
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logger = logging.getLogger(__name__)
@@ -252,7 +253,7 @@ class BackupMixin:
         """Create a backup of the database and clear all data."""
         try:
             backup_info = self.create_backup("manual", "backup_and_reset")
-            print(f"✓ Database backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
+            console.print(f"✓ Database backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
             backup_dir = os.path.join(SCRIPT_DIR, "backups")
             os.makedirs(backup_dir, exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
