@@ -134,20 +134,20 @@ class JobScraper:
         
         # Create backup after scraping to capture new data (only for production database)
         if total_new_jobs > 0 and self.db.database_type == "production":
-            console.print(f"\nScraping completed with {total_new_jobs} new jobs added.")
-            console.print("Creating backup to capture new data...")
+            console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
+            console.info("Creating backup to capture new data...")
             try:
                 backup_info = self.db.create_backup('auto', 'post_scraping')
-                console.print(f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
+                console.info(f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
                 
                 # Manage retention after backup
                 retention_result = self.db.manage_backup_retention()
                 if retention_result['action'] == 'cleanup_performed':
-                    console.print(f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB")
+                    console.info(f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB")
                     
             except Exception as e:
                 logger.warning(f"Post-scraping backup failed: {e}")
-                console.print(f"⚠️  Post-scraping backup failed: {e}")
+                console.info(f"⚠️  Post-scraping backup failed: {e}")
         elif total_new_jobs == 0:
             logger.info("No new jobs found, skipping post-scraping backup")
         else:
@@ -241,12 +241,12 @@ class JobScraper:
                 with open(self.db.db_config.config_path, 'w') as f:
                     json.dump(current_config, f, indent=2)
             
-            console.print(f"\n=== WORKING COPY CREATED ===")
-            console.print(f"Working database: {working_db}")
-            console.print(f"Config updated: {self.db.db_config.config_path}")
+            console.info(f"\n=== WORKING COPY CREATED ===")
+            console.info(f"Working database: {working_db}")
+            console.info(f"Config updated: {self.db.db_config.config_path}")
             
             if auto_clean:
-                console.print("Running automatic data cleaning workflows...")
+                console.info("Running automatic data cleaning workflows...")
                 start_time = time.time()
                 
                 # Create a temporary scraper instance for the working database
@@ -265,36 +265,36 @@ class JobScraper:
                 try:
                     # Get initial count
                     initial_count = working_scraper.db.get_all_jobs().shape[0]
-                    console.print(f"Initial job count in working database: {initial_count}")
+                    console.info(f"Initial job count in working database: {initial_count}")
                     
                     # Run cleaning workflows in optimized order (fastest deletions first)
                     # No backups created during these operations since we're working on working database copy
                     step_start = time.time()
-                    console.print("1. Deleting jobs by salary thresholds (fastest, removes most jobs)...")
+                    console.info("1. Deleting jobs by salary thresholds (fastest, removes most jobs)...")
                     working_cleaner.delete_jobs_by_salary()
                     
                     remaining_after_salary = working_scraper.db.get_all_jobs().shape[0]
                     step_time = time.time() - step_start
-                    console.print(f"   Jobs remaining after salary filter: {remaining_after_salary:,} ({step_time:.1f}s)")
+                    console.info(f"   Jobs remaining after salary filter: {remaining_after_salary:,} ({step_time:.1f}s)")
                     
                     step_start = time.time()
-                    console.print("2. Deleting jobs by company patterns...")
+                    console.info("2. Deleting jobs by company patterns...")
                     working_cleaner.delete_jobs_by_company()
                     
                     remaining_after_company = working_scraper.db.get_all_jobs().shape[0]
                     step_time = time.time() - step_start
-                    console.print(f"   Jobs remaining after company filter: {remaining_after_company:,} ({step_time:.1f}s)")
+                    console.info(f"   Jobs remaining after company filter: {remaining_after_company:,} ({step_time:.1f}s)")
                     
                     step_start = time.time()
-                    console.print("3. Deleting jobs by title patterns...")
+                    console.info("3. Deleting jobs by title patterns...")
                     working_cleaner.delete_jobs_by_title()
                     
                     remaining_after_title = working_scraper.db.get_all_jobs().shape[0]
                     step_time = time.time() - step_start
-                    console.print(f"   Jobs remaining after title filter: {remaining_after_title:,} ({step_time:.1f}s)")
+                    console.info(f"   Jobs remaining after title filter: {remaining_after_title:,} ({step_time:.1f}s)")
                     
                     step_start = time.time()
-                    console.print("4. Processing duplicates (in-memory processing)...")
+                    console.info("4. Processing duplicates (in-memory processing)...")
                     duplicates_deleted = working_cleaner._process_duplicates_auto()
                     
                     # Get final counts
@@ -304,54 +304,54 @@ class JobScraper:
                     duplicate_time = time.time() - step_start
                     total_time = time.time() - start_time
                     
-                    console.print(f"   Duplicate processing completed: {duplicates_deleted} duplicates removed ({duplicate_time:.1f}s)")
+                    console.info(f"   Duplicate processing completed: {duplicates_deleted} duplicates removed ({duplicate_time:.1f}s)")
                     
-                    console.print(f"\n=== CLEANING COMPLETE ===")
-                    console.print(f"Initial jobs: {initial_count:,}")
-                    console.print(f"Jobs removed: {removed_count:,} ({removal_percentage:.1f}%)")
-                    console.print(f"Jobs remaining: {final_count:,}")
-                    console.print(f"Total cleaning time: {total_time:.1f} seconds")
-                    console.print(f"Working database ready for analysis and Retool")
+                    console.info(f"\n=== CLEANING COMPLETE ===")
+                    console.info(f"Initial jobs: {initial_count:,}")
+                    console.info(f"Jobs removed: {removed_count:,} ({removal_percentage:.1f}%)")
+                    console.info(f"Jobs remaining: {final_count:,}")
+                    console.info(f"Total cleaning time: {total_time:.1f} seconds")
+                    console.info(f"Working database ready for analysis and Retool")
                     
                 except Exception as e:
                     logger.error(f"Error during auto-cleaning: {e}")
-                    console.print(f"Error during auto-cleaning: {e}")
+                    console.info(f"Error during auto-cleaning: {e}")
                 finally:
                     working_scraper.close()
             else:
-                console.print("Use with: python scraper.py --working [command]")
+                console.info("Use with: python scraper.py --working [command]")
             
         except psycopg2.Error as e:
             logger.error(f"Error creating working copy: {e}")
-            console.print(f"Error creating working copy: {e}")
+            console.info(f"Error creating working copy: {e}")
             
             # Provide helpful troubleshooting
             if "is being accessed by other users" in str(e):
-                console.print("\nThis error occurs when there are active connections to the source database.")
-                console.print("The script tried to close its connection, but there may be other active connections.")
-                console.print("\nSolutions:")
-                console.print("1. Check for other connections and close them")
-                console.print("2. Restart your PostgreSQL container if needed")
+                console.info("\nThis error occurs when there are active connections to the source database.")
+                console.info("The script tried to close its connection, but there may be other active connections.")
+                console.info("\nSolutions:")
+                console.info("1. Check for other connections and close them")
+                console.info("2. Restart your PostgreSQL container if needed")
             elif "permission denied" in str(e).lower():
                 user = self.db.db_config.get_connection_params().get("user", "")
-                console.print(f"Permission denied - make sure user '{user}' has CREATEDB privileges")
-                console.print("Run this as a superuser:")
-                console.print(f"ALTER USER {user} CREATEDB;")
+                console.info(f"Permission denied - make sure user '{user}' has CREATEDB privileges")
+                console.info("Run this as a superuser:")
+                console.info(f"ALTER USER {user} CREATEDB;")
             elif "does not exist" in str(e).lower():
-                console.print("Template database not found. Available maintenance databases may be limited.")
+                console.info("Template database not found. Available maintenance databases may be limited.")
             else:
                 conn_params = self.db.db_config.get_connection_params()
                 host = conn_params.get("host", "localhost")
                 port = conn_params.get("port", 5432)
                 user = conn_params.get("user", "")
-                console.print("Try creating the database manually:")
-                console.print(
+                console.info("Try creating the database manually:")
+                console.info(
                     f"psql -h {host} -p {port} -U {user} -d template1 -c \"CREATE DATABASE jobscraps_working WITH TEMPLATE {source_db} OWNER {user};\""
                 )
                 
         except Exception as e:
             logger.error(f"Unexpected error creating working copy: {e}")
-            console.print(f"Unexpected error: {e}")
+            console.info(f"Unexpected error: {e}")
         
         finally:
             # Ensure we're reconnected to the original database
