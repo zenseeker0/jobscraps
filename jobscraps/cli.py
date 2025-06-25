@@ -1,7 +1,7 @@
 import typer
 from typing import Optional
 
-from .scraper import JobScraper
+from .scraping_orchestrator import ScrapingOrchestrator
 import typer.rich_utils as rich_utils
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN="bold sky_blue3"
 rich_utils.STYLE_OPTION="bold sky_blue3"
@@ -18,48 +18,50 @@ def main(ctx: typer.Context,
          no_auto_clean: bool = typer.Option(False, "--no-auto-clean", help="Skip automatic cleaning when creating working copy")):
     """Initialize scraper and run scraping if no command is provided."""
     ctx.ensure_object(dict)
-    scraper = JobScraper(config_path=config,
-                         db_config_path=db_config,
-                         database_type="working" if working else "production")
-    ctx.obj["scraper"] = scraper
+    orch = ScrapingOrchestrator(
+        config_path=config,
+        db_config_path=db_config,
+        database_type="working" if working else "production",
+    )
+    ctx.obj["orch"] = orch
     ctx.obj["no_auto_clean"] = no_auto_clean
-    ctx.call_on_close(scraper.close)
+    ctx.call_on_close(orch.close)
     if ctx.invoked_subcommand is None:
         import sys
         if len(sys.argv) == 1:
             typer.echo(ctx.get_help())
             raise typer.Exit()
-        scraper.run()
+        orch.run_scrape()
 
 @app.command()
 def scrape(ctx: typer.Context):
     """Scrape jobs based on configuration."""
-    ctx.obj["scraper"].run()
+    ctx.obj["orch"].run_scrape()
 
 @app.command()
 def clear(ctx: typer.Context):
     """Clear all data from the scraped_jobs table."""
-    ctx.obj["scraper"].clear_jobs()
+    ctx.obj["orch"].data_cleaner.clear_jobs()
 
 @app.command("delete-before-date")
 def delete_before_date(ctx: typer.Context, date: str = typer.Argument(..., help="Date in YYYY-MM-DD format")):
     """Delete jobs scraped before the given date."""
-    ctx.obj["scraper"].delete_jobs_before_date(date)
+    ctx.obj["orch"].data_cleaner.delete_jobs_before_date(date)
 
 @app.command("delete-by-ids")
 def delete_by_ids(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File containing job IDs")):
     """Delete jobs using IDs from a file."""
-    ctx.obj["scraper"].delete_jobs_by_ids(file)
+    ctx.obj["orch"].data_cleaner.delete_jobs_by_ids(file)
 
 @app.command("delete-by-company")
 def delete_by_company(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with company patterns")):
     """Delete jobs matching company patterns."""
-    ctx.obj["scraper"].delete_jobs_by_company(file)
+    ctx.obj["orch"].data_cleaner.delete_jobs_by_company(file)
 
 @app.command("delete-by-title")
 def delete_by_title(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with title patterns")):
     """Delete jobs matching title patterns."""
-    ctx.obj["scraper"].delete_jobs_by_title(file)
+    ctx.obj["orch"].data_cleaner.delete_jobs_by_title(file)
 
 @app.command("delete-by-salary")
 def delete_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000,90000", help="MIN,MAX salary thresholds")):
@@ -69,47 +71,47 @@ def delete_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000
     except ValueError:
         typer.echo("Invalid salary format. Use MIN,MAX")
         raise typer.Exit(code=1)
-    ctx.obj["scraper"].delete_jobs_by_salary(min_sal, max_sal)
+    ctx.obj["orch"].data_cleaner.delete_jobs_by_salary(min_sal, max_sal)
 
 @app.command("backup-reset")
 def backup_reset(ctx: typer.Context):
     """Backup the database and clear all data."""
-    ctx.obj["scraper"].backup_and_reset_db()
+    ctx.obj["orch"].scraper.backup_and_reset_db()
 
 @app.command("process-duplicates")
 def process_duplicates(ctx: typer.Context):
     """Process duplicate job records."""
-    ctx.obj["scraper"].process_duplicates()
+    ctx.obj["orch"].data_cleaner.process_duplicates()
 
 @app.command("create-working-copy")
 def create_working_copy(ctx: typer.Context):
     """Create a working database copy with optional cleaning."""
-    ctx.obj["scraper"].create_working_copy(auto_clean=not ctx.obj["no_auto_clean"])
+    ctx.obj["orch"].scraper.create_working_copy(auto_clean=not ctx.obj["no_auto_clean"])
 
 @app.command("backup")
 def manual_backup(ctx: typer.Context):
     """Create a manual backup."""
-    ctx.obj["scraper"].manual_backup()
+    ctx.obj["orch"].backup_manager.manual_backup()
 
 @app.command("list-backups")
 def list_backups(ctx: typer.Context):
     """List available backups."""
-    ctx.obj["scraper"].list_backups()
+    ctx.obj["orch"].backup_manager.list_backups()
 
 @app.command("restore-backup")
 def restore_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Backup filename")):
     """Restore database from a backup file."""
-    ctx.obj["scraper"].restore_backup(filename)
+    ctx.obj["orch"].backup_manager.restore_backup(filename)
 
 @app.command("test-backup")
 def test_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Backup filename")):
     """Test backup file integrity."""
-    ctx.obj["scraper"].test_backup(filename)
+    ctx.obj["orch"].backup_manager.test_backup(filename)
 
 @app.command("cleanup-backups")
 def cleanup_backups(ctx: typer.Context):
     """Force cleanup of old backups."""
-    ctx.obj["scraper"].cleanup_backups()
+    ctx.obj["orch"].backup_manager.cleanup_backups()
 
 __all__ = ["app"]
 
