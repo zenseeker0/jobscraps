@@ -145,9 +145,9 @@ class DuplicateManager:
                 for job_id in ids_to_delete:
                     f.write(f"{job_id}\n")
             logger.info("Created %s with %d IDs", filename, len(ids_to_delete))
-            console.print(f"Created {filename} with {len(ids_to_delete)} IDs to delete")
+            console.info(f"Created {filename} with {len(ids_to_delete)} IDs to delete")
         except Exception as e:
             logger.error("Error creating delete IDs file: %s", e)
-            console.print(f"Error creating delete IDs file: {e}")
+            console.info(f"Error creating delete IDs file: {e}")
 
 __all__ = ["DuplicateManager"]
