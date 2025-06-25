@@ -26,7 +26,7 @@ from psycopg2 import sql
 import pandas as pd
 from jobspy import scrape_jobs
 from .duplicate_manager import DuplicateManager
-from .scraper_config import JobSearchConfig
+from .config import JobSearchConfig
 
 from .database import DatabaseConfig, JobDatabase
 import warnings

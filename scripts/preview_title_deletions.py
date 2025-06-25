@@ -5,20 +5,17 @@
 # Shows which jobs would be deleted based on patterns in delete_titles_test.txt
 
 import os
-import sys
 import csv
 import pandas as pd
 import argparse
 from datetime import datetime
 from typing import List, Dict
 
-# Add parent directory to path to import from scraper.py
+# Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(SCRIPT_DIR)
-sys.path.insert(0, PARENT_DIR)
 
-# Import classes from scraper.py
-from database import DatabaseConfig, JobDatabase
+from jobscraps.database import DatabaseConfig, JobDatabase
 
 
 class TitleDeletionPreview:
