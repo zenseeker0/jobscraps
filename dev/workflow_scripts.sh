@@ -13,10 +13,10 @@ BACKUP_DIR="$PROJECT_ROOT/backups/DatabaseBackups"
 collect_and_clean() {
     echo "=== JobScraps Full Workflow ==="
     echo "1. Collecting new job data..."
-    python scraper.py --scrape
+    python -m jobscraps.scraper --scrape
     
     echo "2. Creating cleaned working copy for analysis..."
-    python scraper.py --create-working-copy
+    python -m jobscraps.scraper --create-working-copy
     
     echo "=== Workflow Complete ==="
     echo "Production DB: jobscraps (raw data)"
@@ -27,7 +27,7 @@ collect_and_clean() {
 # Script 2: Just create clean working copy (when you have new raw data)
 refresh_working() {
     echo "=== Refreshing Working Database ==="
-    python scraper.py --create-working-copy
+    python -m jobscraps.scraper --create-working-copy
     echo "Working database refreshed and cleaned"
 }
 
@@ -36,10 +36,10 @@ manual_clean() {
     echo "=== Manual Cleaning on Working Database ==="
     echo "Running individual cleaning steps..."
     
-    python scraper.py --working --delete-by-company
-    python scraper.py --working --delete-by-title  
-    python scraper.py --working --delete-by-salary
-    python scraper.py --working --process-duplicates
+    python -m jobscraps.scraper --working --delete-by-company
+    python -m jobscraps.scraper --working --delete-by-title
+    python -m jobscraps.scraper --working --delete-by-salary
+    python -m jobscraps.scraper --working --process-duplicates
     
     echo "Manual cleaning complete"
 }
@@ -70,7 +70,7 @@ test_salary_filter() {
     
     read -p "Proceed with deletion? (y/N): " confirm
     if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
-        python scraper.py --working --delete-by-salary $MIN,$MAX
+        python -m jobscraps.scraper --working --delete-by-salary $MIN,$MAX
     else
         echo "Deletion cancelled"
     fi
