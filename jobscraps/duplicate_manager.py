@@ -3,10 +3,9 @@ from __future__ import annotations
 
 import os
 import logging
-from typing import List, Dict, Tuple, TYPE_CHECKING
+from typing import List, Dict, Tuple
 
-if TYPE_CHECKING:  # pragma: no cover - for type hints only
-    from .database import JobDatabase
+from jobscraps.database import JobDatabase
 
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 logger = logging.getLogger(__name__)
@@ -15,7 +14,7 @@ logger = logging.getLogger(__name__)
 class DuplicateManager:
     """Handle duplicate job detection and cleanup."""
 
-    def __init__(self, db: 'JobDatabase') -> None:
+    def __init__(self, db: JobDatabase) -> None:
         """Initialize the manager with a database connection."""
         self.db = db
         self.site_preference = ['linkedin', 'indeed', 'google']

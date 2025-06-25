@@ -8,7 +8,7 @@ rich_utils.STYLE_OPTION="bold sky_blue3"
 rich_utils.STYLE_USAGE="yellow3"
 rich_utils.STYLE_METAVAR="bold yellow3"
 
-app = typer.Typer(help="Command line interface for JobScraper")
+app: typer.Typer = typer.Typer(help="Command line interface for JobScraper")
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context,
@@ -110,6 +110,8 @@ def test_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Ba
 def cleanup_backups(ctx: typer.Context):
     """Force cleanup of old backups."""
     ctx.obj["scraper"].cleanup_backups()
+
+__all__ = ["app"]
 
 if __name__ == "__main__":
     app()

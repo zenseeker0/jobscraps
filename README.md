@@ -28,7 +28,7 @@ A comprehensive job scraping and data management system built with Python, Postg
 
 5. **Start scraping**
    ```bash
-   python scraper.py --scrape
+   python -m jobscraps.scraper --scrape
    ```
 
 ## 📊 Key Features
@@ -65,41 +65,41 @@ jobscraps/
 ### Daily Scraping
 ```bash
 # Scrape jobs with automatic post-scraping backup
-python scraper.py --scrape
+python -m jobscraps.scraper --scrape
 ```
 
 ### Data Analysis (Recommended)
 ```bash
 # Create working copy with automatic data cleaning
-python scraper.py --create-working-copy
+python -m jobscraps.scraper --create-working-copy
 
 # Work safely on working database (no backups needed)
-python scraper.py --working --delete-by-salary 80000,100000
-python scraper.py --working --delete-by-company
-python scraper.py --working --delete-by-title
+python -m jobscraps.scraper --working --delete-by-salary 80000,100000
+python -m jobscraps.scraper --working --delete-by-company
+python -m jobscraps.scraper --working --delete-by-title
 ```
 
 ### Manual Duplicate Management
 ```bash
 # Analyze duplicates (non-destructive, creates delete_ids.txt)
-python scraper.py --process-duplicates
+python -m jobscraps.scraper --process-duplicates
 
 # Review and edit configs/filters/delete_ids.txt as needed
 
 # Apply deletions (destructive, requires "Y")
-python scraper.py --delete-by-ids
+python -m jobscraps.scraper --delete-by-ids
 ```
 
 ### Backup Management
 ```bash
 # List available backups
-python scraper.py --list-backups
+python -m jobscraps.scraper --list-backups
 
 # Create manual backup
-python scraper.py --backup
+python -m jobscraps.scraper --backup
 
 # Restore from backup (requires "Y")
-python scraper.py --restore-backup filename.sql.gz
+python -m jobscraps.scraper --restore-backup filename.sql.gz
 ```
 
 ## 📈 Data Pipeline
@@ -143,25 +143,25 @@ python scraper.py --restore-backup filename.sql.gz
 
 ### Core Operations
 ```bash
-python scraper.py --scrape                    # Scrape jobs + post-backup
-python scraper.py --create-working-copy       # Create working DB + auto-clean
-python scraper.py --process-duplicates        # Analyze duplicates (non-destructive)
+python -m jobscraps.scraper --scrape                    # Scrape jobs + post-backup
+python -m jobscraps.scraper --create-working-copy       # Create working DB + auto-clean
+python -m jobscraps.scraper --process-duplicates        # Analyze duplicates (non-destructive)
 ```
 
 ### Data Management (Working Database Recommended)
 ```bash
-python scraper.py --working --delete-by-salary          # Clean by salary
-python scraper.py --working --delete-by-company         # Clean by company patterns  
-python scraper.py --working --delete-by-title           # Clean by title patterns
-python scraper.py --working --delete-by-ids             # Delete specific IDs
+python -m jobscraps.scraper --working --delete-by-salary          # Clean by salary
+python -m jobscraps.scraper --working --delete-by-company         # Clean by company patterns
+python -m jobscraps.scraper --working --delete-by-title           # Clean by title patterns
+python -m jobscraps.scraper --working --delete-by-ids             # Delete specific IDs
 ```
 
 ### Backup Management
 ```bash
-python scraper.py --backup                    # Manual backup
-python scraper.py --list-backups              # Show available backups
-python scraper.py --restore-backup file.sql.gz # Restore from backup
-python scraper.py --cleanup-backups           # Force retention cleanup
+python -m jobscraps.scraper --backup                    # Manual backup
+python -m jobscraps.scraper --list-backups              # Show available backups
+python -m jobscraps.scraper --restore-backup file.sql.gz # Restore from backup
+python -m jobscraps.scraper --cleanup-backups           # Force retention cleanup
 ```
 
 ## 🤝 Contributing
