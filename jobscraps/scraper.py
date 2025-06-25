@@ -190,7 +190,9 @@ class JobScraper:
             self.db.close()
             
             # Connect to a maintenance database (not the source database)
-            conn_params = self.db.db_config.get_connection_params()
+            # Copy connection parameters so modifications don't affect
+            # the original configuration
+            conn_params = self.db.db_config.get_connection_params().copy()
             
             # Try connecting to maintenance databases in order of preference
             maintenance_databases = ['template1', 'postgres', 'template0']
