@@ -1,7 +1,7 @@
 import typer
 from typing import Optional
 
-from scraper import JobScraper
+from .scraper import JobScraper
 import typer.rich_utils as rich_utils
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN="bold sky_blue3"
 rich_utils.STYLE_OPTION="bold sky_blue3"

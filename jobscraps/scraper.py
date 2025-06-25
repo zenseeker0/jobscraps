@@ -25,10 +25,10 @@ import psycopg2.extras
 from psycopg2 import sql
 import pandas as pd
 from jobspy import scrape_jobs
-from duplicate_manager import DuplicateManager
-from scraper_config import JobSearchConfig
+from .duplicate_manager import DuplicateManager
+from .scraper_config import JobSearchConfig
 
-from database import DatabaseConfig, JobDatabase
+from .database import DatabaseConfig, JobDatabase
 import warnings
 # Suppress pandas SQLAlchemy warnings for psycopg2 connections
 warnings.filterwarnings('ignore', message='pandas only supports SQLAlchemy connectable')
@@ -40,7 +40,7 @@ warnings.filterwarnings('ignore',
                        module='pandas')
 
 # Get the directory where scraper.py is located
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Setup logging
 LOG_DIR = os.path.join(SCRIPT_DIR, "outputs", "logs")
@@ -633,5 +633,5 @@ class JobScraper:
 
 
 if __name__ == "__main__":
-    from cli import app
+    from .cli import app
     app()

@@ -6,9 +6,9 @@ import logging
 from typing import List, Dict, Tuple, TYPE_CHECKING
 
 if TYPE_CHECKING:  # pragma: no cover - for type hints only
-    from scraper import JobDatabase
+    from .database import JobDatabase
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 logger = logging.getLogger(__name__)
 
 
