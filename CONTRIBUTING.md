@@ -1,11 +1,3 @@
-A CONTRIBUTING.md is a Markdown file at the root of your repo that explains how people (including future you!) should contribute code and changes. It typically covers:
-	•	Branching strategy (how to name and organize branches)
-	•	Workflow steps (creating branches, making PRs, merging, cleaning up)
-	•	Commit/PR conventions (message style, required reviews or checks)
-	•	Coding standards (linting, tests, formatting)
-
-Below is a tailored CONTRIBUTING.md for your Jobscraps workflow, codifying the codex → feature → umbrella → main flow you’re using.
-
 # Contributing to Jobscraps
 
 Thank you for helping improve Jobscraps! This document describes our Git branching model, PR process, and cleanup guidelines so everyone’s contributions stay consistent, traceable, and easy to manage.
