@@ -12,13 +12,13 @@ A comprehensive job scraping and data management system built with Python, Postg
 
 2. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 3. **Configure database**
    ```bash
-   cp configs/db_config.json.template configs/db_config.json
-   # Edit configs/db_config.json with your PostgreSQL details
+   cp configs/db/db_config.json.template configs/db/db_config.json
+   # Edit configs/db/db_config.json with your PostgreSQL details
    ```
 
 4. **Verify setup**
@@ -28,7 +28,12 @@ A comprehensive job scraping and data management system built with Python, Postg
 
 5. **Start scraping**
    ```bash
-   python scraper.py --scrape
+   jobscraps scrape
+   ```
+
+6. **Explore the CLI**
+   ```bash
+   jobscraps --help
    ```
 
 ## 📊 Key Features
@@ -46,13 +51,20 @@ A comprehensive job scraping and data management system built with Python, Postg
 
 ```
 jobscraps/
-├── scraper.py              # Main application with intelligent backup system
-├── configs/                # Configuration files
-│   ├── db_config.json     # Unified database configuration
-│   ├── job_search_config.json # JobSpy search parameters
-│   ├── delete_companies.txt   # Company filter patterns
-│   └── delete_titles.txt      # Job title filter patterns
-├── scripts/                # Helper utilities  
+├── scraper.py              # Legacy scraping entry point
+├── cli.py                  # Typer-based command line interface
+├── scraping_orchestrator.py# Coordinates scraping and cleaning
+├── backup_manager.py       # Backup and restore utilities
+├── data_cleaner.py         # Data cleaning routines
+├── duplicate_manager.py    # Duplicate detection helpers
+├── console_interface.py    # Console abstraction for user prompts
+├── database/               # Database access and backup helpers
+├── configs/
+│   ├── db/            # Database configuration
+│   ├── search/        # Job search parameters
+│   ├── filters/       # Deletion filter patterns
+│   └── testing/       # Sample configs for development
+├── scripts/                # Helper utilities
 ├── data/                   # Schemas and samples
 ├── outputs/                # Logs and analysis (gitignored)
 ├── backups/                # PostgreSQL backups with retention (gitignored)
@@ -64,51 +76,51 @@ jobscraps/
 ### Daily Scraping
 ```bash
 # Scrape jobs with automatic post-scraping backup
-python scraper.py --scrape
+jobscraps scrape
 ```
 
 ### Data Analysis (Recommended)
 ```bash
 # Create working copy with automatic data cleaning
-python scraper.py --create-working-copy
+jobscraps create-working-copy
 
 # Work safely on working database (no backups needed)
-python scraper.py --working --delete-by-salary 80000,100000
-python scraper.py --working --delete-by-company
-python scraper.py --working --delete-by-title
+jobscraps --working delete-by-salary 80000,100000
+jobscraps --working delete-by-company
+jobscraps --working delete-by-title
 ```
 
 ### Manual Duplicate Management
 ```bash
 # Analyze duplicates (non-destructive, creates delete_ids.txt)
-python scraper.py --process-duplicates
+jobscraps process-duplicates
 
-# Review and edit configs/delete_ids.txt as needed
+# Review and edit configs/filters/delete_ids.txt as needed
 
 # Apply deletions (destructive, requires "Y")
-python scraper.py --delete-by-ids
+jobscraps delete-by-ids
 ```
 
 ### Backup Management
 ```bash
 # List available backups
-python scraper.py --list-backups
+jobscraps list-backups
 
 # Create manual backup
-python scraper.py --backup
+jobscraps backup
 
 # Restore from backup (requires "Y")
-python scraper.py --restore-backup filename.sql.gz
+jobscraps restore-backup filename.sql.gz
 ```
 
 ## 📈 Data Pipeline
 
-1. **Collection**: JobSpy scrapes multiple job boards (122k+ jobs)
+1. **Collection**: JobSpy scrapes multiple job boards
 2. **Storage**: Raw data stored in production PostgreSQL database
 3. **Backup**: Intelligent post-scraping backups capture new data state
 4. **Working Copy**: Template copy for safe data analysis (10 seconds)
 5. **Cleaning**: 4-step pipeline removes 70%+ of jobs (salary → company → title → duplicates)
-6. **Analysis**: Clean dataset (~30k high-quality jobs) ready for Retool/BI
+6. **Analysis**: Clean dataset ready for business intelligence tooling
 
 ## 🛡️ Safety Features
 
@@ -131,53 +143,44 @@ python scraper.py --restore-backup filename.sql.gz
 
 ## 📊 Performance Stats
 
-- **Total jobs collected**: 122,943+ (production database)
-- **High-quality jobs**: ~30,000 (after 70%+ cleaning reduction)
 - **Data sources**: Indeed, LinkedIn, Glassdoor
-- **Working copy creation**: ~10 seconds (PostgreSQL template copy)
+- **Working copy creation**: ~10 seconds using PostgreSQL templates
 - **Data cleaning pipeline**: 2-5 minutes depending on data size
-- **Backup creation**: 30-60 seconds (compressed PostgreSQL dumps)
+- **Backup creation**: 30-60 seconds (compressed dumps)
 
 ## 🔧 Command Reference
 
 ### Core Operations
 ```bash
-python scraper.py --scrape                    # Scrape jobs + post-backup
-python scraper.py --create-working-copy       # Create working DB + auto-clean
-python scraper.py --process-duplicates        # Analyze duplicates (non-destructive)
+jobscraps scrape                    # Scrape jobs + post-backup
+jobscraps create-working-copy       # Create working DB + auto-clean
+jobscraps process-duplicates        # Analyze duplicates (non-destructive)
 ```
 
 ### Data Management (Working Database Recommended)
 ```bash
-python scraper.py --working --delete-by-salary          # Clean by salary
-python scraper.py --working --delete-by-company         # Clean by company patterns  
-python scraper.py --working --delete-by-title           # Clean by title patterns
-python scraper.py --working --delete-by-ids             # Delete specific IDs
+jobscraps --working delete-by-salary          # Clean by salary
+jobscraps --working delete-by-company         # Clean by company patterns
+jobscraps --working delete-by-title           # Clean by title patterns
+jobscraps --working delete-by-ids             # Delete specific IDs
 ```
 
 ### Backup Management
 ```bash
-python scraper.py --backup                    # Manual backup
-python scraper.py --list-backups              # Show available backups
-python scraper.py --restore-backup file.sql.gz # Restore from backup
-python scraper.py --cleanup-backups           # Force retention cleanup
+jobscraps backup                    # Manual backup
+jobscraps list-backups              # Show available backups
+jobscraps restore-backup file.sql.gz # Restore from backup
+jobscraps cleanup-backups           # Force retention cleanup
 ```
 
 ## 🤝 Contributing
 
-This project is actively maintained and being modularized for better maintainability:
-
-**Current Architecture** (single file):
-- `scraper.py` - All functionality in one comprehensive script
-
-**Planned Modular Architecture**:
-- `database/` - Database operations and backup management
-- `duplicate_detection/` - Duplicate detection and ranking
-- `config/` - Configuration management
-- `scraping/` - Core JobSpy integration
-- `cli/` - Command-line interface
-
-See `feature/modular-refactor` branch for ongoing modularization work.
+This project is actively maintained. Major components include:
+- `cli.py` - Entry point for all commands
+- `scraping_orchestrator.py` - Coordinates scraping and cleaning
+- `backup_manager.py` - Handles backups and restores
+- `data_cleaner.py` and `duplicate_manager.py` - Data quality utilities
+- `database/` - Connection and backup helpers
 
 ## 📄 License
 

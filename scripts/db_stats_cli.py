@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# cli.py - Command-line interface for JobSpy
+# db_stats_cli.py - Legacy database interface for JobSpy
 
 import typer
 import sqlite3
@@ -457,9 +457,12 @@ def search_jobs(
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("run")
-def run_scraper():
+def run_scraper(script_path: Optional[str] = typer.Option(None, help="Path to jobscraps/scraper.py")):
     """Run the job scraper script"""
-    script_path = "/Users/jonesy/gitlocal/jobscrape/scraper.py"
+    if script_path is None:
+        script_path = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)), "jobscraps", "scraper.py"
+        )
     
     if not os.path.exists(script_path):
         console.print(f"[bold red]Scraper script not found at {script_path}[/bold red]")

@@ -5,20 +5,17 @@
 # Shows which jobs would be deleted based on patterns in delete_titles_test.txt
 
 import os
-import sys
 import csv
 import pandas as pd
 import argparse
 from datetime import datetime
 from typing import List, Dict
 
-# Add parent directory to path to import from scraper.py
+# Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(SCRIPT_DIR)
-sys.path.insert(0, PARENT_DIR)
 
-# Import classes from scraper.py
-from scraper import DatabaseConfig, JobDatabase
+from jobscraps.database import DatabaseConfig, JobDatabase
 
 
 class TitleDeletionPreview:
@@ -31,7 +28,7 @@ class TitleDeletionPreview:
             db_config_path: Path to database configuration file
         """
         if db_config_path is None:
-            db_config_path = os.path.join(PARENT_DIR, "configs", "db_config.json")
+            db_config_path = os.path.join(PARENT_DIR, "configs", "db", "db_config.json")
         self.db = JobDatabase(db_config_path, "production")
         print(f"✓ Connected to production database for preview")
     
@@ -45,7 +42,7 @@ class TitleDeletionPreview:
             Tuple of (DataFrame with preview results, list of patterns with no matches)
         """
         if patterns_file is None:
-            patterns_file = os.path.join(PARENT_DIR, "configs", "delete_titles_test.txt")
+            patterns_file = os.path.join(PARENT_DIR, "configs", "testing", "delete_titles_test.txt")
         if not os.path.exists(patterns_file):
             print(f"❌ Patterns file {patterns_file} not found")
             return pd.DataFrame(), []
@@ -392,7 +389,7 @@ class TitleDeletionPreview:
             DataFrame with jobs that would remain after company deletion
         """
         if companies_file is None:
-            companies_file = os.path.join(PARENT_DIR, "configs", "delete_companies_test.txt")
+            companies_file = os.path.join(PARENT_DIR, "configs", "testing", "delete_companies_test.txt")
         try:
             if not os.path.exists(companies_file):
                 print(f"❌ Company patterns file {companies_file} not found")
@@ -642,17 +639,17 @@ Examples:
     )
     
     parser.add_argument('--patterns-file', 
-                       help=f'Path to file containing title patterns (default: {os.path.join("configs", "delete_titles_test.txt")})')
+                       help=f'Path to file containing title patterns (default: {os.path.join("configs", "testing", "delete_titles_test.txt")})')
     parser.add_argument('--output-file', 
                        help=f'Output CSV filename (default: {os.path.join("outputs", "testing", "title_deletion_preview_[timestamp].csv")})')
     parser.add_argument('--db-config', 
-                       help=f'Path to database configuration file (default: {os.path.join("configs", "db_config.json")})')
+                       help=f'Path to database configuration file (default: {os.path.join("configs", "db", "db_config.json")})')
     parser.add_argument('--show-analysis', action='store_true',
                        help='Show detailed analysis (pattern summary, top companies, etc.)')
     parser.add_argument('--simulate-company-deletion', action='store_true',
                        help='Simulate running --delete-by-company first, then analyze title deletions on remaining jobs')
     parser.add_argument('--companies-file', 
-                       help=f'Path to file containing company patterns for simulation (default: {os.path.join("configs", "delete_companies_test.txt")})')
+                       help=f'Path to file containing company patterns for simulation (default: {os.path.join("configs", "testing", "delete_companies_test.txt")})')
     
     args = parser.parse_args()
     
@@ -667,9 +664,9 @@ Examples:
         print("=" * 70)
         print("🔍 TITLE DELETION PREVIEW")
         print("=" * 70)
-        print(f"📁 Patterns file: {patterns_file or os.path.join(PARENT_DIR, 'configs', 'delete_titles_test.txt')}")
+        print(f"📁 Patterns file: {patterns_file or os.path.join(PARENT_DIR, 'configs', 'testing', 'delete_titles_test.txt')}")
         if args.simulate_company_deletion:
-            print(f"📁 Companies file: {companies_file or os.path.join(PARENT_DIR, 'configs', 'delete_companies_test.txt')}")
+            print(f"📁 Companies file: {companies_file or os.path.join(PARENT_DIR, 'configs', 'testing', 'delete_companies_test.txt')}")
         print(f"🗄️  Database: Production (jobscraps)")
         print(f"⚠️  This is a PREVIEW ONLY - no jobs will be deleted")
         print()

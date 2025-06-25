@@ -1,14 +1,22 @@
 #!/bin/bash
-# /Users/jonesy/gitlocal/jobscrape/workflow_scripts.sh
+
+# Load database settings from config
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+CONFIG_FILE="$PROJECT_ROOT/configs/db/db_config.json"
+DB_HOST=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['host'])" 2>/dev/null)
+DB_PORT=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['port'])" 2>/dev/null)
+DB_USER=$(python -c "import json,sys;print(json.load(open('$CONFIG_FILE'))['production_database']['username'])" 2>/dev/null)
+BACKUP_DIR="$PROJECT_ROOT/backups/DatabaseBackups"
 
 # Script 1: Full data collection and cleaning workflow
 collect_and_clean() {
     echo "=== JobScraps Full Workflow ==="
     echo "1. Collecting new job data..."
-    python scraper.py --scrape
+    python -m jobscraps.scraper --scrape
     
     echo "2. Creating cleaned working copy for analysis..."
-    python scraper.py --create-working-copy
+    python -m jobscraps.scraper --create-working-copy
     
     echo "=== Workflow Complete ==="
     echo "Production DB: jobscraps (raw data)"
@@ -19,7 +27,7 @@ collect_and_clean() {
 # Script 2: Just create clean working copy (when you have new raw data)
 refresh_working() {
     echo "=== Refreshing Working Database ==="
-    python scraper.py --create-working-copy
+    python -m jobscraps.scraper --create-working-copy
     echo "Working database refreshed and cleaned"
 }
 
@@ -28,10 +36,10 @@ manual_clean() {
     echo "=== Manual Cleaning on Working Database ==="
     echo "Running individual cleaning steps..."
     
-    python scraper.py --working --delete-by-company
-    python scraper.py --working --delete-by-title  
-    python scraper.py --working --delete-by-salary
-    python scraper.py --working --process-duplicates
+    python -m jobscraps.scraper --working --delete-by-company
+    python -m jobscraps.scraper --working --delete-by-title
+    python -m jobscraps.scraper --working --delete-by-salary
+    python -m jobscraps.scraper --working --process-duplicates
     
     echo "Manual cleaning complete"
 }
@@ -44,7 +52,7 @@ test_salary_filter() {
     echo "=== Testing Salary Filter (Min: $MIN, Max: $MAX) ==="
     
     # First, show how many would be deleted
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT COUNT(*) as jobs_to_delete
     FROM scraped_jobs
     WHERE 
@@ -62,7 +70,7 @@ test_salary_filter() {
     
     read -p "Proceed with deletion? (y/N): " confirm
     if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
-        python scraper.py --working --delete-by-salary $MIN,$MAX
+        python -m jobscraps.scraper --working --delete-by-salary $MIN,$MAX
     else
         echo "Deletion cancelled"
     fi
@@ -73,7 +81,7 @@ status_check() {
     echo "=== Database Status Check ==="
     
     echo "Production Database (jobscraps):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -c "
     SELECT 
         COUNT(*) as total_jobs,
         COUNT(DISTINCT company) as unique_companies,
@@ -84,7 +92,7 @@ status_check() {
     "
     
     echo "Working Database (jobscraps_working):"
-    psql -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps_working -c "
+    psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps_working -c "
     SELECT 
         COUNT(*) as total_jobs,
         COUNT(DISTINCT company) as unique_companies,
@@ -97,14 +105,13 @@ status_check() {
 
 # Script 6: Backup production database
 backup_production() {
-    BACKUP_DIR="/Users/jonesy/gitlocal/jobscrape/Backups"
     DATE=$(date +%Y%m%d_%H%M%S)
     BACKUP_FILE="$BACKUP_DIR/jobscraps_production_$DATE.dump"
     
     echo "=== Backing Up Production Database ==="
     mkdir -p "$BACKUP_DIR"
     
-    pg_dump -h 192.168.1.31 -p 5432 -U jonesy -d jobscraps -Fc -f "$BACKUP_FILE"
+    pg_dump -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d jobscraps -Fc -f "$BACKUP_FILE"
     
     if [ $? -eq 0 ]; then
         echo "Backup created: $BACKUP_FILE"
@@ -122,25 +129,25 @@ create_working_manual() {
     # Try different maintenance databases
     for db in template1 postgres jobscraps; do
         echo "Trying to connect to $db..."
-        if psql -h 192.168.1.31 -p 5432 -U jonesy -d $db -c "SELECT 1;" >/dev/null 2>&1; then
+        if psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d $db -c "SELECT 1;" >/dev/null 2>&1; then
             echo "Connected to $db successfully"
             
             # Drop and create working database
-            psql -h 192.168.1.31 -p 5432 -U jonesy -d $db -c "DROP DATABASE IF EXISTS jobscraps_working;" 
-            psql -h 192.168.1.31 -p 5432 -U jonesy -d $db -c "CREATE DATABASE jobscraps_working WITH TEMPLATE jobscraps OWNER jonesy;"
+            psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d $db -c "DROP DATABASE IF EXISTS jobscraps_working;"
+            psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d $db -c "CREATE DATABASE jobscraps_working WITH TEMPLATE jobscraps OWNER $DB_USER;"
             
             if [ $? -eq 0 ]; then
                 echo "Working database created successfully!"
                 
                 # Create config file
-                cat > /Users/jonesy/gitlocal/jobscrape/config/db_config_working.json << EOF
+                cat > "$PROJECT_ROOT/configs/db/db_config_working.json" << EOF
 {
   "database": {
-    "host": "192.168.1.31",
-    "port": 5432,
+    "host": "$DB_HOST",
+    "port": $DB_PORT,
     "database": "jobscraps_working",
-    "username": "jonesy",
-    "password": "$(grep '"password"' /Users/jonesy/gitlocal/jobscrape/config/db_config.json | cut -d'"' -f4)"
+    "username": "$DB_USER",
+    "password": "$(python -c 'import json,sys;print(json.load(open("'$CONFIG_FILE'"))["production_database"]["password"])')"
   },
   "connection": {
     "connect_timeout": 30,
@@ -161,7 +168,7 @@ create_working_manual() {
   }
 }
 EOF
-                echo "Config file created: config/db_config_working.json"
+                echo "Config file created: configs/db/db_config_working.json"
                 return 0
             else
                 echo "Failed to create database using $db"
@@ -171,7 +178,7 @@ EOF
     
     echo "Failed to create working database. Check your permissions."
     echo "You may need to grant CREATEDB privilege:"
-    echo "ALTER USER jonesy CREATEDB;"
+    echo "ALTER USER $DB_USER CREATEDB;"
 }
 
 # Main script logic

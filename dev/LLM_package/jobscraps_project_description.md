@@ -5,7 +5,11 @@
 ### **Module Structure**
 
 - **`scraper.py`** - Main application controller and orchestrator with intelligent backup system
-- **`migration_script.py`** - SQLite to PostgreSQL data migration utility
+- **`cli.py`** - Typer-based command line interface
+- **`database/`** - Database utilities
+  - `config.py` - Load database configuration
+  - `core.py` - Core database operations
+  - `backup.py` - Backup and retention logic
 - **`verify_setup.py`** - PostgreSQL setup verification and troubleshooting
 - **`compare_databases.sh`** - Database comparison and efficiency analysis
 - **`workflow_scripts.sh`** - Bash automation for common workflows
@@ -30,7 +34,7 @@
 
 **Configuration Sources:**
 
-- `config/db_config.json` → PostgreSQL connection parameters (unified config with production_database and working_database sections)
+- `configs/db/db_config.json` → PostgreSQL connection parameters (unified config with production_database and working_database sections)
 - `config/job_search_config.json` → JobSpy scraping parameters
 - `config/delete_companies.txt` → Company filtering patterns
 - `config/delete_titles.txt` → Job title filtering patterns
@@ -325,11 +329,12 @@ sequenceDiagram
 - **New Features:**
     - `database_type` parameter ("production" or "working")
     - Backwards compatibility with legacy `database` config format
-- **Dependencies:** `config/db_config.json` (unified configuration)
+- **Dependencies:** `configs/db/db_config.json` (unified configuration)
 
 **`JobDatabase`** _(Significantly Enhanced)_
 
 - **Purpose:** PostgreSQL operations, connection management, and integrated backup system
+- **Inherits:** `BackupMixin` for shared backup utilities
 - **Core Data Methods:**
     - `insert_jobs()` - Batch insert with duplicate detection
     - `get_duplicate_groups()` - Identify duplicate jobs across sites

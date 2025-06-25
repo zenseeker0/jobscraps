@@ -15,5 +15,5 @@ pg_dump -h HOST -p 5432 -U USER -d jobscraps \
 ```
 
 ## Key Tables
-- **scraped_jobs**: Main table with 122k+ job records
-- **search_history**: Tracks all scraping operations
+- **scraped_jobs**: Main table storing all job records
+- **search_history**: Tracks scraping operations
