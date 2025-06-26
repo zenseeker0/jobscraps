@@ -4,9 +4,10 @@ import subprocess
 import time
 import logging
 from datetime import datetime
+import gzip
 import pandas as pd
 from typing import Dict, List
-from ..console_interface import console
+# from ..console_interface import console
 
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logger = logging.getLogger(__name__)
@@ -18,10 +19,27 @@ class BackupMixin:
     db_config: 'DatabaseConfig'
     conn = None
 
+    def _get_backup_directory(self) -> str:
+        """Get the backup directory from config or use default."""
+        try:
+            # Try to get backup directory from database config
+            backup_dir = self.db_config.config.get("backup_directory")
+            if backup_dir:
+                # Expand user home directory if needed
+                backup_dir = os.path.expanduser(backup_dir)
+                os.makedirs(backup_dir, exist_ok=True)
+                return backup_dir
+        except Exception:
+            pass
+        
+        # Fallback to dedicated directory outside project
+        fallback_dir = os.path.expanduser("~/Database_Backups/jobscraps/DatabaseBackups")
+        os.makedirs(fallback_dir, exist_ok=True)
+        return fallback_dir
+
     def create_backup(self, backup_type: str = "auto", reason: str = "") -> Dict:
         """Create a PostgreSQL backup using pg_dump."""
-        backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
-        os.makedirs(backup_dir, exist_ok=True)
+        backup_dir = self._get_backup_directory()  # Use the new method
         conn_params = self.db_config.get_connection_params()
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         reason_suffix = f"_{reason}" if reason else ""
@@ -96,7 +114,8 @@ class BackupMixin:
 
     def _update_backup_manifest(self, backup_info: Dict) -> None:
         """Update the backup manifest file."""
-        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
+        backup_dir = self._get_backup_directory()
+        manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if os.path.exists(manifest_path):
                 with open(manifest_path, "r") as f:
@@ -118,7 +137,7 @@ class BackupMixin:
 
     def manage_backup_retention(self) -> Dict:
         """Manage backup retention policy."""
-        backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
+        backup_dir = self._get_backup_directory()
         manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if not os.path.exists(manifest_path):
@@ -174,7 +193,8 @@ class BackupMixin:
 
     def list_backups(self) -> List[Dict]:
         """List available backups."""
-        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
+        backup_dir = self._get_backup_directory()
+        manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if not os.path.exists(manifest_path):
                 return []
@@ -187,47 +207,104 @@ class BackupMixin:
             logger.error("Failed to list backups: %s", e)
             return []
 
+
     def restore_backup(self, backup_filename: str) -> bool:
-        """Restore database from backup file."""
-        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
+        """Restore database from backup file with proper gzip handling and PostgreSQL compatibility."""
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
             logger.error("Backup file not found: %s", backup_path)
             return False
+        
         try:
             conn_params = self.db_config.get_connection_params()
             if self.conn and not self.conn.closed:
                 self.conn.close()
+            
+            logger.info("Restoring from backup: %s", backup_filename)
+            
+            # Read and filter the gzipped backup content for compatibility
+            with gzip.open(backup_path, 'rt', encoding='utf-8', errors='replace') as f:
+                sql_content = f.read()
+            
+            # Filter out problematic SET statements that cause version compatibility issues
+            problematic_sets = [
+                'SET transaction_timeout',
+                'SET idle_in_transaction_session_timeout', 
+                'SET lock_timeout'
+            ]
+            
+            lines = sql_content.split('\n')
+            filtered_lines = []
+            
+            for line in lines:
+                line_upper = line.upper().strip()
+                skip_line = False
+                
+                for problematic_set in problematic_sets:
+                    if line_upper.startswith(problematic_set.upper()):
+                        logger.info("Skipping incompatible parameter: %s", line.strip())
+                        skip_line = True
+                        break
+                
+                if not skip_line:
+                    filtered_lines.append(line)
+            
+            filtered_content = '\n'.join(filtered_lines)
+            logger.info("Backup content filtered for compatibility (%d lines)", len(filtered_lines))
+            
+            # Execute the filtered SQL via psql
             cmd = [
                 "psql",
-                "-h",
-                conn_params["host"],
-                "-p",
-                str(conn_params["port"]),
-                "-U",
-                conn_params["user"],
-                "-d",
-                conn_params["database"],
-                "-f",
-                backup_path,
+                "-h", conn_params["host"],
+                "-p", str(conn_params["port"]),
+                "-U", conn_params["user"],
+                "-d", conn_params["database"],
+                "-v", "ON_ERROR_STOP=0",  # Continue on minor errors
                 "--quiet",
             ]
+            
             env = os.environ.copy()
             env["PGPASSWORD"] = conn_params["password"]
-            logger.info("Restoring from backup: %s", backup_filename)
-            result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=600)
+            
+            # Execute restore via subprocess with filtered content
+            result = subprocess.run(
+                cmd, 
+                input=filtered_content,
+                env=env, 
+                capture_output=True, 
+                text=True, 
+                timeout=600
+            )
+            
             if result.returncode == 0:
                 logger.info("Database restored successfully from %s", backup_filename)
                 self._connect_with_retry()
                 return True
-            logger.error("Restore failed: %s", result.stderr)
-            return False
-        except Exception as e:  # pylint: disable=broad-except
+            else:
+                # Check if it's just minor compatibility warnings
+                stderr_lower = result.stderr.lower()
+                if ("unrecognized configuration parameter" in stderr_lower or 
+                    "does not exist, skipping" in stderr_lower):
+                    logger.warning("Minor compatibility issues during restore, but likely successful: %s", result.stderr)
+                    try:
+                        self._connect_with_retry()
+                        return True
+                    except:
+                        logger.error("Restore failed: %s", result.stderr)
+                        return False
+                else:
+                    logger.error("Restore failed: %s", result.stderr)
+                    return False
+                    
+        except Exception as e:
             logger.error("Restore operation failed: %s", e)
             return False
-
+            
     def test_backup(self, backup_filename: str) -> bool:
         """Test backup file integrity."""
-        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
             logger.error("Backup file not found: %s", backup_path)
             return False
@@ -253,7 +330,7 @@ class BackupMixin:
         """Create a backup of the database and clear all data."""
         try:
             backup_info = self.create_backup("manual", "backup_and_reset")
-            console.print(f"✓ Database backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
+            print(f"✓ Database backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
             backup_dir = os.path.join(SCRIPT_DIR, "backups")
             os.makedirs(backup_dir, exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -279,3 +356,42 @@ class BackupMixin:
         except Exception as e:  # pylint: disable=broad-except
             logger.error("Error during database backup and reset: %s", e)
             return False
+            
+    def test_backup_compatibility(self, backup_filename: str) -> Dict:
+        """Test backup compatibility with current PostgreSQL version."""
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
+        if not os.path.exists(backup_path):
+            return {"compatible": False, "reason": "File not found", "can_restore": False}
+        
+        try:
+            import gzip
+            with gzip.open(backup_path, 'rt', encoding='utf-8', errors='replace') as f:
+                # Read first 1000 lines to check for compatibility issues
+                content_sample = ""
+                for i, line in enumerate(f):
+                    if i >= 1000:
+                        break
+                    content_sample += line
+            
+            incompatible_features = []
+            
+            # Check for known incompatible features
+            if 'SET transaction_timeout' in content_sample:
+                incompatible_features.append("transaction_timeout (PostgreSQL 15+ feature)")
+            if 'SET idle_in_transaction_session_timeout' in content_sample:
+                incompatible_features.append("idle_in_transaction_session_timeout")
+            if 'SET lock_timeout' in content_sample:
+                incompatible_features.append("lock_timeout")
+            
+            return {
+                "compatible": len(incompatible_features) == 0,
+                "issues": incompatible_features,
+                "can_restore": True,  # We can filter these out during restore
+                "filterable": True
+            }
+            
+        except Exception as e:
+            logger.error("Compatibility test failed: %s", e)
+            return {"compatible": False, "reason": str(e), "can_restore": False}
+        

@@ -2,6 +2,9 @@ import typer
 from typing import Optional
 
 from .scraping_orchestrator import ScrapingOrchestrator
+from .database.core import JobDatabase  # Add this import
+from .console_interface import console  # Add this import
+
 import typer.rich_utils as rich_utils
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN="bold sky_blue3"
 rich_utils.STYLE_OPTION="bold sky_blue3"
@@ -99,9 +102,64 @@ def list_backups(ctx: typer.Context):
     ctx.obj["orch"].backup_manager.list_backups()
 
 @app.command("restore-backup")
-def restore_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Backup filename")):
+def restore_backup(
+    ctx: typer.Context,
+    filename: str = typer.Argument(help="Backup filename to restore from"),
+    force: bool = typer.Option(False, "--force", help="Force restore even with compatibility warnings")
+):
     """Restore database from a backup file."""
-    ctx.obj["orch"].backup_manager.restore_backup(filename)
+    
+    db = None
+    try:
+        db = JobDatabase(database_type="production")
+        
+        # Test compatibility first
+        console.print(f"Testing backup compatibility: {filename}")
+        compat_check = db.test_backup_compatibility(filename)
+        
+        if not compat_check.get("can_restore", False):
+            console.print(f"❌ Cannot restore backup: {compat_check.get('reason', 'Unknown error')}")
+            raise typer.Exit(1)
+        
+        if not compat_check["compatible"] and not force:
+            console.print("⚠️ Compatibility issues detected:")
+            for issue in compat_check.get("issues", []):
+                console.print(f"  • {issue}")
+            
+            if compat_check.get("filterable", False):
+                console.print("\n✓ These issues can be automatically filtered during restore.")
+                console.print("Use --force to proceed with filtering, or cancel to abort.")
+            else:
+                console.print("\n❌ These compatibility issues cannot be automatically resolved.")
+                raise typer.Exit(1)
+            
+            if not typer.confirm("Continue with restore (incompatible settings will be filtered)?"):
+                console.print("❌ Restore cancelled")
+                raise typer.Exit(1)
+        
+        console.print(f"Restoring from backup: {filename}")
+        
+        # Final confirmation for destructive operation
+        response = typer.confirm("This will overwrite all current data. Are you sure?")
+        if not response:
+            console.print("❌ Restore cancelled")
+            raise typer.Exit(1)
+        
+        # Perform the restore
+        success = db.restore_backup(filename)
+        if success:
+            console.print("✅ Database restored successfully")
+        else:
+            console.print("❌ Restore failed")
+            raise typer.Exit(1)
+            
+    except Exception as e:
+        console.print(f"❌ Restore error: {e}")
+        raise typer.Exit(1)
+    finally:
+        if db:
+            db.close()
+
 
 @app.command("test-backup")
 def test_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Backup filename")):
@@ -112,6 +170,44 @@ def test_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Ba
 def cleanup_backups(ctx: typer.Context):
     """Force cleanup of old backups."""
     ctx.obj["orch"].backup_manager.cleanup_backups()
+
+@app.command("test-backup-compatibility")
+def test_backup_compatibility(
+    ctx: typer.Context,
+    filename: str = typer.Argument(help="Backup filename to test")
+):
+    """Test backup compatibility with current PostgreSQL version."""
+    
+    db = None
+    try:
+        # Use JobDatabase directly instead of orchestrator's scraper
+        db = JobDatabase(database_type="production")
+        
+        console.print(f"Testing backup compatibility: {filename}")
+        compat_check = db.test_backup_compatibility(filename)
+        
+        if not compat_check.get("can_restore", True):
+            console.print(f"❌ Backup cannot be restored: {compat_check.get('reason', 'Unknown error')}")
+            raise typer.Exit(1)
+        
+        if compat_check["compatible"]:
+            console.print("✅ Backup is fully compatible")
+        else:
+            console.print("⚠️ Compatibility issues found:")
+            for issue in compat_check.get("issues", []):
+                console.print(f"  • {issue}")
+            
+            if compat_check.get("filterable", False):
+                console.print("\n✓ These issues can be automatically filtered during restore.")
+            else:
+                console.print("\n❌ These issues cannot be automatically resolved.")
+                
+    except Exception as e:
+        console.print(f"❌ Compatibility test error: {e}")
+        raise typer.Exit(1)
+    finally:
+        if db:
+            db.close()
 
 __all__ = ["app"]
 
