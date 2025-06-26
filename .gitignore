@@ -207,7 +207,6 @@ configs/*_prod.json
 # development scripts
 dev/
 
-outputs/
 
 # outputs/Raw Results/*.csv
 # outputs/exports/*.csv
@@ -225,8 +224,16 @@ sql/
 duplicate_evals.xlsx
 parsed_jobscraper_log.tsv
 
+**/*.bkp.json
+
+# Large database backups (now stored externally)
+backups/DatabaseBackups/*.sql.gz
+backups/DatabaseBackups/backup_manifest.json
+
+# System files
 .DS_Store
 **/.DS_Store
 
-**/*.bkp.json
-
+# Large output files
+outputs/
+*.sql.gz

@@ -19,10 +19,27 @@ class BackupMixin:
     db_config: 'DatabaseConfig'
     conn = None
 
+    def _get_backup_directory(self) -> str:
+        """Get the backup directory from config or use default."""
+        try:
+            # Try to get backup directory from database config
+            backup_dir = self.db_config.config.get("backup_directory")
+            if backup_dir:
+                # Expand user home directory if needed
+                backup_dir = os.path.expanduser(backup_dir)
+                os.makedirs(backup_dir, exist_ok=True)
+                return backup_dir
+        except Exception:
+            pass
+        
+        # Fallback to dedicated directory outside project
+        fallback_dir = os.path.expanduser("~/Database_Backups/jobscraps/DatabaseBackups")
+        os.makedirs(fallback_dir, exist_ok=True)
+        return fallback_dir
+
     def create_backup(self, backup_type: str = "auto", reason: str = "") -> Dict:
         """Create a PostgreSQL backup using pg_dump."""
-        backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
-        os.makedirs(backup_dir, exist_ok=True)
+        backup_dir = self._get_backup_directory()  # Use the new method
         conn_params = self.db_config.get_connection_params()
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         reason_suffix = f"_{reason}" if reason else ""
@@ -97,7 +114,8 @@ class BackupMixin:
 
     def _update_backup_manifest(self, backup_info: Dict) -> None:
         """Update the backup manifest file."""
-        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
+        backup_dir = self._get_backup_directory()
+        manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if os.path.exists(manifest_path):
                 with open(manifest_path, "r") as f:
@@ -119,7 +137,7 @@ class BackupMixin:
 
     def manage_backup_retention(self) -> Dict:
         """Manage backup retention policy."""
-        backup_dir = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups")
+        backup_dir = self._get_backup_directory()
         manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if not os.path.exists(manifest_path):
@@ -175,7 +193,8 @@ class BackupMixin:
 
     def list_backups(self) -> List[Dict]:
         """List available backups."""
-        manifest_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", "backup_manifest.json")
+        backup_dir = self._get_backup_directory()
+        manifest_path = os.path.join(backup_dir, "backup_manifest.json")
         try:
             if not os.path.exists(manifest_path):
                 return []
@@ -191,7 +210,8 @@ class BackupMixin:
 
     def restore_backup(self, backup_filename: str) -> bool:
         """Restore database from backup file with proper gzip handling and PostgreSQL compatibility."""
-        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
             logger.error("Backup file not found: %s", backup_path)
             return False
@@ -283,7 +303,8 @@ class BackupMixin:
             
     def test_backup(self, backup_filename: str) -> bool:
         """Test backup file integrity."""
-        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
             logger.error("Backup file not found: %s", backup_path)
             return False
@@ -338,7 +359,8 @@ class BackupMixin:
             
     def test_backup_compatibility(self, backup_filename: str) -> Dict:
         """Test backup compatibility with current PostgreSQL version."""
-        backup_path = os.path.join(SCRIPT_DIR, "backups", "DatabaseBackups", backup_filename)
+        backup_dir = self._get_backup_directory()
+        backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
             return {"compatible": False, "reason": "File not found", "can_restore": False}
         
