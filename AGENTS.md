@@ -6,8 +6,6 @@ General guidelines for maintaining the **JobScraps** repository.
 
 - Install dependencies from `requirements.txt` if new ones are introduced.
     
-- After modifying code, run `python dev/verify_setup.py` to ensure the environment and database configuration are valid.
-    
 - If tests are added, run `pytest` before committing.
     
 
