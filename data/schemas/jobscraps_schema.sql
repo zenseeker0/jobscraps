@@ -19,6 +19,13 @@ SET row_security = off;
 
 DROP INDEX IF EXISTS public.idx_search_history_timestamp;
 DROP INDEX IF EXISTS public.idx_search_history_search_query;
+DROP INDEX IF EXISTS public.idx_search_history_session_id;
+DROP INDEX IF EXISTS public.idx_search_history_new_jobs;
+DROP INDEX IF EXISTS public.idx_search_history_duration;
+DROP INDEX IF EXISTS public.idx_search_history_site_breakdown;
+DROP INDEX IF EXISTS public.idx_search_history_duplicate_breakdown;
+DROP INDEX IF EXISTS public.idx_search_history_remote_jobs;
+DROP INDEX IF EXISTS public.idx_search_history_avg_salary;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title_company;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_site;
@@ -159,7 +166,14 @@ CREATE TABLE public.search_history (
     search_query text,
     parameters text,
     "timestamp" timestamp without time zone,
-    jobs_found integer
+    jobs_found integer,
+    session_id text,
+    new_jobs_inserted integer,
+    duration_seconds numeric(10,2),
+    site_breakdown jsonb,
+    duplicate_breakdown jsonb,
+    remote_jobs_count integer,
+    avg_salary numeric(12,2)
 );
 
 
@@ -309,6 +323,55 @@ CREATE INDEX idx_search_history_search_query ON public.search_history USING btre
 --
 
 CREATE INDEX idx_search_history_timestamp ON public.search_history USING btree ("timestamp");
+
+
+--
+-- Name: idx_search_history_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_session_id ON public.search_history USING btree (session_id);
+
+
+--
+-- Name: idx_search_history_new_jobs; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_new_jobs ON public.search_history USING btree (new_jobs_inserted);
+
+
+--
+-- Name: idx_search_history_duration; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_duration ON public.search_history USING btree (duration_seconds);
+
+
+--
+-- Name: idx_search_history_site_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_site_breakdown ON public.search_history USING gin (site_breakdown);
+
+
+--
+-- Name: idx_search_history_duplicate_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_duplicate_breakdown ON public.search_history USING gin (duplicate_breakdown);
+
+
+--
+-- Name: idx_search_history_remote_jobs; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_remote_jobs ON public.search_history USING btree (remote_jobs_count);
+
+
+--
+-- Name: idx_search_history_avg_salary; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_avg_salary ON public.search_history USING btree (avg_salary);
 
 
 --

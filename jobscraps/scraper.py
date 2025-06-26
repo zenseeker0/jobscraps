@@ -17,6 +17,7 @@ import time
 import subprocess
 import glob
 from datetime import datetime
+import uuid
 from typing import Dict, List, Optional, Any, Union, Tuple
 from collections import defaultdict
 
@@ -99,6 +100,7 @@ class JobScraper:
             return
         
         total_new_jobs = 0
+        session_id = uuid.uuid4().hex
         
         for job_config in job_configs:
             job_name = job_config.get("name", "Unnamed Job")
@@ -115,18 +117,23 @@ class JobScraper:
                 
             logger.info(f"Starting search for: {job_name}")
             logger.info(f"Parameters: {params}")
-            
+
             try:
-                # Perform job search
+                start_time = time.time()
                 jobs_df = scrape_jobs(**params)
-                
-                # Log the search
-                self.db.log_search(job_name, params, len(jobs_df))
-                
-                # Insert results into database
+
                 new_jobs = self.db.insert_jobs(jobs_df, job_name)
                 total_new_jobs += new_jobs
-                
+
+                self.db.log_search(
+                    job_name,
+                    params,
+                    jobs_df,
+                    new_jobs,
+                    session_id,
+                    start_time,
+                )
+
                 logger.info(f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new.")
                 
             except Exception as e:

@@ -58,6 +58,42 @@ class JobDatabase(BackupMixin):
             logger.warning("Database connection error, reconnecting...")
             self._connect_with_retry()
 
+    def _calculate_duration(self, start_time: float) -> float:
+        """Return the elapsed time in seconds since ``start_time``."""
+        return round(time.time() - start_time, 2)
+
+    def _build_site_breakdown(self, jobs_df: pd.DataFrame) -> Dict[str, int]:
+        """Return a job count per site."""
+        if "site" in jobs_df.columns:
+            return jobs_df["site"].value_counts(dropna=True).to_dict()
+        return {}
+
+    def _count_remote_jobs(self, jobs_df: pd.DataFrame) -> int:
+        """Return the number of remote jobs in ``jobs_df``."""
+        if "is_remote" in jobs_df.columns:
+            return int(jobs_df["is_remote"].astype(bool).sum())
+        return 0
+
+    def _calculate_average_salary(self, jobs_df: pd.DataFrame) -> float | None:
+        """Calculate the average salary across all jobs."""
+        salary_cols = []
+        if "min_amount" in jobs_df.columns:
+            salary_cols.append(jobs_df["min_amount"])
+        if "max_amount" in jobs_df.columns:
+            salary_cols.append(jobs_df["max_amount"])
+        if not salary_cols:
+            return None
+        salary_series = pd.concat(salary_cols, axis=1).mean(axis=1)
+        salary_series = salary_series[salary_series.notna() & (salary_series > 0)]
+        if salary_series.empty:
+            return None
+        return round(float(salary_series.mean()), 2)
+
+    def _build_duplicate_breakdown(self, jobs_found: int, new_jobs: int) -> Dict[str, int]:
+        """Return duplicate vs unique job counts."""
+        duplicates = max(jobs_found - new_jobs, 0)
+        return {"unique": new_jobs, "duplicates": duplicates}
+
     def create_tables(self) -> None:
         self._ensure_connection()
         with self.conn.cursor() as cursor:
@@ -110,7 +146,14 @@ class JobDatabase(BackupMixin):
                 search_query TEXT,
                 parameters TEXT,
                 timestamp TIMESTAMP,
-                jobs_found INTEGER
+                jobs_found INTEGER,
+                session_id TEXT,
+                new_jobs_inserted INTEGER,
+                duration_seconds DECIMAL(10,2),
+                site_breakdown JSONB,
+                duplicate_breakdown JSONB,
+                remote_jobs_count INTEGER,
+                avg_salary DECIMAL(12,2)
             )
             """
             )
@@ -130,6 +173,13 @@ class JobDatabase(BackupMixin):
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_session_id ON search_history(session_id)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_new_jobs ON search_history(new_jobs_inserted)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_duration ON search_history(duration_seconds)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_site_breakdown ON search_history USING gin (site_breakdown)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_duplicate_breakdown ON search_history USING gin (duplicate_breakdown)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_remote_jobs ON search_history(remote_jobs_count)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_avg_salary ON search_history(avg_salary)"
             ]
             for query in index_queries:
                 try:
@@ -217,12 +267,53 @@ class JobDatabase(BackupMixin):
             logger.info("No new jobs to insert")
         return new_jobs_count
 
-    def log_search(self, search_query: str, parameters: Dict, jobs_found: int) -> None:
+    def log_search(
+        self,
+        search_query: str,
+        parameters: Dict,
+        jobs_df: pd.DataFrame,
+        new_jobs_inserted: int,
+        session_id: str,
+        start_time: float,
+    ) -> None:
+        """Log a search operation with extended metrics."""
         self._ensure_connection()
+        jobs_found = len(jobs_df)
+        duration = self._calculate_duration(start_time)
+        site_breakdown = self._build_site_breakdown(jobs_df)
+        dup_breakdown = self._build_duplicate_breakdown(jobs_found, new_jobs_inserted)
+        remote_jobs = self._count_remote_jobs(jobs_df)
+        avg_salary = self._calculate_average_salary(jobs_df)
         with self.conn.cursor() as cursor:
             cursor.execute(
-                "INSERT INTO search_history (search_query, parameters, timestamp, jobs_found) VALUES (%s, %s, %s, %s)",
-                (search_query, json.dumps(parameters), datetime.now(), jobs_found),
+                """
+                INSERT INTO search_history (
+                    search_query,
+                    parameters,
+                    timestamp,
+                    jobs_found,
+                    session_id,
+                    new_jobs_inserted,
+                    duration_seconds,
+                    site_breakdown,
+                    duplicate_breakdown,
+                    remote_jobs_count,
+                    avg_salary
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    search_query,
+                    json.dumps(parameters),
+                    datetime.now(),
+                    jobs_found,
+                    session_id,
+                    new_jobs_inserted,
+                    duration,
+                    psycopg2.extras.Json(site_breakdown),
+                    psycopg2.extras.Json(dup_breakdown),
+                    remote_jobs,
+                    avg_salary,
+                ),
             )
             self.conn.commit()
 
