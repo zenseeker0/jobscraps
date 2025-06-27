@@ -156,21 +156,52 @@ class JobDatabase(BackupMixin):
             self.conn.commit()
             logger.info("Database tables and indexes created/verified successfully")
 
-    def insert_jobs(self, jobs_df: pd.DataFrame, search_query: str) -> int:
+    def insert_jobs(
+        self, jobs_df: pd.DataFrame, search_query: str
+    ) -> tuple[int, Dict[str, int], Dict[str, int], int, float]:
+        """Insert jobs into the database.
+
+        Returns the number of new jobs inserted along with a breakdown of
+        inserted jobs per site, duplicate counts per site, the number of remote
+        jobs inserted and the average salary of the inserted jobs.
+        """
+
         self._ensure_connection()
         jobs_df["date_scraped"] = datetime.now()
         jobs_df["search_query"] = search_query
+
         with self.conn.cursor() as cursor:
             cursor.execute("SELECT id FROM scraped_jobs")
             existing_ids = {row[0] for row in cursor.fetchall()}
+
         if "id" in jobs_df.columns:
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
         else:
-            jobs_df["id"] = jobs_df.apply(lambda row: f"{row.get('site', 'unknown')}_{row.get('job_url', '')[-20:]}", axis=1)
+            jobs_df["id"] = jobs_df.apply(
+                lambda row: f"{row.get('site', 'unknown')}_{row.get('job_url', '')[-20:]}",
+                axis=1,
+            )
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
+
         if "is_remote" in new_jobs_df.columns:
             new_jobs_df["is_remote"] = new_jobs_df["is_remote"].astype(bool)
+
         new_jobs_count = len(new_jobs_df)
+        site_counts = new_jobs_df["site"].fillna("unknown").value_counts().to_dict()
+
+        duplicate_df = jobs_df[jobs_df["id"].isin(existing_ids)]
+        duplicate_counts = duplicate_df["site"].fillna("unknown").value_counts().to_dict()
+
+        remote_jobs_count = int(new_jobs_df.get("is_remote", pd.Series(dtype=bool)).sum())
+
+        if not new_jobs_df.empty:
+            salary_cols = new_jobs_df[["min_amount", "max_amount"]].apply(
+                pd.to_numeric, errors="coerce"
+            )
+            salary_mean = salary_cols.mean(axis=1)
+            avg_salary = float(salary_mean.mean()) if not salary_mean.empty else 0.0
+        else:
+            avg_salary = 0.0
         if new_jobs_count > 0:
             columns = [
                 "id",
@@ -232,7 +263,8 @@ class JobDatabase(BackupMixin):
             logger.info("Inserted %s new jobs into database", new_jobs_count)
         else:
             logger.info("No new jobs to insert")
-        return new_jobs_count
+
+        return new_jobs_count, site_counts, duplicate_counts, remote_jobs_count, avg_salary
 
     def start_session(self) -> int:
         self._ensure_connection()
@@ -245,12 +277,52 @@ class JobDatabase(BackupMixin):
             self.conn.commit()
         return session_id
 
-    def log_search(self, session_id: int, search_query: str, parameters: Dict, jobs_found: int) -> None:
+    def log_search(
+        self,
+        session_id: int,
+        search_query: str,
+        parameters: Dict,
+        jobs_found: int,
+        new_jobs_inserted: int,
+        duration_seconds: float,
+        site_breakdown: Dict[str, int],
+        duplicate_breakdown: Dict[str, int],
+        remote_jobs_count: int,
+        avg_salary: float,
+    ) -> None:
+        """Log a search operation with extended metrics."""
+
         self._ensure_connection()
         with self.conn.cursor() as cursor:
             cursor.execute(
-                "INSERT INTO search_history (session_id, search_query, parameters, timestamp, jobs_found) VALUES (%s, %s, %s, %s, %s)",
-                (session_id, search_query, json.dumps(parameters), datetime.now(), jobs_found),
+                """
+                INSERT INTO search_history (
+                    session_id,
+                    search_query,
+                    parameters,
+                    new_jobs_inserted,
+                    duration_seconds,
+                    site_breakdown,
+                    duplicate_breakdown,
+                    remote_jobs_count,
+                    avg_salary,
+                    timestamp,
+                    jobs_found
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    session_id,
+                    search_query,
+                    json.dumps(parameters),
+                    new_jobs_inserted,
+                    duration_seconds,
+                    json.dumps(site_breakdown),
+                    json.dumps(duplicate_breakdown),
+                    remote_jobs_count,
+                    avg_salary,
+                    datetime.now(),
+                    jobs_found,
+                ),
             )
             self.conn.commit()
 
