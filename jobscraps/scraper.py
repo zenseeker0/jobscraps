@@ -120,17 +120,37 @@ class JobScraper:
             logger.info(f"Parameters: {params}")
             
             try:
-                # Perform job search
+                start_time = time.time()
                 jobs_df = scrape_jobs(**params)
-                
-                # Log the search
-                self.db.log_search(self.session_id, job_name, params, len(jobs_df))
-                
-                # Insert results into database
-                new_jobs = self.db.insert_jobs(jobs_df, job_name)
+
+                (
+                    new_jobs,
+                    site_counts,
+                    duplicate_counts,
+                    remote_count,
+                    avg_salary,
+                ) = self.db.insert_jobs(jobs_df, job_name)
+
+                duration = time.time() - start_time
+
+                self.db.log_search(
+                    self.session_id,
+                    job_name,
+                    params,
+                    len(jobs_df),
+                    new_jobs,
+                    duration,
+                    site_counts,
+                    duplicate_counts,
+                    remote_count,
+                    avg_salary,
+                )
+
                 total_new_jobs += new_jobs
-                
-                logger.info(f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new.")
+
+                logger.info(
+                    f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new."
+                )
                 
             except Exception as e:
                 logger.error(f"Error searching for {job_name}: {str(e)}", exc_info=True)
