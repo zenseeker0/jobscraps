@@ -158,6 +158,13 @@ CREATE TABLE public.search_history (
     id integer NOT NULL,
     search_query text,
     parameters text,
+    session_id text,
+    new_jobs_inserted integer,
+    duration_seconds numeric,
+    site_breakdown text,
+    duplicate_breakdown text,
+    remote_jobs_count integer,
+    avg_salary numeric(12,2),
     "timestamp" timestamp without time zone,
     jobs_found integer
 );

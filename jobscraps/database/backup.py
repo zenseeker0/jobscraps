@@ -342,15 +342,23 @@ class BackupMixin:
             search_backup_path = os.path.join(backup_dir, f"search_history_{timestamp}.csv")
             search_df.to_csv(search_backup_path, index=False)
             logger.info("Search history CSV backup created at %s", search_backup_path)
+
+            session_df = pd.read_sql("SELECT * FROM search_sessions", self.conn)
+            session_backup_path = os.path.join(backup_dir, f"search_sessions_{timestamp}.csv")
+            session_df.to_csv(session_backup_path, index=False)
+            logger.info("Search sessions CSV backup created at %s", session_backup_path)
             rows_deleted = self.clear_all_jobs()
             with self.conn.cursor() as cursor:
                 cursor.execute("DELETE FROM search_history")
                 search_rows_deleted = cursor.rowcount
+                cursor.execute("DELETE FROM search_sessions")
+                session_rows_deleted = cursor.rowcount
                 self.conn.commit()
             logger.info(
-                "Database reset completed. Jobs: %s, Search history: %s",
+                "Database reset completed. Jobs: %s, Search history: %s, Sessions: %s",
                 rows_deleted,
                 search_rows_deleted,
+                session_rows_deleted,
             )
             return True
         except Exception as e:  # pylint: disable=broad-except
