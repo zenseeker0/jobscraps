@@ -167,6 +167,57 @@ def list_jobs(
         except sqlite3.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
+@app.command("session-stats")
+def show_session_stats() -> None:
+    """Display aggregated statistics for scraping sessions."""
+    with get_db_connection() as conn:
+        try:
+            query = """
+                SELECT
+                    s.id AS session_id,
+                    s.start_time,
+                    COUNT(h.id) AS searches,
+                    COALESCE(SUM(h.jobs_found), 0) AS jobs_found,
+                    COALESCE(SUM(h.new_jobs_inserted), 0) AS new_jobs,
+                    COALESCE(SUM(h.remote_jobs_count), 0) AS remote_jobs,
+                    COALESCE(SUM(h.duration_seconds), 0) AS duration_seconds,
+                    COALESCE(AVG(h.avg_salary), 0) AS avg_salary
+                FROM search_sessions s
+                LEFT JOIN search_history h ON h.session_id = s.id
+                GROUP BY s.id, s.start_time
+                ORDER BY s.start_time DESC
+            """
+            df = pd.read_sql_query(query, conn)
+            if df.empty:
+                console.print("[yellow]No session data found[/yellow]")
+                return
+
+            table = Table(title="Session Statistics", box=box.ROUNDED)
+            table.add_column("ID", style="dim")
+            table.add_column("Start", style="cyan")
+            table.add_column("Searches", style="green")
+            table.add_column("Found", style="blue")
+            table.add_column("New", style="magenta")
+            table.add_column("Remote", style="yellow")
+            table.add_column("Avg Salary", style="bright_green")
+            table.add_column("Duration", style="white")
+
+            for _, row in df.iterrows():
+                table.add_row(
+                    str(row["session_id"]),
+                    str(row["start_time"]),
+                    str(row["searches"]),
+                    str(row["jobs_found"]),
+                    str(row["new_jobs"]),
+                    str(row["remote_jobs"]),
+                    f"{row['avg_salary']:,.0f}",
+                    f"{row['duration_seconds']:.1f}s",
+                )
+
+            console.print(table)
+        except sqlite3.Error as e:
+            console.print(f"[bold red]Database error: {str(e)}[/bold red]")
+
 @app.command("stats")
 def show_stats():
     """Show job statistics and analytics"""
@@ -626,41 +677,46 @@ def export_jobs(
             console.print(f"[bold red]Export error: {str(e)}[/bold red]")
 
 @app.command("history")
-def show_history():
+def show_history() -> None:
     """Show search history from the job scraper"""
     with get_db_connection() as conn:
         try:
             df = pd.read_sql_query(
                 "SELECT * FROM search_history ORDER BY timestamp DESC",
-                conn
+                conn,
             )
-            
-            if len(df) == 0:
+
+            if df.empty:
                 console.print("[bold yellow]No search history found[/bold yellow]")
                 return
-            
-            table = Table(
-                title="Search History",
-                box=box.ROUNDED
-            )
-            
+
+            table = Table(title="Search History", box=box.ROUNDED)
             table.add_column("ID", style="dim")
-            table.add_column("Search Query", style="cyan")
-            table.add_column("Date", style="green")
-            table.add_column("Jobs Found", style="yellow")
-            
+            table.add_column("Session", style="dim")
+            table.add_column("Query", style="cyan")
+            table.add_column("Found", style="green")
+            table.add_column("New", style="yellow")
+            table.add_column("Remote", style="magenta")
+            table.add_column("Avg Salary", style="blue")
+            table.add_column("Duration", style="green")
+            table.add_column("Date", style="white")
+
             for _, row in df.iterrows():
                 table.add_row(
                     str(row.get("id", "")),
+                    str(row.get("session_id", "")),
                     str(row.get("search_query", "")),
+                    str(row.get("jobs_found", "")),
+                    str(row.get("new_jobs_inserted", "")),
+                    str(row.get("remote_jobs_count", "")),
+                    f"{row.get('avg_salary', 0):,.0f}",
+                    f"{row.get('duration_seconds', 0):.1f}s",
                     str(row.get("timestamp", "")),
-                    str(row.get("jobs_found", ""))
                 )
-            
+
             console.print(table)
-            
-            # Show parameters for the most recent search
-            if len(df) > 0:
+
+            if not df.empty:
                 recent = df.iloc[0]
                 try:
                     params = json.loads(recent.get("parameters", "{}"))
@@ -668,14 +724,14 @@ def show_history():
                     params_table = Table(box=box.SIMPLE)
                     params_table.add_column("Parameter", style="cyan")
                     params_table.add_column("Value", style="green")
-                    
+
                     for key, value in params.items():
                         params_table.add_row(key, str(value))
-                    
+
                     console.print(params_table)
                 except json.JSONDecodeError:
                     pass
-            
+
         except sqlite3.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
