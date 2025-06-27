@@ -109,6 +109,13 @@ class JobDatabase(BackupMixin):
                 id SERIAL PRIMARY KEY,
                 search_query TEXT,
                 parameters TEXT,
+                session_id TEXT,
+                new_jobs_inserted INTEGER,
+                duration_seconds NUMERIC,
+                site_breakdown TEXT,
+                duplicate_breakdown TEXT,
+                remote_jobs_count INTEGER,
+                avg_salary NUMERIC(12,2),
                 timestamp TIMESTAMP,
                 jobs_found INTEGER
             )
