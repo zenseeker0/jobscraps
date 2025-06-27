@@ -84,6 +84,9 @@ class JobScraper:
         self.config = JobSearchConfig(config_path)
         self.db = JobDatabase(db_config_path, database_type)
         self.duplicate_manager = DuplicateManager(self.db)
+
+        self.session_id = self.db.start_session()
+        logger.info("Started search session %s", self.session_id)
         
         self.proxies = [
         ]
@@ -121,7 +124,7 @@ class JobScraper:
                 jobs_df = scrape_jobs(**params)
                 
                 # Log the search
-                self.db.log_search(job_name, params, len(jobs_df))
+                self.db.log_search(self.session_id, job_name, params, len(jobs_df))
                 
                 # Insert results into database
                 new_jobs = self.db.insert_jobs(jobs_df, job_name)

@@ -105,8 +105,17 @@ class JobDatabase(BackupMixin):
             )
             cursor.execute(
                 """
+            CREATE TABLE IF NOT EXISTS search_sessions (
+                id SERIAL PRIMARY KEY,
+                start_time TIMESTAMP
+            )
+            """
+            )
+            cursor.execute(
+                """
             CREATE TABLE IF NOT EXISTS search_history (
                 id SERIAL PRIMARY KEY,
+                session_id INTEGER REFERENCES search_sessions(id),
                 search_query TEXT,
                 parameters TEXT,
                 session_id TEXT,
@@ -137,6 +146,7 @@ class JobDatabase(BackupMixin):
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_session_id ON search_history(session_id)",
             ]
             for query in index_queries:
                 try:
@@ -224,12 +234,23 @@ class JobDatabase(BackupMixin):
             logger.info("No new jobs to insert")
         return new_jobs_count
 
-    def log_search(self, search_query: str, parameters: Dict, jobs_found: int) -> None:
+    def start_session(self) -> int:
         self._ensure_connection()
         with self.conn.cursor() as cursor:
             cursor.execute(
-                "INSERT INTO search_history (search_query, parameters, timestamp, jobs_found) VALUES (%s, %s, %s, %s)",
-                (search_query, json.dumps(parameters), datetime.now(), jobs_found),
+                "INSERT INTO search_sessions (start_time) VALUES (%s) RETURNING id",
+                (datetime.now(),),
+            )
+            session_id = cursor.fetchone()[0]
+            self.conn.commit()
+        return session_id
+
+    def log_search(self, session_id: int, search_query: str, parameters: Dict, jobs_found: int) -> None:
+        self._ensure_connection()
+        with self.conn.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO search_history (session_id, search_query, parameters, timestamp, jobs_found) VALUES (%s, %s, %s, %s, %s)",
+                (session_id, search_query, json.dumps(parameters), datetime.now(), jobs_found),
             )
             self.conn.commit()
 
