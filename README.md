@@ -46,6 +46,7 @@ A comprehensive job scraping and data management system built with Python, Postg
 - **Data cleaning pipeline** with configurable filters (salary, company, title, duplicates)
 - **Safety-first design** - non-destructive analysis vs explicit destructive operations
 - **Retool integration** for business intelligence dashboards
+- **Session analytics** with per-search metrics and salary averages
 
 ## 📁 Project Structure
 
@@ -171,6 +172,12 @@ jobscraps backup                    # Manual backup
 jobscraps list-backups              # Show available backups
 jobscraps restore-backup file.sql.gz # Restore from backup
 jobscraps cleanup-backups           # Force retention cleanup
+```
+
+### Analytics
+```bash
+python scripts/db_stats_cli.py session-stats  # Aggregated session statistics
+python scripts/db_stats_cli.py history        # Detailed search log
 ```
 
 ## 🤝 Contributing
