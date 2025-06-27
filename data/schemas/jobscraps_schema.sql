@@ -20,6 +20,8 @@ SET row_security = off;
 DROP INDEX IF EXISTS public.idx_search_history_timestamp;
 DROP INDEX IF EXISTS public.idx_search_history_search_query;
 DROP INDEX IF EXISTS public.idx_search_history_session_id;
+DROP INDEX IF EXISTS public.idx_search_history_site_breakdown;
+DROP INDEX IF EXISTS public.idx_search_history_duplicate_breakdown;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title_company;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_site;
@@ -358,6 +360,20 @@ CREATE INDEX idx_scraped_jobs_title_company ON public.scraped_jobs USING btree (
 --
 
 CREATE INDEX idx_search_history_session_id ON public.search_history USING btree (session_id);
+
+
+--
+-- Name: idx_search_history_site_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_site_breakdown ON public.search_history USING gin (site_breakdown);
+
+
+--
+-- Name: idx_search_history_duplicate_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_duplicate_breakdown ON public.search_history USING gin (duplicate_breakdown);
 
 
 

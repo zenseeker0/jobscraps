@@ -146,6 +146,8 @@ class JobDatabase(BackupMixin):
                 "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_session_id ON search_history(session_id)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_site_breakdown ON search_history USING gin (site_breakdown)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_duplicate_breakdown ON search_history USING gin (duplicate_breakdown)",
             ]
             for query in index_queries:
                 try:
