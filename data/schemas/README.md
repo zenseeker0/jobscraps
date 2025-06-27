@@ -23,4 +23,5 @@ Migration scripts are stored in `data/schemas/migrations`. Apply them with psql:
 
 ```bash
 psql -h HOST -U USER -d jobscraps -f data/schemas/migrations/001_add_search_metrics.sql
+psql -h HOST -U USER -d jobscraps -f data/schemas/migrations/002_migrate_sessions.sql
 ```
