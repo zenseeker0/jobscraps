@@ -118,7 +118,6 @@ class JobDatabase(BackupMixin):
                 session_id INTEGER REFERENCES search_sessions(id),
                 search_query TEXT,
                 parameters TEXT,
-                session_id TEXT,
                 new_jobs_inserted INTEGER,
                 duration_seconds NUMERIC,
                 site_breakdown TEXT,
