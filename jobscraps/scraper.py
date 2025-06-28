@@ -32,6 +32,7 @@ from .database import get_connection
 from .console_interface import console
 from .backup_manager import BackupManager
 from .data_cleaner import DataCleaner
+from .session_manager import SessionManager
 import warnings
 # Suppress pandas SQLAlchemy warnings for psycopg2 connections
 warnings.filterwarnings('ignore', message='pandas only supports SQLAlchemy connectable')
@@ -97,85 +98,93 @@ class JobScraper:
         global_params = self.config.get_global_params()
         job_configs = self.config.get_job_configs()
         
+    
         if not job_configs:
             logger.warning("No enabled job configurations found")
+            self.db.end_session(self.session_id, "no_jobs")
             return
-        
+
         total_new_jobs = 0
-        
-        for job_config in job_configs:
-            job_name = job_config.get("name", "Unnamed Job")
-            params = job_config.get("parameters", {})
-            
-            # Merge with global parameters
-            for key, value in global_params.items():
-                if key not in params:
-                    params[key] = value
-                    
-            # Add proxies if available
-            if self.proxies:
-                params["proxies"] = self.proxies
-                
-            logger.info(f"Starting search for: {job_name}")
-            logger.info(f"Parameters: {params}")
-            
-            try:
-                start_time = time.time()
-                jobs_df = scrape_jobs(**params)
 
-                (
-                    new_jobs,
-                    site_counts,
-                    duplicate_counts,
-                    remote_count,
-                    avg_salary,
-                ) = self.db.insert_jobs(jobs_df, job_name)
+        with SessionManager(self.db, self.session_id):
+            for job_config in job_configs:
+                job_name = job_config.get("name", "Unnamed Job")
+                params = job_config.get("parameters", {})
 
-                duration = time.time() - start_time
+                # Merge with global parameters
+                for key, value in global_params.items():
+                    if key not in params:
+                        params[key] = value
 
-                self.db.log_search(
-                    self.session_id,
-                    job_name,
-                    params,
-                    len(jobs_df),
-                    new_jobs,
-                    duration,
-                    site_counts,
-                    duplicate_counts,
-                    remote_count,
-                    avg_salary,
-                )
+                # Add proxies if available
+                if self.proxies:
+                    params["proxies"] = self.proxies
 
-                total_new_jobs += new_jobs
+                logger.info(f"Starting search for: {job_name}")
+                logger.info(f"Parameters: {params}")
 
-                logger.info(
-                    f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new."
-                )
-                
-            except Exception as e:
-                logger.error(f"Error searching for {job_name}: {str(e)}", exc_info=True)
-        
-        # Create backup after scraping to capture new data (only for production database)
-        if total_new_jobs > 0 and self.db.database_type == "production":
-            console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
-            console.info("Creating backup to capture new data...")
-            try:
-                backup_info = self.db.create_backup('auto', 'post_scraping')
-                console.info(f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
-                
-                # Manage retention after backup
-                retention_result = self.db.manage_backup_retention()
-                if retention_result['action'] == 'cleanup_performed':
-                    console.info(f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB")
-                    
-            except Exception as e:
-                logger.warning(f"Post-scraping backup failed: {e}")
-                console.info(f"⚠️  Post-scraping backup failed: {e}")
-        elif total_new_jobs == 0:
-            logger.info("No new jobs found, skipping post-scraping backup")
-        else:
-            logger.info("Working database scraping completed (no backup needed)")
-    
+                try:
+                    start_time = time.time()
+                    jobs_df = scrape_jobs(**params)
+
+                    (
+                        new_jobs,
+                        site_counts,
+                        duplicate_counts,
+                        remote_count,
+                        avg_salary,
+                    ) = self.db.insert_jobs(jobs_df, job_name)
+
+                    duration = time.time() - start_time
+
+                    self.db.log_search(
+                        self.session_id,
+                        job_name,
+                        params,
+                        len(jobs_df),
+                        new_jobs,
+                        duration,
+                        site_counts,
+                        duplicate_counts,
+                        remote_count,
+                        avg_salary,
+                    )
+
+                    total_new_jobs += new_jobs
+
+                    logger.info(
+                        f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new."
+                    )
+
+                except Exception as e:
+                    logger.error(
+                        f"Error searching for {job_name}: {str(e)}", exc_info=True
+                    )
+
+            # Create backup after scraping to capture new data (only for production database)
+            if total_new_jobs > 0 and self.db.database_type == "production":
+                console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
+                console.info("Creating backup to capture new data...")
+                try:
+                    backup_info = self.db.create_backup('auto', 'post_scraping')
+                    console.info(
+                        f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)"
+                    )
+
+                    # Manage retention after backup
+                    retention_result = self.db.manage_backup_retention()
+                    if retention_result['action'] == 'cleanup_performed':
+                        console.info(
+                            f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB"
+                        )
+
+                except Exception as e:
+                    logger.warning(f"Post-scraping backup failed: {e}")
+                    console.info(f"⚠️  Post-scraping backup failed: {e}")
+            elif total_new_jobs == 0:
+                logger.info("No new jobs found, skipping post-scraping backup")
+            else:
+                logger.info("Working database scraping completed (no backup needed)")
     
     
     def backup_and_reset_db(self) -> None:
