@@ -6,7 +6,59 @@ import json
 import logging
 from typing import Dict, List
 
+from jsonschema import validate
+from jsonschema.exceptions import ValidationError
+
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+class ConfigurationError(Exception):
+    """Raised when a configuration file is invalid."""
+
+
+CONFIG_SCHEMA: Dict = {
+    "type": "object",
+    "properties": {
+        "jobs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "enabled": {"type": "boolean"},
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "site_name": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
+                            "search_term": {"type": "string"},
+                            "location": {"type": "string"},
+                            "results_wanted": {"type": "integer"},
+                            "hours_old": {"type": "integer"},
+                            "country_indeed": {"type": "string"},
+                        },
+                        "required": ["site_name", "search_term", "location"],
+                        "additionalProperties": True,
+                    },
+                },
+                "required": ["name", "parameters"],
+                "additionalProperties": True,
+            },
+        },
+        "global": {
+            "type": "object",
+            "properties": {
+                "description_format": {"type": "string"},
+                "enforce_annual_salary": {"type": "boolean"},
+                "verbose": {"type": "integer"},
+            },
+            "additionalProperties": True,
+        },
+    },
+    "required": ["jobs", "global"],
+}
 logger = logging.getLogger(__name__)
 
 
@@ -26,7 +78,10 @@ class JobSearchConfig:
         if config_dir and not os.path.exists(config_dir):
             os.makedirs(config_dir)
         if not os.path.exists(self.config_path):
-            logger.warning("Config file %s not found. Creating default configuration.", self.config_path)
+            logger.warning(
+                "Config file %s not found. Creating default configuration.",
+                self.config_path,
+            )
             default_config = {
                 "jobs": [
                     {
@@ -48,11 +103,17 @@ class JobSearchConfig:
                     "verbose": 1
                 }
             }
-            with open(self.config_path, 'w') as f:
+            with open(self.config_path, "w") as f:
                 json.dump(default_config, f, indent=4)
-            return default_config
-        with open(self.config_path, 'r') as f:
-            return json.load(f)
+            config_data = default_config
+        else:
+            with open(self.config_path, "r") as f:
+                config_data = json.load(f)
+        try:
+            validate(instance=config_data, schema=CONFIG_SCHEMA)
+        except ValidationError as exc:
+            raise ConfigurationError(f"Invalid configuration: {exc.message}") from exc
+        return config_data
 
     def get_job_configs(self) -> List[Dict]:
         """Return all enabled job configurations."""
@@ -62,4 +123,4 @@ class JobSearchConfig:
         """Return global parameters that apply to all searches."""
         return self.config.get("global", {})
 
-__all__ = ["JobSearchConfig"]
+__all__ = ["JobSearchConfig", "ConfigurationError"]

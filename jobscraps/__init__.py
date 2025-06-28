@@ -7,7 +7,7 @@ from .data_cleaner import DataCleaner
 from .scraping_orchestrator import ScrapingOrchestrator
 from .console_interface import console
 from .database import DatabaseConfig, JobDatabase, BackupMixin
-from .config import JobSearchConfig
+from .config import JobSearchConfig, ConfigurationError
 from .session_manager import SessionManager
 from .base_manager import BaseManager
 
@@ -22,6 +22,7 @@ __all__ = [
     "JobDatabase",
     "BackupMixin",
     "JobSearchConfig",
+    "ConfigurationError",
     "SessionManager",
     "BaseManager",
 ]
