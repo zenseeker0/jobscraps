@@ -108,13 +108,22 @@ class DuplicateManager:
 
         # Step 8: Select by most recent date_posted
         if len(candidates) > 1:
-            jobs_with_dates = [job for job in candidates if job.get('date_posted') and job['date_posted'].strip()]
+            jobs_with_dates = [
+                job for job in candidates
+                if job.get('date_posted') and job['date_posted'].strip()
+            ]
             if jobs_with_dates:
                 try:
-                    jobs_with_dates.sort(key=lambda x: x['date_posted'], reverse=True)
+                    jobs_with_dates.sort(
+                        key=lambda x: x['date_posted'],
+                        reverse=True,
+                    )
                     return jobs_with_dates[0]
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.exception(
+                        "Error sorting jobs by date_posted: %s", e
+                    )
+                    return candidates[0]
         # Fallback
         return candidates[0]
 
