@@ -28,7 +28,7 @@ from jobspy import scrape_jobs
 from .duplicate_manager import DuplicateManager
 from .config import JobSearchConfig
 
-from .database import DatabaseConfig, JobDatabase
+from .database import get_connection
 from .console_interface import console
 from .backup_manager import BackupManager
 from .data_cleaner import DataCleaner
@@ -82,7 +82,7 @@ class JobScraper:
         if db_config_path is None:
             db_config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.config = JobSearchConfig(config_path)
-        self.db = JobDatabase(db_config_path, database_type)
+        self.db = get_connection(db_config_path, database_type)
         self.duplicate_manager = DuplicateManager(self.db)
 
         self.session_id = self.db.start_session()

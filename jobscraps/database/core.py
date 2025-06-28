@@ -3,7 +3,7 @@ import json
 import time
 import logging
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict, List, Tuple, Optional
 from collections import defaultdict
 
 import pandas as pd
@@ -456,4 +456,29 @@ class JobDatabase(BackupMixin):
         if self.conn and not self.conn.closed:
             self.conn.close()
             logger.info("Database connection closed")
+
+
+class ConnectionPool:
+    """Manage shared JobDatabase instances."""
+
+    _instances: Dict[Tuple[str, str], JobDatabase] = {}
+
+    @classmethod
+    def get_connection(
+        cls, config_path: Optional[str] = None, database_type: str = "production"
+    ) -> JobDatabase:
+        """Return a pooled JobDatabase instance."""
+        key = (config_path or "", database_type)
+        db = cls._instances.get(key)
+        if db is None or db.conn is None or getattr(db.conn, "closed", True):
+            db = JobDatabase(config_path, database_type)
+            cls._instances[key] = db
+        return db
+
+
+def get_connection(
+    config_path: Optional[str] = None, database_type: str = "production"
+) -> JobDatabase:
+    """Convenience wrapper for ConnectionPool.get_connection."""
+    return ConnectionPool.get_connection(config_path, database_type)
 
