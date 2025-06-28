@@ -107,9 +107,17 @@ class JobDatabase(BackupMixin):
                 """
             CREATE TABLE IF NOT EXISTS search_sessions (
                 id SERIAL PRIMARY KEY,
-                start_time TIMESTAMP
+                start_time TIMESTAMP,
+                end_time TIMESTAMP,
+                status TEXT
             )
             """
+            )
+            cursor.execute(
+                "ALTER TABLE search_sessions ADD COLUMN IF NOT EXISTS end_time TIMESTAMP"
+            )
+            cursor.execute(
+                "ALTER TABLE search_sessions ADD COLUMN IF NOT EXISTS status TEXT"
             )
             cursor.execute(
                 """
@@ -277,6 +285,20 @@ class JobDatabase(BackupMixin):
             session_id = cursor.fetchone()[0]
             self.conn.commit()
         return session_id
+
+    def end_session(self, session_id: int, status: str) -> None:
+        """Mark a search session as completed."""
+        self._ensure_connection()
+        with self.conn.cursor() as cursor:
+            cursor.execute(
+                """
+                UPDATE search_sessions
+                SET end_time = %s, status = %s
+                WHERE id = %s
+                """,
+                (datetime.now(), status, session_id),
+            )
+            self.conn.commit()
 
     def log_search(
         self,

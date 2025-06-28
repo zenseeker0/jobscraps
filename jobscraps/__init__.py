@@ -8,6 +8,7 @@ from .scraping_orchestrator import ScrapingOrchestrator
 from .console_interface import console
 from .database import DatabaseConfig, JobDatabase, BackupMixin
 from .config import JobSearchConfig
+from .session_manager import SessionManager
 
 __all__ = [
     "JobScraper",
@@ -20,4 +21,5 @@ __all__ = [
     "JobDatabase",
     "BackupMixin",
     "JobSearchConfig",
+    "SessionManager",
 ]
