@@ -84,7 +84,8 @@ class JobScraper:
             db_config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.config = JobSearchConfig(config_path)
         self.db = get_connection(db_config_path, database_type)
-        self.duplicate_manager = DuplicateManager(self.db)
+        preferences = self.config.get_global_params().get("duplicate_preferences", {})
+        self.duplicate_manager = DuplicateManager(self.db, preferences)
 
         self.session_id = self.db.start_session()
         logger.info("Started search session %s", self.session_id)

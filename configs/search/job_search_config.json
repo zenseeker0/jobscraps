@@ -18,6 +18,9 @@
     "global": {
         "description_format": "markdown",
         "enforce_annual_salary": true,
-        "verbose": 2
+        "verbose": 2,
+        "duplicate_preferences": {
+            "locations": ["Colorado"]
+        }
     }
 }

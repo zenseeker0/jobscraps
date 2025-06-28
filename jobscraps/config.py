@@ -100,7 +100,10 @@ class JobSearchConfig:
                 "global": {
                     "description_format": "markdown",
                     "enforce_annual_salary": True,
-                    "verbose": 1
+                    "verbose": 1,
+                    "duplicate_preferences": {
+                        "locations": ["Colorado"]
+                    }
                 }
             }
             with open(self.config_path, "w") as f:
