@@ -7,13 +7,14 @@ from .database import JobDatabase
 from .duplicate_manager import DuplicateManager
 from .console_interface import console
 from .backup_manager import BackupManager
+from .base_manager import BaseManager
 
 
-class DataCleaner:
+class DataCleaner(BaseManager):
     """Data deletion and duplicate processing utilities."""
 
     def __init__(self, db: JobDatabase, duplicate_manager: DuplicateManager, backup_manager: BackupManager) -> None:
-        self.db = db
+        super().__init__(db)
         self.duplicate_manager = duplicate_manager
         self.backup_manager = backup_manager
 
@@ -31,13 +32,11 @@ class DataCleaner:
 
     def process_duplicates(self) -> None:
         """Process duplicates manually."""
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running duplicate processing against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database processing? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running duplicate processing against PRODUCTION database!",
+            "   Continue with production database processing? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("duplicates"):
             return
         console.print("Processing duplicates...")
@@ -54,26 +53,23 @@ class DataCleaner:
 
     def clear_jobs(self) -> None:
         """Clear all data from scraped_jobs table."""
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: About to CLEAR ALL DATA from PRODUCTION database!")
-            console.print("   This will permanently delete all job records.")
-            response = console.input("   Are you absolutely sure? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: About to CLEAR ALL DATA from PRODUCTION database!",
+            "   Are you absolutely sure? (y/n): ",
+            "   This will permanently delete all job records.",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("clear_all"):
             return
         self.db.clear_all_jobs()
 
     def delete_jobs_before_date(self, date_str: str) -> None:
         """Delete jobs scraped before a specified date."""
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running data deletion against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database deletion? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running data deletion against PRODUCTION database!",
+            "   Continue with production database deletion? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("delete_by_date"):
             return
         self.db.delete_jobs_before_date(date_str)
@@ -82,26 +78,22 @@ class DataCleaner:
         """Delete jobs by their IDs from a file."""
         if ids_file is None:
             ids_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "configs", "filters", "delete_ids.txt")
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running data deletion against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database deletion? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running data deletion against PRODUCTION database!",
+            "   Continue with production database deletion? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("delete_by_ids"):
             return
         self.db.delete_jobs_by_ids(ids_file)
 
     def delete_jobs_by_salary(self, min_threshold: int = 70000, max_threshold: int = 90000) -> None:
         """Delete jobs with salaries below specified thresholds."""
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database cleaning? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running data cleaning against PRODUCTION database!",
+            "   Continue with production database cleaning? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("delete_by_salary"):
             return
         self.db.delete_jobs_by_salary(min_threshold, max_threshold)
@@ -110,13 +102,11 @@ class DataCleaner:
         """Delete jobs by company names from a file."""
         if companies_file is None:
             companies_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "configs", "filters", "delete_companies.txt")
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database cleaning? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running data cleaning against PRODUCTION database!",
+            "   Continue with production database cleaning? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("delete_by_company"):
             return
         self.db.delete_jobs_by_field("company", companies_file)
@@ -125,13 +115,11 @@ class DataCleaner:
         """Delete jobs by titles from a file."""
         if titles_file is None:
             titles_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "configs", "filters", "delete_titles.txt")
-        if self.db.database_type == "production":
-            console.print("⚠️  WARNING: Running data cleaning against PRODUCTION database!")
-            console.print("   Consider using --create-working-copy for data cleaning operations.")
-            response = console.input("   Continue with production database cleaning? (y/n): ")
-            if response.lower() != "y":
-                console.print("Operation cancelled for safety")
-                return
+        if not self.check_production_safety(
+            "⚠️  WARNING: Running data cleaning against PRODUCTION database!",
+            "   Continue with production database cleaning? (y/n): ",
+        ):
+            return
         if not self.backup_manager.create_backup_with_prompt("delete_by_title"):
             return
         self.db.delete_jobs_by_field("title", titles_file)

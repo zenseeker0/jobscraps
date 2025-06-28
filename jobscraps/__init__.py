@@ -9,6 +9,7 @@ from .console_interface import console
 from .database import DatabaseConfig, JobDatabase, BackupMixin
 from .config import JobSearchConfig
 from .session_manager import SessionManager
+from .base_manager import BaseManager
 
 __all__ = [
     "JobScraper",
@@ -22,4 +23,5 @@ __all__ = [
     "BackupMixin",
     "JobSearchConfig",
     "SessionManager",
+    "BaseManager",
 ]
