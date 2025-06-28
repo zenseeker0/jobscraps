@@ -2,8 +2,8 @@ import typer
 from typing import Optional
 
 from .scraping_orchestrator import ScrapingOrchestrator
-from .database.core import JobDatabase  # Add this import
-from .console_interface import console  # Add this import
+from .database.core import get_connection
+from .console_interface import console
 
 import typer.rich_utils as rich_utils
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN="bold sky_blue3"
@@ -111,7 +111,8 @@ def restore_backup(
     
     db = None
     try:
-        db = JobDatabase(database_type="production")
+        orch_db = ctx.obj["orch"].scraper.db
+        db = get_connection(orch_db.db_config.config_path, orch_db.database_type)
         
         # Test compatibility first
         console.print(f"Testing backup compatibility: {filename}")
@@ -156,9 +157,6 @@ def restore_backup(
     except Exception as e:
         console.print(f"❌ Restore error: {e}")
         raise typer.Exit(1)
-    finally:
-        if db:
-            db.close()
 
 
 @app.command("test-backup")
@@ -180,8 +178,8 @@ def test_backup_compatibility(
     
     db = None
     try:
-        # Use JobDatabase directly instead of orchestrator's scraper
-        db = JobDatabase(database_type="production")
+        orch_db = ctx.obj["orch"].scraper.db
+        db = get_connection(orch_db.db_config.config_path, orch_db.database_type)
         
         console.print(f"Testing backup compatibility: {filename}")
         compat_check = db.test_backup_compatibility(filename)
@@ -205,9 +203,6 @@ def test_backup_compatibility(
     except Exception as e:
         console.print(f"❌ Compatibility test error: {e}")
         raise typer.Exit(1)
-    finally:
-        if db:
-            db.close()
 
 __all__ = ["app"]
 
