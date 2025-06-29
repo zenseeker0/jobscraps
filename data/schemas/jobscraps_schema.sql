@@ -19,6 +19,9 @@ SET row_security = off;
 
 DROP INDEX IF EXISTS public.idx_search_history_timestamp;
 DROP INDEX IF EXISTS public.idx_search_history_search_query;
+DROP INDEX IF EXISTS public.idx_search_history_session_id;
+DROP INDEX IF EXISTS public.idx_search_history_site_breakdown;
+DROP INDEX IF EXISTS public.idx_search_history_duplicate_breakdown;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title_company;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_title;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_site;
@@ -33,9 +36,12 @@ DROP INDEX IF EXISTS public.idx_scraped_jobs_company_location;
 DROP INDEX IF EXISTS public.idx_scraped_jobs_company;
 ALTER TABLE IF EXISTS ONLY public.search_history DROP CONSTRAINT IF EXISTS search_history_pkey;
 ALTER TABLE IF EXISTS ONLY public.scraped_jobs DROP CONSTRAINT IF EXISTS scraped_jobs_pkey;
+ALTER TABLE IF EXISTS ONLY public.search_sessions DROP CONSTRAINT IF EXISTS search_sessions_pkey;
 ALTER TABLE IF EXISTS public.search_history ALTER COLUMN id DROP DEFAULT;
 DROP SEQUENCE IF EXISTS public.search_history_id_seq;
+DROP SEQUENCE IF EXISTS public.search_sessions_id_seq;
 DROP TABLE IF EXISTS public.search_history;
+DROP TABLE IF EXISTS public.search_sessions;
 DROP TABLE IF EXISTS public.scraped_jobs;
 DROP EXTENSION IF EXISTS pg_trgm;
 -- *not* dropping schema, since initdb creates it
@@ -158,16 +164,64 @@ COMMENT ON COLUMN public.scraped_jobs.search_query IS 'Search query that found t
 
 
 --
+-- Name: search_sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.search_sessions (
+    id integer NOT NULL,
+    start_time timestamp without time zone,
+    end_time timestamp without time zone,
+    status text
+);
+
+--
+-- Name: search_sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.search_sessions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+--
+-- Name: search_sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.search_sessions_id_seq OWNED BY public.search_sessions.id;
+
+--
+-- Name: search_sessions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_sessions ALTER COLUMN id SET DEFAULT nextval('public.search_sessions_id_seq'::regclass);
+
+--
+-- Name: search_sessions search_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_sessions
+    ADD CONSTRAINT search_sessions_pkey PRIMARY KEY (id);
+
+--
 -- Name: search_history; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.search_history (
     id integer NOT NULL,
+    session_id integer REFERENCES public.search_sessions(id),
     search_query text,
     parameters text,
+    new_jobs_inserted integer,
+    duration_seconds numeric,
+    site_breakdown text,
+    duplicate_breakdown text,
+    remote_jobs_count integer,
+    avg_salary numeric(12,2),
     "timestamp" timestamp without time zone,
-    jobs_found integer,
-    avg_salary numeric(12,2)
+    jobs_found integer
 );
 
 
@@ -317,6 +371,27 @@ CREATE INDEX idx_search_history_search_query ON public.search_history USING btre
 --
 
 CREATE INDEX idx_search_history_timestamp ON public.search_history USING btree ("timestamp");
+
+
+--
+-- Name: idx_search_history_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_session_id ON public.search_history USING btree (session_id);
+
+
+--
+-- Name: idx_search_history_site_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_site_breakdown ON public.search_history USING gin (site_breakdown);
+
+
+--
+-- Name: idx_search_history_duplicate_breakdown; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_duplicate_breakdown ON public.search_history USING gin (duplicate_breakdown);
 
 
 --
