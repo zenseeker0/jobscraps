@@ -310,38 +310,45 @@ class JobDatabase(BackupMixin):
         """Log a search operation with extended metrics."""
 
         self._ensure_connection()
-        with self.conn.cursor() as cursor:
-            cursor.execute(
-                """
-                INSERT INTO search_history (
-                    session_id,
-                    search_query,
-                    parameters,
-                    new_jobs_inserted,
-                    duration_seconds,
-                    site_breakdown,
-                    duplicate_breakdown,
-                    remote_jobs_count,
-                    avg_salary,
-                    timestamp,
-                    jobs_found
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """,
-                (
-                    session_id,
-                    search_query,
-                    json.dumps(parameters),
-                    new_jobs_inserted,
-                    duration_seconds,
-                    json.dumps(site_breakdown),
-                    json.dumps(duplicate_breakdown),
-                    remote_jobs_count,
-                    avg_salary,
-                    datetime.now(),
-                    jobs_found,
-                ),
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO search_history (
+                        session_id,
+                        search_query,
+                        parameters,
+                        new_jobs_inserted,
+                        duration_seconds,
+                        site_breakdown,
+                        duplicate_breakdown,
+                        remote_jobs_count,
+                        avg_salary,
+                        timestamp,
+                        jobs_found
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        session_id,
+                        search_query,
+                        json.dumps(parameters),
+                        new_jobs_inserted,
+                        duration_seconds,
+                        json.dumps(site_breakdown),
+                        json.dumps(duplicate_breakdown),
+                        remote_jobs_count,
+                        avg_salary,
+                        datetime.now(),
+                        jobs_found,
+                    ),
+                )
+                self.conn.commit()
+        except psycopg2.Error as exc:
+            self.conn.rollback()
+            logger.error(
+                "Failed to log search history (possible schema mismatch): %s",
+                exc,
             )
-            self.conn.commit()
 
     def get_all_jobs(self) -> pd.DataFrame:
         self._ensure_connection()
