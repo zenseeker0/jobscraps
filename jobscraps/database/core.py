@@ -114,12 +114,6 @@ class JobDatabase(BackupMixin):
             """
             )
             cursor.execute(
-                "ALTER TABLE search_sessions ADD COLUMN IF NOT EXISTS end_time TIMESTAMP"
-            )
-            cursor.execute(
-                "ALTER TABLE search_sessions ADD COLUMN IF NOT EXISTS status TEXT"
-            )
-            cursor.execute(
                 """
             CREATE TABLE IF NOT EXISTS search_history (
                 id SERIAL PRIMARY KEY,
