@@ -21,7 +21,6 @@ collect_and_clean() {
     echo "=== Workflow Complete ==="
     echo "Production DB: jobscraps (raw data)"
     echo "Analysis DB: jobscraps_working (cleaned)"
-    echo "Retool should connect to: jobscraps_working"
 }
 
 # Script 2: Just create clean working copy (when you have new raw data)

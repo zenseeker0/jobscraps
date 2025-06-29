@@ -216,7 +216,7 @@ class JobScraper:
             else:
                 raise ValueError("No database configuration found")
             
-            working_db = "jobscraps_working"  # Fixed name for Retool consistency
+            working_db = "jobscraps_working"
             
             # IMPORTANT: Close the current connection to the source database first
             logger.info("Closing current database connection to allow template copy")
@@ -344,7 +344,7 @@ class JobScraper:
                     console.info(f"Jobs removed: {removed_count:,} ({removal_percentage:.1f}%)")
                     console.info(f"Jobs remaining: {final_count:,}")
                     console.info(f"Total cleaning time: {total_time:.1f} seconds")
-                    console.info(f"Working database ready for analysis and Retool")
+                    console.info(f"Working database ready for analysis")
                     
                 except Exception as e:
                     logger.error(f"Error during auto-cleaning: {e}")

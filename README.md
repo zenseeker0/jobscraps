@@ -21,17 +21,12 @@ A comprehensive job scraping and data management system built with Python, Postg
    # Edit configs/db/db_config.json with your PostgreSQL details
    ```
 
-4. **Verify setup**
-   ```bash
-   python dev/verify_setup.py
-   ```
-
-5. **Start scraping**
+4. **Start scraping**
    ```bash
    jobscraps scrape
    ```
 
-6. **Explore the CLI**
+5. **Explore the CLI**
    ```bash
    jobscraps --help
    ```
@@ -45,7 +40,6 @@ A comprehensive job scraping and data management system built with Python, Postg
 - **Intelligent backup system** - backups only when needed, retention management
 - **Data cleaning pipeline** with configurable filters (salary, company, title, duplicates)
 - **Safety-first design** - non-destructive analysis vs explicit destructive operations
-- **Retool integration** for business intelligence dashboards
 - **Session analytics** with per-search metrics and salary averages
 
 ## 📁 Project Structure
@@ -68,7 +62,6 @@ jobscraps/
 ├── scripts/                # Helper utilities
 ├── data/                   # Schemas and samples
 ├── outputs/                # Logs and analysis (gitignored)
-├── backups/                # PostgreSQL backups with retention (gitignored)
 └── dev/                    # Development and migration tools
 ```
 
