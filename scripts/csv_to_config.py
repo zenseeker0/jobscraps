@@ -8,8 +8,8 @@ import ast
 from datetime import datetime
 
 # Input CSV and output JSON filenames
-INPUT_CSV = 'search_queries.csv'
-OUTPUT_JSON = 'job_search_config.json'
+INPUT_CSV = '/Users/jonesy/gitlocal/jobscraps/configs/search/search_queries.csv'
+OUTPUT_JSON = '/Users/jonesy/gitlocal/jobscraps/configs/search/job_search_config.json'
 
 # Global section defaults
 GLOBAL_CONFIG = {
