@@ -104,30 +104,43 @@ class JobScraper:
             logger.warning("No enabled job configurations found")
             self.db.end_session(self.session_id, "no_jobs")
             return
-
+    
         total_new_jobs = 0
-
+    
         with SessionManager(self.db, self.session_id):
             for job_config in job_configs:
                 job_name = job_config.get("name", "Unnamed Job")
                 params = job_config.get("parameters", {})
-
+    
                 # Merge with global parameters
                 for key, value in global_params.items():
                     if key not in params:
                         params[key] = value
-
+    
                 # Add proxies if available
                 if self.proxies:
                     params["proxies"] = self.proxies
-
+    
                 logger.info(f"Starting search for: {job_name}")
                 logger.info(f"Parameters: {params}")
-
+    
                 try:
                     start_time = time.time()
                     jobs_df = scrape_jobs(**params)
-
+                    
+                    # Validate the DataFrame before processing
+                    if jobs_df is None:
+                        logger.warning(f"scrape_jobs returned None for {job_name}")
+                        jobs_df = pd.DataFrame()
+                    elif not isinstance(jobs_df, pd.DataFrame):
+                        logger.warning(f"scrape_jobs returned non-DataFrame for {job_name}: {type(jobs_df)}")
+                        jobs_df = pd.DataFrame()
+                    elif jobs_df.empty:
+                        logger.info(f"No jobs found for {job_name}")
+                    
+                    # Log DataFrame info for debugging
+                    logger.debug(f"DataFrame for {job_name}: shape={jobs_df.shape}, columns={list(jobs_df.columns) if not jobs_df.empty else []}")
+    
                     (
                         new_jobs,
                         site_counts,
@@ -135,9 +148,9 @@ class JobScraper:
                         remote_count,
                         avg_salary,
                     ) = self.db.insert_jobs(jobs_df, job_name)
-
+    
                     duration = time.time() - start_time
-
+    
                     self.db.log_search(
                         self.session_id,
                         job_name,
@@ -150,18 +163,36 @@ class JobScraper:
                         remote_count,
                         avg_salary,
                     )
-
+    
                     total_new_jobs += new_jobs
-
+    
                     logger.info(
                         f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new."
                     )
-
+    
                 except Exception as e:
                     logger.error(
                         f"Error searching for {job_name}: {str(e)}", exc_info=True
                     )
-
+                    
+                    # Log failed search to database with zero results
+                    duration = time.time() - start_time
+                    try:
+                        self.db.log_search(
+                            self.session_id,
+                            job_name,
+                            params,
+                            0,  # jobs_found
+                            0,  # new_jobs_inserted
+                            duration,
+                            {},  # site_breakdown
+                            {},  # duplicate_breakdown
+                            0,   # remote_jobs_count
+                            0.0  # avg_salary
+                        )
+                    except Exception as log_error:
+                        logger.error(f"Failed to log failed search for {job_name}: {log_error}")
+    
             # Create backup after scraping to capture new data (only for production database)
             if total_new_jobs > 0 and self.db.database_type == "production":
                 console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
@@ -171,14 +202,14 @@ class JobScraper:
                     console.info(
                         f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)"
                     )
-
+    
                     # Manage retention after backup
                     retention_result = self.db.manage_backup_retention()
                     if retention_result['action'] == 'cleanup_performed':
                         console.info(
                             f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB"
                         )
-
+    
                 except Exception as e:
                     logger.warning(f"Post-scraping backup failed: {e}")
                     console.info(f"⚠️  Post-scraping backup failed: {e}")
@@ -186,7 +217,6 @@ class JobScraper:
                 logger.info("No new jobs found, skipping post-scraping backup")
             else:
                 logger.info("Working database scraping completed (no backup needed)")
-    
     
     def backup_and_reset_db(self) -> None:
         """Create a backup of the database and clear all data."""

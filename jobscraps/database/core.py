@@ -163,20 +163,38 @@ class JobDatabase(BackupMixin):
         self, jobs_df: pd.DataFrame, search_query: str
     ) -> tuple[int, Dict[str, int], Dict[str, int], int, float]:
         """Insert jobs into the database.
-
+    
         Returns the number of new jobs inserted along with a breakdown of
         inserted jobs per site, duplicate counts per site, the number of remote
         jobs inserted and the average salary of the inserted jobs.
         """
-
+    
         self._ensure_connection()
         jobs_df["date_scraped"] = datetime.now()
         jobs_df["search_query"] = search_query
-
+    
+        # Handle empty DataFrame or missing columns
+        if jobs_df.empty:
+            logger.info("No jobs to process - empty DataFrame")
+            return 0, {}, {}, 0, 0.0
+    
+        # Ensure required columns exist
+        required_columns = ['site', 'id', 'is_remote']
+        for col in required_columns:
+            if col not in jobs_df.columns:
+                if col == 'site':
+                    jobs_df[col] = 'unknown'
+                elif col == 'id':
+                    jobs_df[col] = jobs_df.apply(
+                        lambda row: f"unknown_{row.name}_{int(time.time())}", axis=1
+                    )
+                elif col == 'is_remote':
+                    jobs_df[col] = False
+    
         with self.conn.cursor() as cursor:
             cursor.execute("SELECT id FROM scraped_jobs")
             existing_ids = {row[0] for row in cursor.fetchall()}
-
+    
         if "id" in jobs_df.columns:
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
         else:
@@ -185,26 +203,42 @@ class JobDatabase(BackupMixin):
                 axis=1,
             )
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
-
+    
+        # Ensure is_remote column is boolean
         if "is_remote" in new_jobs_df.columns:
             new_jobs_df["is_remote"] = new_jobs_df["is_remote"].astype(bool)
-
+    
         new_jobs_count = len(new_jobs_df)
-        site_counts = new_jobs_df["site"].fillna("unknown").value_counts().to_dict()
-
+        
+        # Safe site counts calculation
+        if "site" in new_jobs_df.columns and not new_jobs_df.empty:
+            site_counts = new_jobs_df["site"].fillna("unknown").value_counts().to_dict()
+        else:
+            site_counts = {"unknown": new_jobs_count} if new_jobs_count > 0 else {}
+    
+        # Safe duplicate counts calculation
         duplicate_df = jobs_df[jobs_df["id"].isin(existing_ids)]
-        duplicate_counts = duplicate_df["site"].fillna("unknown").value_counts().to_dict()
-
-        remote_jobs_count = int(new_jobs_df.get("is_remote", pd.Series(dtype=bool)).sum())
-
+        if "site" in duplicate_df.columns and not duplicate_df.empty:
+            duplicate_counts = duplicate_df["site"].fillna("unknown").value_counts().to_dict()
+        else:
+            duplicate_counts = {}
+    
+        # Safe remote jobs count calculation
+        if "is_remote" in new_jobs_df.columns and not new_jobs_df.empty:
+            remote_jobs_count = int(new_jobs_df["is_remote"].sum())
+        else:
+            remote_jobs_count = 0
+    
+        # Safe average salary calculation
         if not new_jobs_df.empty:
             salary_cols = new_jobs_df[["min_amount", "max_amount"]].apply(
                 pd.to_numeric, errors="coerce"
             )
             salary_mean = salary_cols.mean(axis=1)
-            avg_salary = float(salary_mean.mean()) if not salary_mean.empty else 0.0
+            avg_salary = float(salary_mean.mean()) if not salary_mean.empty and not salary_mean.isna().all() else 0.0
         else:
             avg_salary = 0.0
+    
         if new_jobs_count > 0:
             columns = [
                 "id",
@@ -244,9 +278,12 @@ class JobDatabase(BackupMixin):
                 "date_scraped",
                 "search_query",
             ]
+            
+            # Ensure all required columns exist in DataFrame
             for col in columns:
                 if col not in new_jobs_df.columns:
                     new_jobs_df[col] = None
+                    
             data_to_insert = []
             for _, row in new_jobs_df.iterrows():
                 row_data = []
@@ -257,16 +294,23 @@ class JobDatabase(BackupMixin):
                     else:
                         row_data.append(value)
                 data_to_insert.append(tuple(row_data))
+            
             insert_query = sql.SQL(
                 "INSERT INTO scraped_jobs (" + ",".join(columns) + ") VALUES (" + ",".join(["%s"] * len(columns)) + ")"
             )
-            with self.conn.cursor() as cursor:
-                psycopg2.extras.execute_batch(cursor, insert_query, data_to_insert)
-                self.conn.commit()
-            logger.info("Inserted %s new jobs into database", new_jobs_count)
+            
+            try:
+                with self.conn.cursor() as cursor:
+                    psycopg2.extras.execute_batch(cursor, insert_query, data_to_insert)
+                    self.conn.commit()
+                logger.info("Inserted %s new jobs into database", new_jobs_count)
+            except Exception as e:
+                logger.error("Error inserting jobs into database: %s", e)
+                self.conn.rollback()
+                return 0, {}, {}, 0, 0.0
         else:
             logger.info("No new jobs to insert")
-
+    
         return new_jobs_count, site_counts, duplicate_counts, remote_jobs_count, avg_salary
 
     def start_session(self) -> int:
