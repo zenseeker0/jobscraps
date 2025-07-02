@@ -55,6 +55,8 @@ class BackupMixin:
             conn_params["user"],
             "-d",
             conn_params["database"],
+            "--clean",              # FIXED: Include DROP statements
+            "--if-exists",          # FIXED: Use IF EXISTS for safer drops
             "--compress=9",
             "--verbose",
             "--file",
@@ -207,9 +209,8 @@ class BackupMixin:
             logger.error("Failed to list backups: %s", e)
             return []
 
-
     def restore_backup(self, backup_filename: str) -> bool:
-        """Restore database from backup file with proper gzip handling and PostgreSQL compatibility."""
+        """Restore database from backup file with proper error handling and transaction management."""
         backup_dir = self._get_backup_directory()
         backup_path = os.path.join(backup_dir, backup_filename)
         if not os.path.exists(backup_path):
@@ -223,7 +224,42 @@ class BackupMixin:
             
             logger.info("Restoring from backup: %s", backup_filename)
             
-            # Read and filter the gzipped backup content for compatibility
+            # CRITICAL FIX: Clear database first to handle old backups and auto-created tables
+            logger.info("Clearing existing database objects for clean restore...")
+            clear_cmd = [
+                "psql",
+                "-h", conn_params["host"],
+                "-p", str(conn_params["port"]),
+                "-U", conn_params["user"],
+                "-d", conn_params["database"],
+                "-v", "ON_ERROR_STOP=1",
+                "-c", """
+                DROP TABLE IF EXISTS search_history CASCADE;
+                DROP TABLE IF EXISTS search_sessions CASCADE;
+                DROP TABLE IF EXISTS scraped_jobs CASCADE;
+                DROP SEQUENCE IF EXISTS search_history_id_seq CASCADE;
+                DROP SEQUENCE IF EXISTS search_sessions_id_seq CASCADE;
+                """
+            ]
+            
+            env = os.environ.copy()
+            env["PGPASSWORD"] = conn_params["password"]
+            
+            clear_result = subprocess.run(
+                clear_cmd,
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+            
+            if clear_result.returncode != 0:
+                logger.error("Failed to clear database before restore: %s", clear_result.stderr)
+                return False
+            
+            logger.info("Database cleared successfully")
+            
+            # Step 2: Read and filter the gzipped backup content for compatibility
             with gzip.open(backup_path, 'rt', encoding='utf-8', errors='replace') as f:
                 sql_content = f.read()
             
@@ -253,21 +289,24 @@ class BackupMixin:
             filtered_content = '\n'.join(filtered_lines)
             logger.info("Backup content filtered for compatibility (%d lines)", len(filtered_lines))
             
-            # Execute the filtered SQL via psql
+            # Step 3: Execute the filtered SQL via psql with proper error handling
             cmd = [
                 "psql",
                 "-h", conn_params["host"],
                 "-p", str(conn_params["port"]),
                 "-U", conn_params["user"],
                 "-d", conn_params["database"],
-                "-v", "ON_ERROR_STOP=0",  # Continue on minor errors
-                "--quiet",
+                "-v", "ON_ERROR_STOP=1",           # FIXED: Stop on errors instead of continuing
+                "--single-transaction",            # FIXED: All-or-nothing restore
+                "--set", "VERBOSITY=verbose",      # FIXED: More detailed error messages
+                # Removed --quiet to see what's happening
             ]
             
             env = os.environ.copy()
             env["PGPASSWORD"] = conn_params["password"]
             
             # Execute restore via subprocess with filtered content
+            logger.info("Step 3: Executing restore with single transaction...")
             result = subprocess.run(
                 cmd, 
                 input=filtered_content,
@@ -279,24 +318,21 @@ class BackupMixin:
             
             if result.returncode == 0:
                 logger.info("Database restored successfully from %s", backup_filename)
+                # Log successful output for debugging
+                if result.stdout:
+                    logger.debug("Restore stdout: %s", result.stdout[:500])  # First 500 chars
                 self._connect_with_retry()
                 return True
             else:
-                # Check if it's just minor compatibility warnings
-                stderr_lower = result.stderr.lower()
-                if ("unrecognized configuration parameter" in stderr_lower or 
-                    "does not exist, skipping" in stderr_lower):
-                    logger.warning("Minor compatibility issues during restore, but likely successful: %s", result.stderr)
-                    try:
-                        self._connect_with_retry()
-                        return True
-                    except:
-                        logger.error("Restore failed: %s", result.stderr)
-                        return False
-                else:
-                    logger.error("Restore failed: %s", result.stderr)
-                    return False
+                logger.error("Restore failed with return code %d", result.returncode)
+                logger.error("Restore stderr: %s", result.stderr)
+                if result.stdout:
+                    logger.error("Restore stdout: %s", result.stdout)
+                return False
                     
+        except subprocess.TimeoutExpired:
+            logger.error("Restore operation timed out after 600 seconds")
+            return False
         except Exception as e:
             logger.error("Restore operation failed: %s", e)
             return False
@@ -402,4 +438,3 @@ class BackupMixin:
         except Exception as e:
             logger.error("Compatibility test failed: %s", e)
             return {"compatible": False, "reason": str(e), "can_restore": False}
-        
