@@ -2,7 +2,9 @@
 # db_stats_cli.py - Legacy database interface for JobSpy
 
 import typer
-import sqlite3
+import psycopg2
+import psycopg2.extras
+from jobscraps.database import DatabaseConfig
 import pandas as pd
 import json
 from datetime import datetime, timedelta
@@ -23,9 +25,10 @@ app = typer.Typer(help="JobSpy CLI - Manage and analyze job postings")
 console = Console()
 
 def get_db_connection():
-    """Get a connection to the SQLite database"""
-    conn = sqlite3.connect("jobs.db")
-    conn.row_factory = sqlite3.Row
+    """Get a connection to the PostgreSQL database."""
+    db_config = DatabaseConfig()
+    params = db_config.get_connection_params()
+    conn = psycopg2.connect(**params)
     return conn
 
 @app.command("list")
@@ -49,35 +52,35 @@ def list_jobs(
         params = []
         
         if query:
-            query_str += " AND search_query = ?"
+            query_str += " AND search_query = %s"
             params.append(query)
         
         if site:
-            query_str += " AND site = ?"
+            query_str += " AND site = %s"
             params.append(site)
         
         if job_type:
-            query_str += " AND job_type = ?"
+            query_str += " AND job_type = %s"
             params.append(job_type)
         
         if remote:
             query_str += " AND is_remote = 1"
         
         if title:
-            query_str += " AND title LIKE ?"
+            query_str += " AND title LIKE %s"
             params.append(f"%{title}%")
         
         if company:
-            query_str += " AND company LIKE ?"
+            query_str += " AND company LIKE %s"
             params.append(f"%{company}%")
         
         if min_salary:
-            query_str += " AND (min_amount >= ? OR max_amount >= ?)"
+            query_str += " AND (min_amount >= %s OR max_amount >= %s)"
             params.extend([min_salary, min_salary])
         
         if days:
             date_limit = (datetime.now() - timedelta(days=days)).isoformat()
-            query_str += " AND date_posted >= ?"
+            query_str += " AND date_posted >= %s"
             params.append(date_limit)
         
         query_str += " ORDER BY date_posted DESC"
@@ -164,7 +167,58 @@ def list_jobs(
                         ))
                         console.print("\n" + "-" * 100 + "\n")
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
+            console.print(f"[bold red]Database error: {str(e)}[/bold red]")
+
+@app.command("session-stats")
+def show_session_stats() -> None:
+    """Display aggregated statistics for scraping sessions."""
+    with get_db_connection() as conn:
+        try:
+            query = """
+                SELECT
+                    s.id AS session_id,
+                    s.start_time,
+                    COUNT(h.id) AS searches,
+                    COALESCE(SUM(h.jobs_found), 0) AS jobs_found,
+                    COALESCE(SUM(h.new_jobs_inserted), 0) AS new_jobs,
+                    COALESCE(SUM(h.remote_jobs_count), 0) AS remote_jobs,
+                    COALESCE(SUM(h.duration_seconds), 0) AS duration_seconds,
+                    COALESCE(AVG(h.avg_salary), 0) AS avg_salary
+                FROM search_sessions s
+                LEFT JOIN search_history h ON h.session_id = s.id
+                GROUP BY s.id, s.start_time
+                ORDER BY s.start_time DESC
+            """
+            df = pd.read_sql_query(query, conn)
+            if df.empty:
+                console.print("[yellow]No session data found[/yellow]")
+                return
+
+            table = Table(title="Session Statistics", box=box.ROUNDED)
+            table.add_column("ID", style="dim")
+            table.add_column("Start", style="cyan")
+            table.add_column("Searches", style="green")
+            table.add_column("Found", style="blue")
+            table.add_column("New", style="magenta")
+            table.add_column("Remote", style="yellow")
+            table.add_column("Avg Salary", style="bright_green")
+            table.add_column("Duration", style="white")
+
+            for _, row in df.iterrows():
+                table.add_row(
+                    str(row["session_id"]),
+                    str(row["start_time"]),
+                    str(row["searches"]),
+                    str(row["jobs_found"]),
+                    str(row["new_jobs"]),
+                    str(row["remote_jobs"]),
+                    f"{row['avg_salary']:,.0f}",
+                    f"{row['duration_seconds']:.1f}s",
+                )
+
+            console.print(table)
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("stats")
@@ -173,7 +227,7 @@ def show_stats():
     with get_db_connection() as conn:
         try:
             # Get total jobs
-            cursor = conn.cursor()
+            cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
             cursor.execute("SELECT COUNT(*) as count FROM scraped_jobs")
             total_jobs = cursor.fetchone()["count"]
             
@@ -340,7 +394,7 @@ def show_stats():
             
             console.print(desc_table)
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("view")
@@ -348,8 +402,8 @@ def view_job(job_id: str = typer.Argument(..., help="Job ID to view")):
     """View detailed information about a specific job"""
     with get_db_connection() as conn:
         try:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM scraped_jobs WHERE id = ?", (job_id,))
+            cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+            cursor.execute("SELECT * FROM scraped_jobs WHERE id = %s", (job_id,))
             job = cursor.fetchone()
             
             if not job:
@@ -402,7 +456,7 @@ def view_job(job_id: str = typer.Argument(..., help="Job ID to view")):
             else:
                 console.print("[yellow]No description available[/yellow]")
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("search")
@@ -415,7 +469,7 @@ def search_jobs(
             sql = """
                 SELECT id, title, company, location, date_posted, site
                 FROM scraped_jobs
-                WHERE title LIKE ? OR description LIKE ?
+                WHERE title LIKE %s OR description LIKE %s
                 ORDER BY date_posted DESC
                 LIMIT 20
             """
@@ -453,7 +507,7 @@ def search_jobs(
             console.print(table)
             console.print(f"\n[bold green]To view full details of a job, use: jobspy view <ID>[/bold green]")
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("run")
@@ -558,7 +612,7 @@ def show_filters():
             console.print("  jobspy list --salary 100000 --days 7 --limit 10")
             console.print("  jobspy list --title \"Data Scientist\" --export csv")
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("export")
@@ -578,16 +632,16 @@ def export_jobs(
             params = []
             
             if query:
-                query_str += " AND search_query = ?"
+                query_str += " AND search_query = %s"
                 params.append(query)
             
             if site:
-                query_str += " AND site = ?"
+                query_str += " AND site = %s"
                 params.append(site)
             
             if not all_jobs and days > 0:
                 date_limit = (datetime.now() - timedelta(days=days)).isoformat()
-                query_str += " AND date_posted >= ?"
+                query_str += " AND date_posted >= %s"
                 params.append(date_limit)
             
             query_str += " ORDER BY date_posted DESC"
@@ -620,47 +674,52 @@ def export_jobs(
             
             console.print(f"[bold green]Successfully exported {len(df)} jobs to {output_path}[/bold green]")
             
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
         except Exception as e:
             console.print(f"[bold red]Export error: {str(e)}[/bold red]")
 
 @app.command("history")
-def show_history():
+def show_history() -> None:
     """Show search history from the job scraper"""
     with get_db_connection() as conn:
         try:
             df = pd.read_sql_query(
                 "SELECT * FROM search_history ORDER BY timestamp DESC",
-                conn
+                conn,
             )
-            
-            if len(df) == 0:
+
+            if df.empty:
                 console.print("[bold yellow]No search history found[/bold yellow]")
                 return
-            
-            table = Table(
-                title="Search History",
-                box=box.ROUNDED
-            )
-            
+
+            table = Table(title="Search History", box=box.ROUNDED)
             table.add_column("ID", style="dim")
-            table.add_column("Search Query", style="cyan")
-            table.add_column("Date", style="green")
-            table.add_column("Jobs Found", style="yellow")
-            
+            table.add_column("Session", style="dim")
+            table.add_column("Query", style="cyan")
+            table.add_column("Found", style="green")
+            table.add_column("New", style="yellow")
+            table.add_column("Remote", style="magenta")
+            table.add_column("Avg Salary", style="blue")
+            table.add_column("Duration", style="green")
+            table.add_column("Date", style="white")
+
             for _, row in df.iterrows():
                 table.add_row(
                     str(row.get("id", "")),
+                    str(row.get("session_id", "")),
                     str(row.get("search_query", "")),
+                    str(row.get("jobs_found", "")),
+                    str(row.get("new_jobs_inserted", "")),
+                    str(row.get("remote_jobs_count", "")),
+                    f"{row.get('avg_salary', 0):,.0f}",
+                    f"{row.get('duration_seconds', 0):.1f}s",
                     str(row.get("timestamp", "")),
-                    str(row.get("jobs_found", ""))
                 )
-            
+
             console.print(table)
-            
-            # Show parameters for the most recent search
-            if len(df) > 0:
+
+            if not df.empty:
                 recent = df.iloc[0]
                 try:
                     params = json.loads(recent.get("parameters", "{}"))
@@ -668,15 +727,15 @@ def show_history():
                     params_table = Table(box=box.SIMPLE)
                     params_table.add_column("Parameter", style="cyan")
                     params_table.add_column("Value", style="green")
-                    
+
                     for key, value in params.items():
                         params_table.add_row(key, str(value))
-                    
+
                     console.print(params_table)
                 except json.JSONDecodeError:
                     pass
-            
-        except sqlite3.Error as e:
+
+        except psycopg2.Error as e:
             console.print(f"[bold red]Database error: {str(e)}[/bold red]")
 
 @app.command("config")

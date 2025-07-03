@@ -237,3 +237,7 @@ backups/DatabaseBackups/backup_manifest.json
 # Large output files
 outputs/
 *.sql.gz
+
+configs/search/job_search_config.json
+
+configs/search/job_search_config_20250629_083129.json

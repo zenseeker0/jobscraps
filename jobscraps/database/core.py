@@ -3,7 +3,7 @@ import json
 import time
 import logging
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict, List, Tuple, Optional
 from collections import defaultdict
 
 import pandas as pd
@@ -105,10 +105,27 @@ class JobDatabase(BackupMixin):
             )
             cursor.execute(
                 """
+            CREATE TABLE IF NOT EXISTS search_sessions (
+                id SERIAL PRIMARY KEY,
+                start_time TIMESTAMP,
+                end_time TIMESTAMP,
+                status TEXT
+            )
+            """
+            )
+            cursor.execute(
+                """
             CREATE TABLE IF NOT EXISTS search_history (
                 id SERIAL PRIMARY KEY,
+                session_id INTEGER REFERENCES search_sessions(id),
                 search_query TEXT,
                 parameters TEXT,
+                new_jobs_inserted INTEGER,
+                duration_seconds NUMERIC,
+                site_breakdown JSONB,
+                duplicate_breakdown JSONB,
+                remote_jobs_count INTEGER,
+                avg_salary NUMERIC(12,2),
                 timestamp TIMESTAMP,
                 jobs_found INTEGER
             )
@@ -130,6 +147,9 @@ class JobDatabase(BackupMixin):
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_session_id ON search_history(session_id)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_site_breakdown ON search_history USING gin (site_breakdown)",
+                "CREATE INDEX IF NOT EXISTS idx_search_history_duplicate_breakdown ON search_history USING gin (duplicate_breakdown)",
             ]
             for query in index_queries:
                 try:
@@ -139,21 +159,86 @@ class JobDatabase(BackupMixin):
             self.conn.commit()
             logger.info("Database tables and indexes created/verified successfully")
 
-    def insert_jobs(self, jobs_df: pd.DataFrame, search_query: str) -> int:
+    def insert_jobs(
+        self, jobs_df: pd.DataFrame, search_query: str
+    ) -> tuple[int, Dict[str, int], Dict[str, int], int, float]:
+        """Insert jobs into the database.
+    
+        Returns the number of new jobs inserted along with a breakdown of
+        inserted jobs per site, duplicate counts per site, the number of remote
+        jobs inserted and the average salary of the inserted jobs.
+        """
+    
         self._ensure_connection()
         jobs_df["date_scraped"] = datetime.now()
         jobs_df["search_query"] = search_query
+    
+        # Handle empty DataFrame or missing columns
+        if jobs_df.empty:
+            logger.info("No jobs to process - empty DataFrame")
+            return 0, {}, {}, 0, 0.0
+    
+        # Ensure required columns exist
+        required_columns = ['site', 'id', 'is_remote']
+        for col in required_columns:
+            if col not in jobs_df.columns:
+                if col == 'site':
+                    jobs_df[col] = 'unknown'
+                elif col == 'id':
+                    jobs_df[col] = jobs_df.apply(
+                        lambda row: f"unknown_{row.name}_{int(time.time())}", axis=1
+                    )
+                elif col == 'is_remote':
+                    jobs_df[col] = False
+    
         with self.conn.cursor() as cursor:
             cursor.execute("SELECT id FROM scraped_jobs")
             existing_ids = {row[0] for row in cursor.fetchall()}
+    
         if "id" in jobs_df.columns:
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
         else:
-            jobs_df["id"] = jobs_df.apply(lambda row: f"{row.get('site', 'unknown')}_{row.get('job_url', '')[-20:]}", axis=1)
+            jobs_df["id"] = jobs_df.apply(
+                lambda row: f"{row.get('site', 'unknown')}_{row.get('job_url', '')[-20:]}",
+                axis=1,
+            )
             new_jobs_df = jobs_df[~jobs_df["id"].isin(existing_ids)]
+    
+        # Ensure is_remote column is boolean
         if "is_remote" in new_jobs_df.columns:
             new_jobs_df["is_remote"] = new_jobs_df["is_remote"].astype(bool)
+    
         new_jobs_count = len(new_jobs_df)
+        
+        # Safe site counts calculation
+        if "site" in new_jobs_df.columns and not new_jobs_df.empty:
+            site_counts = new_jobs_df["site"].fillna("unknown").value_counts().to_dict()
+        else:
+            site_counts = {"unknown": new_jobs_count} if new_jobs_count > 0 else {}
+    
+        # Safe duplicate counts calculation
+        duplicate_df = jobs_df[jobs_df["id"].isin(existing_ids)]
+        if "site" in duplicate_df.columns and not duplicate_df.empty:
+            duplicate_counts = duplicate_df["site"].fillna("unknown").value_counts().to_dict()
+        else:
+            duplicate_counts = {}
+    
+        # Safe remote jobs count calculation
+        if "is_remote" in new_jobs_df.columns and not new_jobs_df.empty:
+            remote_jobs_count = int(new_jobs_df["is_remote"].sum())
+        else:
+            remote_jobs_count = 0
+    
+        # Safe average salary calculation
+        if not new_jobs_df.empty:
+            salary_cols = new_jobs_df[["min_amount", "max_amount"]].apply(
+                pd.to_numeric, errors="coerce"
+            )
+            salary_mean = salary_cols.mean(axis=1)
+            avg_salary = float(salary_mean.mean()) if not salary_mean.empty and not salary_mean.isna().all() else 0.0
+        else:
+            avg_salary = 0.0
+    
         if new_jobs_count > 0:
             columns = [
                 "id",
@@ -193,9 +278,12 @@ class JobDatabase(BackupMixin):
                 "date_scraped",
                 "search_query",
             ]
+            
+            # Ensure all required columns exist in DataFrame
             for col in columns:
                 if col not in new_jobs_df.columns:
                     new_jobs_df[col] = None
+                    
             data_to_insert = []
             for _, row in new_jobs_df.iterrows():
                 row_data = []
@@ -206,25 +294,105 @@ class JobDatabase(BackupMixin):
                     else:
                         row_data.append(value)
                 data_to_insert.append(tuple(row_data))
+            
             insert_query = sql.SQL(
                 "INSERT INTO scraped_jobs (" + ",".join(columns) + ") VALUES (" + ",".join(["%s"] * len(columns)) + ")"
             )
-            with self.conn.cursor() as cursor:
-                psycopg2.extras.execute_batch(cursor, insert_query, data_to_insert)
-                self.conn.commit()
-            logger.info("Inserted %s new jobs into database", new_jobs_count)
+            
+            try:
+                with self.conn.cursor() as cursor:
+                    psycopg2.extras.execute_batch(cursor, insert_query, data_to_insert)
+                    self.conn.commit()
+                logger.info("Inserted %s new jobs into database", new_jobs_count)
+            except Exception as e:
+                logger.error("Error inserting jobs into database: %s", e)
+                self.conn.rollback()
+                return 0, {}, {}, 0, 0.0
         else:
             logger.info("No new jobs to insert")
-        return new_jobs_count
+    
+        return new_jobs_count, site_counts, duplicate_counts, remote_jobs_count, avg_salary
 
-    def log_search(self, search_query: str, parameters: Dict, jobs_found: int) -> None:
+    def start_session(self) -> int:
         self._ensure_connection()
         with self.conn.cursor() as cursor:
             cursor.execute(
-                "INSERT INTO search_history (search_query, parameters, timestamp, jobs_found) VALUES (%s, %s, %s, %s)",
-                (search_query, json.dumps(parameters), datetime.now(), jobs_found),
+                "INSERT INTO search_sessions (start_time) VALUES (%s) RETURNING id",
+                (datetime.now(),),
+            )
+            session_id = cursor.fetchone()[0]
+            self.conn.commit()
+        return session_id
+
+    def end_session(self, session_id: int, status: str) -> None:
+        """Mark a search session as completed."""
+        self._ensure_connection()
+        with self.conn.cursor() as cursor:
+            cursor.execute(
+                """
+                UPDATE search_sessions
+                SET end_time = %s, status = %s
+                WHERE id = %s
+                """,
+                (datetime.now(), status, session_id),
             )
             self.conn.commit()
+
+    def log_search(
+        self,
+        session_id: int,
+        search_query: str,
+        parameters: Dict,
+        jobs_found: int,
+        new_jobs_inserted: int,
+        duration_seconds: float,
+        site_breakdown: Dict[str, int],
+        duplicate_breakdown: Dict[str, int],
+        remote_jobs_count: int,
+        avg_salary: float,
+    ) -> None:
+        """Log a search operation with extended metrics."""
+
+        self._ensure_connection()
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO search_history (
+                        session_id,
+                        search_query,
+                        parameters,
+                        new_jobs_inserted,
+                        duration_seconds,
+                        site_breakdown,
+                        duplicate_breakdown,
+                        remote_jobs_count,
+                        avg_salary,
+                        timestamp,
+                        jobs_found
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        session_id,
+                        search_query,
+                        json.dumps(parameters),
+                        new_jobs_inserted,
+                        duration_seconds,
+                        json.dumps(site_breakdown),
+                        json.dumps(duplicate_breakdown),
+                        remote_jobs_count,
+                        avg_salary,
+                        datetime.now(),
+                        jobs_found,
+                    ),
+                )
+                self.conn.commit()
+        except psycopg2.Error as exc:
+            self.conn.rollback()
+            logger.error(
+                "Failed to log search history (possible schema mismatch): %s",
+                exc,
+            )
 
     def get_all_jobs(self) -> pd.DataFrame:
         self._ensure_connection()
@@ -355,4 +523,29 @@ class JobDatabase(BackupMixin):
         if self.conn and not self.conn.closed:
             self.conn.close()
             logger.info("Database connection closed")
+
+
+class ConnectionPool:
+    """Manage shared JobDatabase instances."""
+
+    _instances: Dict[Tuple[str, str], JobDatabase] = {}
+
+    @classmethod
+    def get_connection(
+        cls, config_path: Optional[str] = None, database_type: str = "production"
+    ) -> JobDatabase:
+        """Return a pooled JobDatabase instance."""
+        key = (config_path or "", database_type)
+        db = cls._instances.get(key)
+        if db is None or db.conn is None or getattr(db.conn, "closed", True):
+            db = JobDatabase(config_path, database_type)
+            cls._instances[key] = db
+        return db
+
+
+def get_connection(
+    config_path: Optional[str] = None, database_type: str = "production"
+) -> JobDatabase:
+    """Convenience wrapper for ConnectionPool.get_connection."""
+    return ConnectionPool.get_connection(config_path, database_type)
 

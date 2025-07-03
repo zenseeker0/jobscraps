@@ -2,8 +2,8 @@ import typer
 from typing import Optional
 
 from .scraping_orchestrator import ScrapingOrchestrator
-from .database.core import JobDatabase  # Add this import
-from .console_interface import console  # Add this import
+from .database.core import get_connection
+from .console_interface import console
 
 import typer.rich_utils as rich_utils
 rich_utils.STYLE_COMMANDS_TABLE_FIRST_COLUMN="bold sky_blue3"
@@ -13,6 +13,19 @@ rich_utils.STYLE_METAVAR="bold yellow3"
 
 app: typer.Typer = typer.Typer(help="Command line interface for JobScraper")
 
+def get_orchestrator(ctx: typer.Context) -> ScrapingOrchestrator:
+    """Lazy initialization of orchestrator - only create when needed."""
+    if "orch" not in ctx.obj:
+        # Get the parameters from when main was called
+        orch = ScrapingOrchestrator(
+            config_path=ctx.obj.get("config"),
+            db_config_path=ctx.obj.get("db_config"),
+            database_type=ctx.obj.get("database_type", "production"),
+        )
+        ctx.obj["orch"] = orch
+        ctx.call_on_close(orch.close)
+    return ctx.obj["orch"]
+
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context,
          config: Optional[str] = typer.Option(None, "--config", help="Path to job search configuration file"),
@@ -21,50 +34,52 @@ def main(ctx: typer.Context,
          no_auto_clean: bool = typer.Option(False, "--no-auto-clean", help="Skip automatic cleaning when creating working copy")):
     """Initialize scraper and run scraping if no command is provided."""
     ctx.ensure_object(dict)
-    orch = ScrapingOrchestrator(
-        config_path=config,
-        db_config_path=db_config,
-        database_type="working" if working else "production",
-    )
-    ctx.obj["orch"] = orch
+    
+    # Store parameters for lazy initialization
+    ctx.obj["config"] = config
+    ctx.obj["db_config"] = db_config
+    ctx.obj["database_type"] = "working" if working else "production"
     ctx.obj["no_auto_clean"] = no_auto_clean
-    ctx.call_on_close(orch.close)
+    
+    # Check if we should show help BEFORE initializing anything
     if ctx.invoked_subcommand is None:
         import sys
         if len(sys.argv) == 1:
             typer.echo(ctx.get_help())
             raise typer.Exit()
+        # Only initialize orchestrator when we're actually going to scrape
+        orch = get_orchestrator(ctx)
         orch.run_scrape()
 
 @app.command()
 def scrape(ctx: typer.Context):
     """Scrape jobs based on configuration."""
-    ctx.obj["orch"].run_scrape()
+    get_orchestrator(ctx).run_scrape()
 
 @app.command()
 def clear(ctx: typer.Context):
     """Clear all data from the scraped_jobs table."""
-    ctx.obj["orch"].data_cleaner.clear_jobs()
+    get_orchestrator(ctx).data_cleaner.clear_jobs()
 
 @app.command("delete-before-date")
 def delete_before_date(ctx: typer.Context, date: str = typer.Argument(..., help="Date in YYYY-MM-DD format")):
     """Delete jobs scraped before the given date."""
-    ctx.obj["orch"].data_cleaner.delete_jobs_before_date(date)
+    get_orchestrator(ctx).data_cleaner.delete_jobs_before_date(date)
 
 @app.command("delete-by-ids")
 def delete_by_ids(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File containing job IDs")):
     """Delete jobs using IDs from a file."""
-    ctx.obj["orch"].data_cleaner.delete_jobs_by_ids(file)
+    get_orchestrator(ctx).data_cleaner.delete_jobs_by_ids(file)
 
 @app.command("delete-by-company")
 def delete_by_company(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with company patterns")):
     """Delete jobs matching company patterns."""
-    ctx.obj["orch"].data_cleaner.delete_jobs_by_company(file)
+    get_orchestrator(ctx).data_cleaner.delete_jobs_by_company(file)
 
 @app.command("delete-by-title")
 def delete_by_title(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with title patterns")):
     """Delete jobs matching title patterns."""
-    ctx.obj["orch"].data_cleaner.delete_jobs_by_title(file)
+    get_orchestrator(ctx).data_cleaner.delete_jobs_by_title(file)
 
 @app.command("delete-by-salary")
 def delete_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000,90000", help="MIN,MAX salary thresholds")):
@@ -74,32 +89,32 @@ def delete_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000
     except ValueError:
         typer.echo("Invalid salary format. Use MIN,MAX")
         raise typer.Exit(code=1)
-    ctx.obj["orch"].data_cleaner.delete_jobs_by_salary(min_sal, max_sal)
+    get_orchestrator(ctx).data_cleaner.delete_jobs_by_salary(min_sal, max_sal)
 
 @app.command("backup-reset")
 def backup_reset(ctx: typer.Context):
     """Backup the database and clear all data."""
-    ctx.obj["orch"].scraper.backup_and_reset_db()
+    get_orchestrator(ctx).scraper.backup_and_reset_db()
 
 @app.command("process-duplicates")
 def process_duplicates(ctx: typer.Context):
     """Process duplicate job records."""
-    ctx.obj["orch"].data_cleaner.process_duplicates()
+    get_orchestrator(ctx).data_cleaner.process_duplicates()
 
 @app.command("create-working-copy")
 def create_working_copy(ctx: typer.Context):
     """Create a working database copy with optional cleaning."""
-    ctx.obj["orch"].scraper.create_working_copy(auto_clean=not ctx.obj["no_auto_clean"])
+    get_orchestrator(ctx).scraper.create_working_copy(auto_clean=not ctx.obj["no_auto_clean"])
 
 @app.command("backup")
 def manual_backup(ctx: typer.Context):
     """Create a manual backup."""
-    ctx.obj["orch"].backup_manager.manual_backup()
+    get_orchestrator(ctx).backup_manager.manual_backup()
 
 @app.command("list-backups")
 def list_backups(ctx: typer.Context):
     """List available backups."""
-    ctx.obj["orch"].backup_manager.list_backups()
+    get_orchestrator(ctx).backup_manager.list_backups()
 
 @app.command("restore-backup")
 def restore_backup(
@@ -111,7 +126,9 @@ def restore_backup(
     
     db = None
     try:
-        db = JobDatabase(database_type="production")
+        orch = get_orchestrator(ctx)
+        orch_db = orch.scraper.db
+        db = get_connection(orch_db.db_config.config_path, orch_db.database_type)
         
         # Test compatibility first
         console.print(f"Testing backup compatibility: {filename}")
@@ -156,20 +173,17 @@ def restore_backup(
     except Exception as e:
         console.print(f"❌ Restore error: {e}")
         raise typer.Exit(1)
-    finally:
-        if db:
-            db.close()
 
 
 @app.command("test-backup")
 def test_backup(ctx: typer.Context, filename: str = typer.Argument(..., help="Backup filename")):
     """Test backup file integrity."""
-    ctx.obj["orch"].backup_manager.test_backup(filename)
+    get_orchestrator(ctx).backup_manager.test_backup(filename)
 
 @app.command("cleanup-backups")
 def cleanup_backups(ctx: typer.Context):
     """Force cleanup of old backups."""
-    ctx.obj["orch"].backup_manager.cleanup_backups()
+    get_orchestrator(ctx).backup_manager.cleanup_backups()
 
 @app.command("test-backup-compatibility")
 def test_backup_compatibility(
@@ -180,8 +194,9 @@ def test_backup_compatibility(
     
     db = None
     try:
-        # Use JobDatabase directly instead of orchestrator's scraper
-        db = JobDatabase(database_type="production")
+        orch = get_orchestrator(ctx)
+        orch_db = orch.scraper.db
+        db = get_connection(orch_db.db_config.config_path, orch_db.database_type)
         
         console.print(f"Testing backup compatibility: {filename}")
         compat_check = db.test_backup_compatibility(filename)
@@ -205,9 +220,6 @@ def test_backup_compatibility(
     except Exception as e:
         console.print(f"❌ Compatibility test error: {e}")
         raise typer.Exit(1)
-    finally:
-        if db:
-            db.close()
 
 __all__ = ["app"]
 

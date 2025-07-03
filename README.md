@@ -2,6 +2,17 @@
 
 A comprehensive job scraping and data management system built with Python, PostgreSQL, and intelligent backup management.
 
+## 📋 Prerequisites
+
+- **Python** 3.10 or newer
+- **PostgreSQL** 12 or newer with a user that can create databases
+
+### Key Python Dependencies
+- [python-jobspy](https://pypi.org/project/python-jobspy/) - scraping library
+- [psycopg2-binary](https://pypi.org/project/psycopg2-binary/) - PostgreSQL adapter
+- [typer](https://pypi.org/project/typer/) - CLI framework
+- [pandas](https://pypi.org/project/pandas/) - data manipulation
+
 ## 🚀 Quick Start
 
 1. **Clone repository**
@@ -10,31 +21,44 @@ A comprehensive job scraping and data management system built with Python, Postg
    cd jobscraps
    ```
 
-2. **Install dependencies**
+2. **Install Python dependencies**
    ```bash
    pip install -e .
    ```
 
-3. **Configure database**
+3. **Create PostgreSQL databases**
+   ```bash
+   createdb jobscraps
+   createdb jobscraps_working
+   ```
+
+4. **Configure database**
    ```bash
    cp configs/db/db_config.json.template configs/db/db_config.json
    # Edit configs/db/db_config.json with your PostgreSQL details
    ```
-
-4. **Verify setup**
+   Set `PGPASSWORD` in your environment so backup operations can run non-interactively:
    ```bash
-   python dev/verify_setup.py
+   export PGPASSWORD=your_db_password
    ```
 
-5. **Start scraping**
+5. **Create a job search configuration**
+   ```bash
+   cp configs/testing/test_job_search_config.json configs/search/job_search_config.json
+   # Edit configs/search/job_search_config.json with your search parameters
+   ```
+
+6. **Start scraping**
    ```bash
    jobscraps scrape
    ```
 
-6. **Explore the CLI**
+7. **Explore the CLI**
    ```bash
    jobscraps --help
    ```
+   Most commands operate on the production database. Add `--working` to safely
+   use the working copy.
 
 ## 📊 Key Features
 
@@ -45,30 +69,36 @@ A comprehensive job scraping and data management system built with Python, Postg
 - **Intelligent backup system** - backups only when needed, retention management
 - **Data cleaning pipeline** with configurable filters (salary, company, title, duplicates)
 - **Safety-first design** - non-destructive analysis vs explicit destructive operations
-- **Retool integration** for business intelligence dashboards
+- **Session analytics** with per-search metrics and salary averages
 
 ## 📁 Project Structure
 
 ```
 jobscraps/
-├── scraper.py              # Legacy scraping entry point
-├── cli.py                  # Typer-based command line interface
-├── scraping_orchestrator.py# Coordinates scraping and cleaning
-├── backup_manager.py       # Backup and restore utilities
-├── data_cleaner.py         # Data cleaning routines
-├── duplicate_manager.py    # Duplicate detection helpers
-├── console_interface.py    # Console abstraction for user prompts
-├── database/               # Database access and backup helpers
+├── jobscraps/
+│   ├── cli.py                  # Typer-based command line interface
+│   ├── scraper.py              # Scraping logic
+│   ├── scraping_orchestrator.py
+│   ├── backup_manager.py
+│   ├── data_cleaner.py
+│   ├── duplicate_manager.py
+│   ├── base_manager.py
+│   ├── session_manager.py
+│   ├── config.py
+│   ├── console_interface.py
+│   └── database/
+│       ├── backup.py
+│       ├── config.py
+│       └── core.py
 ├── configs/
-│   ├── db/            # Database configuration
-│   ├── search/        # Job search parameters
-│   ├── filters/       # Deletion filter patterns
-│   └── testing/       # Sample configs for development
-├── scripts/                # Helper utilities
-├── data/                   # Schemas and samples
-├── outputs/                # Logs and analysis (gitignored)
-├── backups/                # PostgreSQL backups with retention (gitignored)
-└── dev/                    # Development and migration tools
+│   ├── db/
+│   ├── search/
+│   ├── filters/
+│   └── testing/
+├── scripts/
+├── data/
+├── outputs/                # Gitignored job data
+└── dev/
 ```
 
 ## 🔄 Typical Workflows
@@ -163,6 +193,9 @@ jobscraps --working delete-by-salary          # Clean by salary
 jobscraps --working delete-by-company         # Clean by company patterns
 jobscraps --working delete-by-title           # Clean by title patterns
 jobscraps --working delete-by-ids             # Delete specific IDs
+jobscraps delete-before-date YYYY-MM-DD      # Remove older jobs
+jobscraps clear                              # Delete all job data
+jobscraps backup-reset                       # Backup then clear database
 ```
 
 ### Backup Management
@@ -171,7 +204,15 @@ jobscraps backup                    # Manual backup
 jobscraps list-backups              # Show available backups
 jobscraps restore-backup file.sql.gz # Restore from backup
 jobscraps cleanup-backups           # Force retention cleanup
+jobscraps test-backup file.sql.gz   # Validate backup integrity
+jobscraps test-backup-compatibility file.sql.gz  # Check restore compatibility
 ```
+
+## 🛠️ Troubleshooting
+
+- **Database connection errors**: confirm `db_config.json` credentials and that PostgreSQL is running.
+- **Permission denied creating working copy**: ensure your database user has `CREATEDB` privileges.
+- **Restore fails with compatibility warnings**: use `jobscraps test-backup-compatibility` before running `restore-backup`.
 
 ## 🤝 Contributing
 

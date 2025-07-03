@@ -1,0 +1,101 @@
+{
+  "management_tiers": {
+    "c_suite": [
+      "CEO", "CFO", "CTO", "COO", "CMO", "CHRO", "CDO", "CSO", "CPO", "CRO", "CLO",
+      "Chief Executive Officer", "Chief Financial Officer", "Chief Technology Officer",
+      "Chief Operating Officer", "Chief Marketing Officer", "Chief Human Resources Officer",
+      "Chief Data Officer", "Chief Security Officer", "Chief Product Officer",
+      "Chief Revenue Officer", "Chief Legal Officer", "Chief Information Officer", "CIO",
+      "Chief Executive", "Chief Financial", "Chief Technology", "Chief Operating",
+      "Chief Marketing", "Chief Human Resources", "Chief Data", "Chief Security",
+      "Chief Product", "Chief Revenue", "Chief Legal", "Chief Information",
+      "President", "Vice President", "VP", "SVP", "EVP", "Senior Vice President",
+      "Executive Vice President", "Regional President", "Global President"
+    ],
+    "director": [
+      "Director", "Senior Director", "Executive Director", "Associate Director",
+      "Managing Director", "Regional Director", "Global Director", "Area Director",
+      "District Director", "Operations Director", "Technical Director",
+      "Creative Director", "Art Director", "Marketing Director", "Sales Director",
+      "Finance Director", "HR Director", "IT Director", "Engineering Director",
+      "Product Director", "Strategy Director", "Business Director"
+    ],
+    "manager": [
+      "Manager", "Senior Manager", "Principal Manager", "General Manager",
+      "Assistant Manager", "Deputy Manager", "Area Manager", "Regional Manager",
+      "District Manager", "Operations Manager", "Project Manager", "Program Manager",
+      "Product Manager", "Account Manager", "Sales Manager", "Marketing Manager",
+      "Finance Manager", "HR Manager", "IT Manager", "Engineering Manager",
+      "Development Manager", "Technical Manager", "Branch Manager", "Store Manager",
+      "Office Manager", "Facility Manager", "Risk Manager", "Quality Manager",
+      "Production Manager", "Manufacturing Manager", "Supply Chain Manager",
+      "Business Manager", "Customer Manager", "Service Manager", "Support Manager"
+    ],
+    "supervisor_lead": [
+      "Supervisor", "Senior Supervisor", "Floor Supervisor", "Shift Supervisor",
+      "Production Supervisor", "Operations Supervisor", "Quality Supervisor",
+      "Safety Supervisor", "Maintenance Supervisor", "Customer Service Supervisor",
+      "Lead", "Team Lead", "Squad Lead", "Tech Lead", "Development Lead",
+      "Engineering Lead", "Product Lead", "Project Lead", "Technical Lead",
+      "Software Lead", "QA Lead", "Design Lead", "Research Lead",
+      "Head of", "Head", "Department Head", "Team Head", "Group Head",
+      "Foreman", "Superintendent", "Site Superintendent", "Construction Superintendent",
+      "Maintenance Superintendent", "Operations Superintendent"
+    ]
+  },
+  "individual_contributor_titles": [
+    "Analyst", "Senior Analyst", "Data Analyst", "Business Analyst", "Financial Analyst",
+    "Research Analyst", "Systems Analyst", "Quality Analyst", "Performance Analyst",
+    "Associate", "Senior Associate", "Sales Associate", "Marketing Associate",
+    "Research Associate", "Quality Assurance Associate", "Administrative Associate",
+    "Specialist", "Senior Specialist", "Technical Specialist", "IT Specialist",
+    "Marketing Specialist", "HR Specialist", "Quality Specialist", "Support Specialist",
+    "Customer Service Specialist", "Data Specialist", "Communications Specialist",
+    "Subject Matter Expert", "SME", "Expert", "Technical Expert",
+    "Representative", "Senior Representative", "Sales Representative", "Customer Representative",
+    "Support Representative", "Account Representative", "Service Representative",
+    "Engineer", "Senior Engineer", "Software Engineer", "Systems Engineer", "Network Engineer",
+    "Quality Engineer", "Test Engineer", "Support Engineer", "Field Engineer",
+    "Developer", "Senior Developer", "Software Developer", "Web Developer", "Application Developer",
+    "Architect", "Senior Architect", "Solutions Architect", "Systems Architect", "Data Architect",
+    "Technician", "Senior Technician", "IT Technician", "Network Technician", "Support Technician"
+  ],
+  "ambiguous_titles": [
+    "Coordinator", "Senior Coordinator", "Program Coordinator", "Project Coordinator",
+    "Operations Coordinator", "Marketing Coordinator", "HR Coordinator",
+    "Administrative Coordinator", "Event Coordinator", "Training Coordinator",
+    "Consultant", "Senior Consultant", "Principal Consultant", "Staff Consultant",
+    "Principal Analyst", "Principal Associate", "Principal Specialist", "Staff Specialist",
+    "Advisor", "Senior Advisor", "Principal Advisor", "Business Advisor"
+  ],
+  "exclusion_patterns": [
+    "Assistant to", "Assistant to the", "Administrative Assistant",
+    "Executive Assistant", "Personal Assistant", "Virtual Assistant",
+    "Junior", "Intern", "Trainee", "Entry Level", "Entry-Level",
+    "Apprentice", "Student", "Graduate", "Associate Level"
+  ],
+  "company_exclusion_keywords": [
+    "Management", "Consulting", "Solutions", "Services", "Group", "Corp",
+    "Corporation", "Company", "LLC", "Inc", "Ltd", "Limited", "Partners",
+    "Associates", "Advisors", "Holdings", "Capital", "Ventures", "Equity"
+  ],
+  "word_boundary_exceptions": {
+    "lead": ["Lead Generation", "Lead Qualification", "Sales Lead", "Marketing Lead"],
+    "head": ["Overhead", "Ehead", "Warhead", "Letterhead"],
+    "manager": ["Stage Manager", "Talent Manager", "Artist Manager"],
+    "director": ["Film Director", "Movie Director", "Theatre Director", "Creative Director"]
+  },
+  "regex_patterns": {
+    "word_boundary_prefix": "\\b",
+    "word_boundary_suffix": "\\b",
+    "case_insensitive_flag": "i",
+    "exclusion_distance": 10
+  },
+  "analysis_settings": {
+    "min_salary_threshold": 30000,
+    "max_salary_threshold": 1000000,
+    "include_remote_analysis": true,
+    "sample_size_for_validation": 100,
+    "confidence_threshold": 0.85
+  }
+}

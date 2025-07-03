@@ -15,10 +15,11 @@ logger = logging.getLogger(__name__)
 class DuplicateManager:
     """Handle duplicate job detection and cleanup."""
 
-    def __init__(self, db: JobDatabase) -> None:
-        """Initialize the manager with a database connection."""
+    def __init__(self, db: JobDatabase, preferences: Dict | None = None) -> None:
+        """Initialize the manager with a database connection and preferences."""
         self.db = db
         self.site_preference = ['linkedin', 'indeed', 'google']
+        self.preferences: Dict = preferences or {}
 
     def identify_duplicates(self) -> Tuple[List[List[Dict]], List[str], List[str]]:
         """Identify duplicate jobs and determine which ones to keep/delete."""
@@ -45,18 +46,15 @@ class DuplicateManager:
         if len(candidates) == 1:
             return candidates[0]
 
-        # Step 2: Filter by Colorado location preference
-        colorado_jobs = [
-            job for job in candidates
-            if job.get('location') and (
-                ', CO' in job['location'] or
-                'Colorado' in job['location'] or
-                ', co' in job['location'].lower() or
-                'colorado' in job['location'].lower()
-            )
-        ]
-        if colorado_jobs and len(colorado_jobs) < len(candidates):
-            candidates = colorado_jobs
+        # Step 2: Filter by preferred locations from config
+        preferred_locations = [loc.lower() for loc in self.preferences.get('locations', [])]
+        if preferred_locations:
+            location_jobs = [
+                job for job in candidates
+                if job.get('location') and any(loc in job['location'].lower() for loc in preferred_locations)
+            ]
+            if location_jobs and len(location_jobs) < len(candidates):
+                candidates = location_jobs
         if len(candidates) == 1:
             return candidates[0]
 
@@ -108,13 +106,22 @@ class DuplicateManager:
 
         # Step 8: Select by most recent date_posted
         if len(candidates) > 1:
-            jobs_with_dates = [job for job in candidates if job.get('date_posted') and job['date_posted'].strip()]
+            jobs_with_dates = [
+                job for job in candidates
+                if job.get('date_posted') and job['date_posted'].strip()
+            ]
             if jobs_with_dates:
                 try:
-                    jobs_with_dates.sort(key=lambda x: x['date_posted'], reverse=True)
+                    jobs_with_dates.sort(
+                        key=lambda x: x['date_posted'],
+                        reverse=True,
+                    )
                     return jobs_with_dates[0]
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.exception(
+                        "Error sorting jobs by date_posted: %s", e
+                    )
+                    return candidates[0]
         # Fallback
         return candidates[0]
 

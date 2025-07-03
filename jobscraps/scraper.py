@@ -28,10 +28,11 @@ from jobspy import scrape_jobs
 from .duplicate_manager import DuplicateManager
 from .config import JobSearchConfig
 
-from .database import DatabaseConfig, JobDatabase
+from .database import get_connection
 from .console_interface import console
 from .backup_manager import BackupManager
 from .data_cleaner import DataCleaner
+from .session_manager import SessionManager
 import warnings
 # Suppress pandas SQLAlchemy warnings for psycopg2 connections
 warnings.filterwarnings('ignore', message='pandas only supports SQLAlchemy connectable')
@@ -82,8 +83,12 @@ class JobScraper:
         if db_config_path is None:
             db_config_path = os.path.join(SCRIPT_DIR, "configs", "db", "db_config.json")
         self.config = JobSearchConfig(config_path)
-        self.db = JobDatabase(db_config_path, database_type)
-        self.duplicate_manager = DuplicateManager(self.db)
+        self.db = get_connection(db_config_path, database_type)
+        preferences = self.config.get_global_params().get("duplicate_preferences", {})
+        self.duplicate_manager = DuplicateManager(self.db, preferences)
+
+        self.session_id = self.db.start_session()
+        logger.info("Started search session %s", self.session_id)
         
         self.proxies = [
         ]
@@ -94,66 +99,124 @@ class JobScraper:
         global_params = self.config.get_global_params()
         job_configs = self.config.get_job_configs()
         
+    
         if not job_configs:
             logger.warning("No enabled job configurations found")
+            self.db.end_session(self.session_id, "no_jobs")
             return
-        
+    
         total_new_jobs = 0
-        
-        for job_config in job_configs:
-            job_name = job_config.get("name", "Unnamed Job")
-            params = job_config.get("parameters", {})
-            
-            # Merge with global parameters
-            for key, value in global_params.items():
-                if key not in params:
-                    params[key] = value
-                    
-            # Add proxies if available
-            if self.proxies:
-                params["proxies"] = self.proxies
-                
-            logger.info(f"Starting search for: {job_name}")
-            logger.info(f"Parameters: {params}")
-            
-            try:
-                # Perform job search
-                jobs_df = scrape_jobs(**params)
-                
-                # Log the search
-                self.db.log_search(job_name, params, len(jobs_df))
-                
-                # Insert results into database
-                new_jobs = self.db.insert_jobs(jobs_df, job_name)
-                total_new_jobs += new_jobs
-                
-                logger.info(f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new.")
-                
-            except Exception as e:
-                logger.error(f"Error searching for {job_name}: {str(e)}", exc_info=True)
-        
-        # Create backup after scraping to capture new data (only for production database)
-        if total_new_jobs > 0 and self.db.database_type == "production":
-            console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
-            console.info("Creating backup to capture new data...")
-            try:
-                backup_info = self.db.create_backup('auto', 'post_scraping')
-                console.info(f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)")
-                
-                # Manage retention after backup
-                retention_result = self.db.manage_backup_retention()
-                if retention_result['action'] == 'cleanup_performed':
-                    console.info(f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB")
-                    
-            except Exception as e:
-                logger.warning(f"Post-scraping backup failed: {e}")
-                console.info(f"⚠️  Post-scraping backup failed: {e}")
-        elif total_new_jobs == 0:
-            logger.info("No new jobs found, skipping post-scraping backup")
-        else:
-            logger.info("Working database scraping completed (no backup needed)")
     
+        with SessionManager(self.db, self.session_id):
+            for job_config in job_configs:
+                job_name = job_config.get("name", "Unnamed Job")
+                params = job_config.get("parameters", {})
     
+                # Merge with global parameters
+                for key, value in global_params.items():
+                    if key not in params:
+                        params[key] = value
+    
+                # Add proxies if available
+                if self.proxies:
+                    params["proxies"] = self.proxies
+    
+                logger.info(f"Starting search for: {job_name}")
+                logger.info(f"Parameters: {params}")
+    
+                try:
+                    start_time = time.time()
+                    jobs_df = scrape_jobs(**params)
+                    
+                    # Validate the DataFrame before processing
+                    if jobs_df is None:
+                        logger.warning(f"scrape_jobs returned None for {job_name}")
+                        jobs_df = pd.DataFrame()
+                    elif not isinstance(jobs_df, pd.DataFrame):
+                        logger.warning(f"scrape_jobs returned non-DataFrame for {job_name}: {type(jobs_df)}")
+                        jobs_df = pd.DataFrame()
+                    elif jobs_df.empty:
+                        logger.info(f"No jobs found for {job_name}")
+                    
+                    # Log DataFrame info for debugging
+                    logger.debug(f"DataFrame for {job_name}: shape={jobs_df.shape}, columns={list(jobs_df.columns) if not jobs_df.empty else []}")
+    
+                    (
+                        new_jobs,
+                        site_counts,
+                        duplicate_counts,
+                        remote_count,
+                        avg_salary,
+                    ) = self.db.insert_jobs(jobs_df, job_name)
+    
+                    duration = time.time() - start_time
+    
+                    self.db.log_search(
+                        self.session_id,
+                        job_name,
+                        params,
+                        len(jobs_df),
+                        new_jobs,
+                        duration,
+                        site_counts,
+                        duplicate_counts,
+                        remote_count,
+                        avg_salary,
+                    )
+    
+                    total_new_jobs += new_jobs
+    
+                    logger.info(
+                        f"Search completed for {job_name}. Found {len(jobs_df)} jobs, {new_jobs} new."
+                    )
+    
+                except Exception as e:
+                    logger.error(
+                        f"Error searching for {job_name}: {str(e)}", exc_info=True
+                    )
+                    
+                    # Log failed search to database with zero results
+                    duration = time.time() - start_time
+                    try:
+                        self.db.log_search(
+                            self.session_id,
+                            job_name,
+                            params,
+                            0,  # jobs_found
+                            0,  # new_jobs_inserted
+                            duration,
+                            {},  # site_breakdown
+                            {},  # duplicate_breakdown
+                            0,   # remote_jobs_count
+                            0.0  # avg_salary
+                        )
+                    except Exception as log_error:
+                        logger.error(f"Failed to log failed search for {job_name}: {log_error}")
+    
+            # Create backup after scraping to capture new data (only for production database)
+            if total_new_jobs > 0 and self.db.database_type == "production":
+                console.info(f"\nScraping completed with {total_new_jobs} new jobs added.")
+                console.info("Creating backup to capture new data...")
+                try:
+                    backup_info = self.db.create_backup('auto', 'post_scraping')
+                    console.info(
+                        f"✓ Post-scraping backup created: {backup_info['filename']} ({backup_info['size_mb']} MB)"
+                    )
+    
+                    # Manage retention after backup
+                    retention_result = self.db.manage_backup_retention()
+                    if retention_result['action'] == 'cleanup_performed':
+                        console.info(
+                            f"Backup retention: {retention_result['remaining_backups']} backups, {retention_result['total_size_gb']} GB"
+                        )
+    
+                except Exception as e:
+                    logger.warning(f"Post-scraping backup failed: {e}")
+                    console.info(f"⚠️  Post-scraping backup failed: {e}")
+            elif total_new_jobs == 0:
+                logger.info("No new jobs found, skipping post-scraping backup")
+            else:
+                logger.info("Working database scraping completed (no backup needed)")
     
     def backup_and_reset_db(self) -> None:
         """Create a backup of the database and clear all data."""
@@ -183,7 +246,7 @@ class JobScraper:
             else:
                 raise ValueError("No database configuration found")
             
-            working_db = "jobscraps_working"  # Fixed name for Retool consistency
+            working_db = "jobscraps_working"
             
             # IMPORTANT: Close the current connection to the source database first
             logger.info("Closing current database connection to allow template copy")
@@ -311,7 +374,7 @@ class JobScraper:
                     console.info(f"Jobs removed: {removed_count:,} ({removal_percentage:.1f}%)")
                     console.info(f"Jobs remaining: {final_count:,}")
                     console.info(f"Total cleaning time: {total_time:.1f} seconds")
-                    console.info(f"Working database ready for analysis and Retool")
+                    console.info(f"Working database ready for analysis")
                     
                 except Exception as e:
                     logger.error(f"Error during auto-cleaning: {e}")

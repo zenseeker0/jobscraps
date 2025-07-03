@@ -4,6 +4,7 @@
 Complete PostgreSQL schema for the JobScraps database including:
 - `scraped_jobs` table with all job posting fields
 - `search_history` table for tracking scraping operations  
+- `search_sessions` table for tracking details of scraping sessions for analysis
 - Indexes for optimized querying
 - Column specifications and data types
 
@@ -17,3 +18,4 @@ pg_dump -h HOST -p 5432 -U USER -d jobscraps \
 ## Key Tables
 - **scraped_jobs**: Main table storing all job records
 - **search_history**: Tracks scraping operations
+- **search_sessions**: Tracks scraping session details for analysis

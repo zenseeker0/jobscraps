@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# ccsv_to_config.py - Convert CSV file to job_search_config.json
+# csv_to_config.py - Convert CSV file to job_search_config.json
 
 import csv
 import json
@@ -8,15 +8,14 @@ import ast
 from datetime import datetime
 
 # Input CSV and output JSON filenames
-INPUT_CSV = 'search_queries.csv'
-OUTPUT_JSON = 'job_search_config.json'
+INPUT_CSV = '/Users/jonesy/gitlocal/jobscraps/configs/search/search_queries.csv'
+OUTPUT_JSON = '/Users/jonesy/gitlocal/jobscraps/configs/search/job_search_config.json'
 
-# Global section defaults
+# Global section defaults (removed distance - now per-search)
 GLOBAL_CONFIG = {
     'description_format': 'markdown',
     'enforce_annual_salary': True,
-    'verbose': 2,
-    'distance': 25
+    'verbose': 2
 }
 
 def parse_bool(value):
@@ -70,8 +69,8 @@ def load_jobs_from_csv(csv_path):
                 if key in row and row[key].strip():
                     params[key] = parse_bool(row[key])
 
-            # Integer fields
-            for key in ('hours_old', 'results_wanted'):
+            # Integer fields (including distance)
+            for key in ('hours_old', 'results_wanted', 'distance'):
                 val = row.get(key, '').strip()
                 if val:
                     try:
