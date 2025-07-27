@@ -1,0 +1,2745 @@
+{
+  "jobs": [
+    {
+      "name": "Professional Services Consultant (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Professional Services Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Professional Services Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Loveland, CO",
+        "google_search_term": "(Partner Enablement) OR (Partner Onboarding) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote (Partner Enablement) OR (Partner Onboarding) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Loveland, CO",
+        "google_search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote (Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Loveland, CO",
+        "google_search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote (Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Loveland, CO",
+        "google_search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote (Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Program Manager (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Technical Program Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Program Manager (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Technical Program Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Analyst (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Data Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Data Analyst (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Data Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Operations Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Analyst (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Operations Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Consultant (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Solutions Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Consultant (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Solutions Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Account Manager (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Technical Account Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Account Manager (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Technical Account Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Manager (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Customer Success Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Manager (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Customer Success Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Consultant (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Operations Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Consultant (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Operations Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Business Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Business Analyst (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Business Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Specialist (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Loveland, CO",
+        "google_search_term": "Operations Specialist jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Specialist (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Operations Specialist jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training Specialist (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Loveland, CO",
+        "google_search_term": "Product Training Specialist jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Product Training Specialist (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Product Training Specialist jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Customer Success Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Customer Success Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Loveland, CO",
+        "google_search_term": "(Customer Onboarding) OR (Customer Enablement) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote (Customer Onboarding) OR (Customer Enablement) jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Solutions Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Engineer (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Solutions Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Professional Services Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Professional Services Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Customer Success Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Customer Success Engineer jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Account Manager (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Customer Account Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Account Manager (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Customer Account Manager jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Managed Services (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Loveland, CO",
+        "google_search_term": "Managed Services jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Managed Services (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Managed Services jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Consultant (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Technical Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Consultant (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Technical Consultant jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Loveland, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Analyst (Loveland, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Loveland, CO",
+        "google_search_term": "Remote Analyst jobs near Loveland CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Professional Services Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Professional Services Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "(Partner Enablement) OR (Partner Onboarding) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote (Partner Enablement) OR (Partner Onboarding) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote (Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote (Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote (Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Program Manager (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Technical Program Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Program Manager (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Technical Program Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Analyst (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Data Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Data Analyst (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Data Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Operations Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Analyst (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Operations Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Consultant (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Solutions Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Consultant (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Solutions Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Account Manager (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Technical Account Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Account Manager (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Technical Account Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Manager (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Customer Success Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Manager (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Customer Success Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Consultant (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Operations Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Consultant (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Operations Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Business Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Business Analyst (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Business Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Specialist (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Operations Specialist jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Specialist (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Operations Specialist jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training Specialist (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Product Training Specialist jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Product Training Specialist (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Product Training Specialist jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Customer Success Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Customer Success Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "(Customer Onboarding) OR (Customer Enablement) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote (Customer Onboarding) OR (Customer Enablement) jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Solutions Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Engineer (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Solutions Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Professional Services Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Professional Services Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Customer Success Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Customer Success Engineer jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Account Manager (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Customer Account Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Account Manager (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Customer Account Manager jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Managed Services (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Managed Services jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Managed Services (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Managed Services jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Consultant (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Technical Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Consultant (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Technical Consultant jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Castle Rock, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Analyst (Castle Rock, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Castle Rock, CO",
+        "google_search_term": "Remote Analyst jobs near Castle Rock CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Professional Services Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Professional Services Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Denver, CO",
+        "google_search_term": "(Partner Enablement) OR (Partner Onboarding) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Denver, CO",
+        "google_search_term": "Remote (Partner Enablement) OR (Partner Onboarding) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Denver, CO",
+        "google_search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Denver, CO",
+        "google_search_term": "Remote (Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Denver, CO",
+        "google_search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Denver, CO",
+        "google_search_term": "Remote (Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Denver, CO",
+        "google_search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Denver, CO",
+        "google_search_term": "Remote (Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Program Manager (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Technical Program Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Program Manager (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Technical Program Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Analyst (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Data Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Data Analyst (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Data Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Operations Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Analyst (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Operations Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Consultant (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Solutions Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Consultant (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Solutions Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Account Manager (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Technical Account Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Account Manager (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Technical Account Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Manager (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Customer Success Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Manager (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Customer Success Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Consultant (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Operations Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Consultant (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Operations Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Business Analyst (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Business Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Business Analyst (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Business Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Business Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Specialist (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Denver, CO",
+        "google_search_term": "Operations Specialist jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Specialist (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Specialist",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Operations Specialist jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Product Training Specialist (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Denver, CO",
+        "google_search_term": "Product Training Specialist jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Product Training Specialist (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Product Training Specialist",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Product Training Specialist jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Customer Success Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Analyst (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Customer Success Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Denver, CO",
+        "google_search_term": "(Customer Onboarding) OR (Customer Enablement) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Onboarding and Enablement (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Customer Onboarding) OR (Customer Enablement)",
+        "location": "Denver, CO",
+        "google_search_term": "Remote (Customer Onboarding) OR (Customer Enablement) jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Engineer (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Solutions Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Engineer (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Solutions Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Professional Services Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Engineer (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Professional Services Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Customer Success Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Engineer (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Engineer",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Customer Success Engineer jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Account Manager (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Customer Account Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Account Manager (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Account Manager",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Customer Account Manager jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Managed Services (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Denver, CO",
+        "google_search_term": "Managed Services jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Managed Services (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Managed Services",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Managed Services jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Consultant (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Technical Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Consultant (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Consultant",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Technical Consultant jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Analyst (Denver, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Analyst (Denver, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Analyst",
+        "location": "Denver, CO",
+        "google_search_term": "Remote Analyst jobs near Denver CO in the last week",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 168,
+        "results_wanted": 1500
+      }
+    }
+  ],
+  "global": {
+    "description_format": "markdown",
+    "enforce_annual_salary": true,
+    "verbose": 2
+  }
+}

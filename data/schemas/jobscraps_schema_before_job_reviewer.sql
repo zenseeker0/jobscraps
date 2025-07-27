@@ -18,7 +18,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 ALTER TABLE IF EXISTS ONLY public.search_history DROP CONSTRAINT IF EXISTS fk_search_sessions;
-DROP INDEX IF EXISTS public.scraped_jobs_title_idx;
 DROP INDEX IF EXISTS public.idx_search_history_timestamp;
 DROP INDEX IF EXISTS public.idx_search_history_site_breakdown;
 DROP INDEX IF EXISTS public.idx_search_history_session_id;
@@ -440,13 +439,6 @@ CREATE INDEX idx_search_history_site_breakdown ON public.search_history USING gi
 --
 
 CREATE INDEX idx_search_history_timestamp ON public.search_history USING btree ("timestamp");
-
-
---
--- Name: scraped_jobs_title_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX scraped_jobs_title_idx ON public.scraped_jobs USING gin (title public.gin_trgm_ops);
 
 
 --
