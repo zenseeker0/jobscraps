@@ -1,0 +1,268 @@
+            Index "public.idx_job_metadata_reviewed"
+  Column  |  Type   | Key? | Definition | Storage | Stats target 
+----------+---------+------+------------+---------+--------------
+ reviewed | boolean | yes  | reviewed   | plain   | 
+btree, for table "public.job_user_metadata"
+
+                    Index "public.idx_job_metadata_status"
+ Column |         Type          | Key? | Definition | Storage  | Stats target 
+--------+-----------------------+------+------------+----------+--------------
+ status | character varying(20) | yes  | status     | extended | 
+btree, for table "public.job_user_metadata"
+
+           Index "public.idx_scraped_jobs_company"
+ Column  | Type | Key? | Definition | Storage  | Stats target 
+---------+------+------+------------+----------+--------------
+ company | text | yes  | company    | extended | 
+btree, for table "public.scraped_jobs"
+
+       Index "public.idx_scraped_jobs_company_location"
+  Column  | Type | Key? | Definition | Storage  | Stats target 
+----------+------+------+------------+----------+--------------
+ company  | text | yes  | company    | extended | 
+ location | text | yes  | location   | extended | 
+btree, for table "public.scraped_jobs"
+
+            Index "public.idx_scraped_jobs_date_posted"
+   Column    | Type | Key? | Definition  | Storage  | Stats target 
+-------------+------+------+-------------+----------+--------------
+ date_posted | text | yes  | date_posted | extended | 
+btree, for table "public.scraped_jobs"
+
+                       Index "public.idx_scraped_jobs_date_scraped"
+    Column    |            Type             | Key? |  Definition  | Storage | Stats target 
+--------------+-----------------------------+------+--------------+---------+--------------
+ date_scraped | timestamp without time zone | yes  | date_scraped | plain   | 
+btree, for table "public.scraped_jobs"
+
+           Index "public.idx_scraped_jobs_description_gin"
+   Column    |  Type   | Key? | Definition  | Storage | Stats target 
+-------------+---------+------+-------------+---------+--------------
+ description | integer | yes  | description | plain   | 
+gin, for table "public.scraped_jobs"
+
+            Index "public.idx_scraped_jobs_is_remote"
+  Column   |  Type   | Key? | Definition | Storage | Stats target 
+-----------+---------+------+------------+---------+--------------
+ is_remote | boolean | yes  | is_remote  | plain   | 
+btree, for table "public.scraped_jobs"
+
+           Index "public.idx_scraped_jobs_location"
+  Column  | Type | Key? | Definition | Storage  | Stats target 
+----------+------+------+------------+----------+--------------
+ location | text | yes  | location   | extended | 
+btree, for table "public.scraped_jobs"
+
+            Index "public.idx_scraped_jobs_search_query"
+    Column    | Type | Key? |  Definition  | Storage  | Stats target 
+--------------+------+------+--------------+----------+--------------
+ search_query | text | yes  | search_query | extended | 
+btree, for table "public.scraped_jobs"
+
+          Index "public.idx_scraped_jobs_search_query_lower"
+ Column | Type | Key? |     Definition      | Storage  | Stats target 
+--------+------+------+---------------------+----------+--------------
+ lower  | text | yes  | lower(search_query) | extended | 
+btree, for table "public.scraped_jobs"
+
+            Index "public.idx_scraped_jobs_site"
+ Column | Type | Key? | Definition | Storage  | Stats target 
+--------+------+------+------------+----------+--------------
+ site   | text | yes  | site       | extended | 
+btree, for table "public.scraped_jobs"
+
+            Index "public.idx_scraped_jobs_title"
+ Column | Type | Key? | Definition | Storage  | Stats target 
+--------+------+------+------------+----------+--------------
+ title  | text | yes  | title      | extended | 
+btree, for table "public.scraped_jobs"
+
+        Index "public.idx_scraped_jobs_title_company"
+ Column  | Type | Key? | Definition | Storage  | Stats target 
+---------+------+------+------------+----------+--------------
+ title   | text | yes  | title      | extended | 
+ company | text | yes  | company    | extended | 
+btree, for table "public.scraped_jobs"
+
+               Index "public.idx_search_history_duplicate_breakdown"
+       Column        | Type | Key? |     Definition      | Storage  | Stats target 
+---------------------+------+------+---------------------+----------+--------------
+ duplicate_breakdown | text | yes  | duplicate_breakdown | extended | 
+gin, for table "public.search_history"
+
+           Index "public.idx_search_history_search_query"
+    Column    | Type | Key? |  Definition  | Storage  | Stats target 
+--------------+------+------+--------------+----------+--------------
+ search_query | text | yes  | search_query | extended | 
+btree, for table "public.search_history"
+
+           Index "public.idx_search_history_session_id"
+   Column   |  Type   | Key? | Definition | Storage | Stats target 
+------------+---------+------+------------+---------+--------------
+ session_id | integer | yes  | session_id | plain   | 
+btree, for table "public.search_history"
+
+            Index "public.idx_search_history_site_breakdown"
+     Column     | Type | Key? |   Definition   | Storage  | Stats target 
+----------------+------+------+----------------+----------+--------------
+ site_breakdown | text | yes  | site_breakdown | extended | 
+gin, for table "public.search_history"
+
+                      Index "public.idx_search_history_timestamp"
+  Column   |            Type             | Key? | Definition  | Storage | Stats target 
+-----------+-----------------------------+------+-------------+---------+--------------
+ timestamp | timestamp without time zone | yes  | "timestamp" | plain   | 
+btree, for table "public.search_history"
+
+                                                     Table "public.job_user_metadata"
+   Column   |            Type             | Collation | Nullable |      Default      | Storage  | Compression | Stats target | Description 
+------------+-----------------------------+-----------+----------+-------------------+----------+-------------+--------------+-------------
+ job_id     | text                        |           | not null |                   | extended |             |              | 
+ reviewed   | boolean                     |           |          | false             | plain    |             |              | 
+ status     | character varying(20)       |           |          |                   | extended |             |              | 
+ user_notes | text                        |           |          |                   | extended |             |              | 
+ created_at | timestamp without time zone |           |          | CURRENT_TIMESTAMP | plain    |             |              | 
+ updated_at | timestamp without time zone |           |          | CURRENT_TIMESTAMP | plain    |             |              | 
+Indexes:
+    "job_user_metadata_pkey" PRIMARY KEY, btree (job_id)
+    "idx_job_metadata_reviewed" btree (reviewed)
+    "idx_job_metadata_status" btree (status)
+Access method: heap
+
+            Index "public.job_user_metadata_pkey"
+ Column | Type | Key? | Definition | Storage  | Stats target 
+--------+------+------+------------+----------+--------------
+ job_id | text | yes  | job_id     | extended | 
+primary key, btree, for table "public.job_user_metadata"
+
+                                                                           Table "public.scraped_jobs"
+        Column         |            Type             | Collation | Nullable | Default | Storage  | Compression | Stats target |                    Description                    
+-----------------------+-----------------------------+-----------+----------+---------+----------+-------------+--------------+---------------------------------------------------
+ id                    | text                        |           | not null |         | extended |             |              | 
+ site                  | text                        |           |          |         | extended |             |              | 
+ job_url               | text                        |           |          |         | extended |             |              | 
+ job_url_direct        | text                        |           |          |         | extended |             |              | 
+ title                 | text                        |           |          |         | extended |             |              | 
+ company               | text                        |           |          |         | extended |             |              | 
+ location              | text                        |           |          |         | extended |             |              | 
+ date_posted           | text                        |           |          |         | extended |             |              | 
+ job_type              | text                        |           |          |         | extended |             |              | 
+ salary_source         | text                        |           |          |         | extended |             |              | 
+ interval              | text                        |           |          |         | extended |             |              | 
+ min_amount            | numeric(12,2)               |           |          |         | main     |             |              | Minimum salary amount in specified currency
+ max_amount            | numeric(12,2)               |           |          |         | main     |             |              | Maximum salary amount in specified currency
+ currency              | text                        |           |          |         | extended |             |              | 
+ is_remote             | boolean                     |           |          |         | plain    |             |              | Boolean flag indicating if job allows remote work
+ job_level             | text                        |           |          |         | extended |             |              | 
+ job_function          | text                        |           |          |         | extended |             |              | 
+ listing_type          | text                        |           |          |         | extended |             |              | 
+ emails                | text                        |           |          |         | extended |             |              | 
+ description           | text                        |           |          |         | extended |             |              | 
+ company_industry      | text                        |           |          |         | extended |             |              | 
+ company_url           | text                        |           |          |         | extended |             |              | 
+ company_logo          | text                        |           |          |         | extended |             |              | 
+ company_url_direct    | text                        |           |          |         | extended |             |              | 
+ company_addresses     | text                        |           |          |         | extended |             |              | 
+ company_num_employees | text                        |           |          |         | extended |             |              | 
+ company_revenue       | text                        |           |          |         | extended |             |              | 
+ company_description   | text                        |           |          |         | extended |             |              | 
+ skills                | text                        |           |          |         | extended |             |              | 
+ experience_range      | text                        |           |          |         | extended |             |              | 
+ company_rating        | text                        |           |          |         | extended |             |              | 
+ company_reviews_count | text                        |           |          |         | extended |             |              | 
+ vacancy_count         | text                        |           |          |         | extended |             |              | 
+ work_from_home_type   | text                        |           |          |         | extended |             |              | 
+ date_scraped          | timestamp without time zone |           |          |         | plain    |             |              | Timestamp when this job was scraped
+ search_query          | text                        |           |          |         | extended |             |              | Search query that found this job
+Indexes:
+    "scraped_jobs_pkey" PRIMARY KEY, btree (id)
+    "idx_scraped_jobs_company" btree (company)
+    "idx_scraped_jobs_company_location" btree (company, location)
+    "idx_scraped_jobs_date_posted" btree (date_posted)
+    "idx_scraped_jobs_date_scraped" btree (date_scraped)
+    "idx_scraped_jobs_description_gin" gin (description gin_trgm_ops)
+    "idx_scraped_jobs_is_remote" btree (is_remote)
+    "idx_scraped_jobs_location" btree (location)
+    "idx_scraped_jobs_search_query" btree (search_query)
+    "idx_scraped_jobs_search_query_lower" btree (lower(search_query))
+    "idx_scraped_jobs_site" btree (site)
+    "idx_scraped_jobs_title" btree (title)
+    "idx_scraped_jobs_title_company" btree (title, company)
+    "scraped_jobs_title_idx" gin (title gin_trgm_ops)
+Access method: heap
+
+              Index "public.scraped_jobs_pkey"
+ Column | Type | Key? | Definition | Storage  | Stats target 
+--------+------+------+------------+----------+--------------
+ id     | text | yes  | id         | extended | 
+primary key, btree, for table "public.scraped_jobs"
+
+             Index "public.scraped_jobs_title_idx"
+ Column |  Type   | Key? | Definition | Storage | Stats target 
+--------+---------+------+------------+---------+--------------
+ title  | integer | yes  | title      | plain   | 
+gin, for table "public.scraped_jobs"
+
+                                                                        Table "public.search_history"
+       Column        |            Type             | Collation | Nullable |                  Default                   | Storage  | Compression | Stats target | Description 
+---------------------+-----------------------------+-----------+----------+--------------------------------------------+----------+-------------+--------------+-------------
+ id                  | integer                     |           | not null | nextval('search_history_id_seq'::regclass) | plain    |             |              | 
+ search_query        | text                        |           |          |                                            | extended |             |              | 
+ parameters          | text                        |           |          |                                            | extended |             |              | 
+ timestamp           | timestamp without time zone |           |          |                                            | plain    |             |              | 
+ jobs_found          | integer                     |           |          |                                            | plain    |             |              | 
+ avg_salary          | numeric(12,2)               |           |          |                                            | main     |             |              | 
+ new_jobs_inserted   | integer                     |           |          |                                            | plain    |             |              | 
+ duration_seconds    | numeric                     |           |          |                                            | main     |             |              | 
+ site_breakdown      | jsonb                       |           |          |                                            | extended |             |              | 
+ duplicate_breakdown | jsonb                       |           |          |                                            | extended |             |              | 
+ remote_jobs_count   | integer                     |           |          |                                            | plain    |             |              | 
+ session_id          | integer                     |           |          |                                            | plain    |             |              | 
+Indexes:
+    "search_history_pkey" PRIMARY KEY, btree (id)
+    "idx_search_history_duplicate_breakdown" gin (duplicate_breakdown)
+    "idx_search_history_search_query" btree (search_query)
+    "idx_search_history_session_id" btree (session_id)
+    "idx_search_history_site_breakdown" gin (site_breakdown)
+    "idx_search_history_timestamp" btree ("timestamp")
+Foreign-key constraints:
+    "fk_search_sessions" FOREIGN KEY (session_id) REFERENCES search_sessions(id)
+Access method: heap
+
+               Sequence "public.search_history_id_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: public.search_history.id
+
+              Index "public.search_history_pkey"
+ Column |  Type   | Key? | Definition | Storage | Stats target 
+--------+---------+------+------------+---------+--------------
+ id     | integer | yes  | id         | plain   | 
+primary key, btree, for table "public.search_history"
+
+                                                                   Table "public.search_sessions"
+   Column   |            Type             | Collation | Nullable |                   Default                   | Storage  | Compression | Stats target | Description 
+------------+-----------------------------+-----------+----------+---------------------------------------------+----------+-------------+--------------+-------------
+ id         | integer                     |           | not null | nextval('search_sessions_id_seq'::regclass) | plain    |             |              | 
+ start_time | timestamp without time zone |           |          |                                             | plain    |             |              | 
+ end_time   | timestamp without time zone |           |          |                                             | plain    |             |              | 
+ status     | text                        |           |          |                                             | extended |             |              | 
+Indexes:
+    "search_sessions_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "search_history" CONSTRAINT "fk_search_sessions" FOREIGN KEY (session_id) REFERENCES search_sessions(id)
+Access method: heap
+
+               Sequence "public.search_sessions_id_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: public.search_sessions.id
+
+              Index "public.search_sessions_pkey"
+ Column |  Type   | Key? | Definition | Storage | Stats target 
+--------+---------+------+------------+---------+--------------
+ id     | integer | yes  | id         | plain   | 
+primary key, btree, for table "public.search_sessions"
+

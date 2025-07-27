@@ -1,5 +1,3 @@
-%aflac%
-%amazon%
 %Army%
 %aspen%
 %behavioral%
@@ -7,13 +5,9 @@
 %Chick-fil-A%
 %church%
 %cinnabon%
-%coin%
 %college%
-%comcast%
-%commission%only%
 %Commonwealth%
 %crypto%
-%cutco%
 %defense%
 %dental%
 %dentist%
@@ -22,64 +16,47 @@
 %directv%
 %dish%
 %district%
-%doordash%
 %Dunkin%
-%energy%consultant%
 %Fanatics%
 %farmers%insurance%
+%furniture%
 %government%
-%home%improvement%sales%
 %homeless%
-%instacart%
 %institute of%
 %jefferson county%
-%Kraken%
 %Latinx%
 %Lockheed%
 %lowe's%
-%lyft%
-%make%money%fast%
-%no%experience%necessary%
-%Pfizer%
+%municipal%
 %physician%
-%planet fitness%
-%primerica%
 %Probation%
 %recruiting%
+%sailpoint%
 %school%
 %sheriff%
-%solar%sales%
 %staffing%
 %State of%
 %state%farm%agent%
 %Summit County%
 %talent%solutions%
-%temp%agency%
 %the arc%
-%the buckle%
 %tri-state%
 %U.S. Army%
 %U.S. Marine Corps%
-%uber%
 %universal%
 %universit%
-%usaf%
 %USDA%
-%usmc%
 %vector%marketing%
 %veterin%
 %vets%
 %women%
-%work%from%home%opportunity%
 %workforce%
-%world%financial%group%
-%xfinity%
-%Yahoo%
 %ymca%
-%Youtube%
 24 Hour Fitness
 Advance Auto Parts
+Aflac
 Alea Partners
+Amazon.com
 American Eagle Outfitters
 apple
 Auto-Chlor System
@@ -88,29 +65,35 @@ AutoZone
 Bad Daddy's Burger Bar
 Bank of America
 beBee Careers
+BlackRock
 ByteDance
 Carl's Jr.
-Catholic
 Ceva Santé Animale
+Coinbase
+Comcast
 CVS Health
 Denver Health
 Denver Water
-Diocese of Corpus Christi
-Discovery Place
 DISH
 Dollar Tree Stores
+DoorDash
 Dow Jones
-DSW Designer Shoe Warehouse
+EchoStar
+Eli Lilly
 Five Below
 Foot Locker
 GameStop
+GEICO
 H&M GROUP
 Humane Society of Boulder Valley
+Instacart
 JCPenney
 King Soopers
 Kroger
 lenscrafters
 Little Caesars Pizza
+Lyft
+Moody's
 NASDAQ
 Navy Federal Credit Union
 Nebraska Furniture Mart Inc.
@@ -118,22 +101,27 @@ Oracle
 Papa Johns
 Petco
 petsmart
+Pfizer
 Pixel Plus
 Planet Fitness
+Primerica
 Qdoba
 Red Bull
 Robinhood
 S&P Global
-SERVPRO of South Bend, NE/W. St. Joseph County
-Shelby County, AL
 Snohomish County
 Somerset County
+Spectrum
 Spirit Halloween
+StarBucks
 State Air Resources Board
-Thayer County Health Services
+The Buckle, Inc.
 The City of Lynchburg
 TikTok
+Transunion
 Uber
+Uber
+Uberall
 uc %
 UChicago Medicine
 UFC GYM
@@ -142,10 +130,7 @@ UNICEF
 United Nations
 Upslope Brewing Company
 urban outfitters
-Vail
 Vail Resorts
-Virgin Pulse
-Virginia Cancer Specialists
 Virginia Garcia Memorial Health Center
 VirtualVocations
 visa
@@ -159,6 +144,5 @@ Westchester Medical Center Health Network
 Western Union
 Wetzel's Pretzels
 WeWork
-%palintir%
-%sailpoint%
-%starbucks%
+Yahoo
+YouTube

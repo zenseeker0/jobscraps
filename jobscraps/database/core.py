@@ -58,6 +58,13 @@ class JobDatabase(BackupMixin):
             logger.warning("Database connection error, reconnecting...")
             self._connect_with_retry()
 
+    def get_jobs_count(self) -> int:
+        """Get count of jobs without loading all data."""
+        self._ensure_connection()
+        with self.conn.cursor() as cursor:
+            cursor.execute("SELECT COUNT(*) FROM scraped_jobs")
+            return cursor.fetchone()[0]
+
     def create_tables(self) -> None:
         self._ensure_connection()
         with self.conn.cursor() as cursor:

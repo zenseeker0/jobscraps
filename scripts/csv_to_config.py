@@ -8,8 +8,31 @@ import ast
 from datetime import datetime
 
 # Input CSV and output JSON filenames
-INPUT_CSV = '/Users/jonesy/gitlocal/jobscraps/configs/search/search_queries.csv'
-OUTPUT_JSON = '/Users/jonesy/gitlocal/jobscraps/configs/search/job_search_config.json'
+# Try to find the CSV file in multiple locations
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+
+# Possible CSV locations
+csv_locations = [
+    '/Users/jonesy/gitlocal/jobscraps/configs/search/search_queries.csv',
+    os.path.join(project_root, 'configs', 'search', 'search_queries.csv'),
+    'configs/search/search_queries.csv',
+    '../configs/search/search_queries.csv'
+]
+
+INPUT_CSV = None
+for csv_path in csv_locations:
+    if os.path.exists(csv_path):
+        INPUT_CSV = csv_path
+        break
+
+if INPUT_CSV is None:
+    print("Error: Could not find search_queries.csv in any of these locations:")
+    for loc in csv_locations:
+        print(f"  - {loc}")
+    exit(1)
+
+OUTPUT_JSON = os.path.join(os.path.dirname(INPUT_CSV), 'job_search_config.json')
 
 # Global section defaults (removed distance - now per-search)
 GLOBAL_CONFIG = {
@@ -38,14 +61,31 @@ def version_existing_file(path):
         print(f"Existing '{path}' renamed to '{new_name}'")
 
 
+
+
+
 def load_jobs_from_csv(csv_path):
     """
     Read the CSV file and convert each row into a job config dict.
     """
     jobs = []
-    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+    print(f"Opening CSV file: {csv_path}")
+    
+    with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:  # utf-8-sig handles BOM
         reader = csv.DictReader(csvfile)
+        
+        # Debug: Print headers
+        print(f"CSV Headers: {reader.fieldnames}")
+        
+        row_count = 0
         for row in reader:
+            row_count += 1
+            
+            # Debug: Print first few rows
+            if row_count <= 3:
+                print(f"Row {row_count}: name='{row.get('name', 'NOT_FOUND')}'")
+            
+            # Use name directly from CSV
             name = row.get('name', '').strip()
             enabled = parse_bool(row.get('enabled', 'True'))
 
@@ -83,10 +123,15 @@ def load_jobs_from_csv(csv_path):
                 'enabled': enabled,
                 'parameters': params
             })
+    
+    print(f"Loaded {len(jobs)} jobs from CSV")
     return jobs
 
 
 def main():
+    print(f"Using CSV file: {INPUT_CSV}")
+    print(f"Output JSON file: {OUTPUT_JSON}")
+    
     # Version any existing config
     version_existing_file(OUTPUT_JSON)
 
@@ -103,6 +148,16 @@ def main():
     with open(OUTPUT_JSON, 'w', encoding='utf-8') as out:
         json.dump(config, out, indent=2)
     print(f"Created new config file: '{OUTPUT_JSON}' with {len(jobs)} jobs.")
+    
+    # Print first few job names for verification
+    print("\nFirst 5 job names from CSV:")
+    for i, job in enumerate(jobs[:5]):
+        print(f"  {i+1}. '{job['name']}'")
+    
+    # Check for any empty names
+    empty_names = [i for i, job in enumerate(jobs) if not job['name']]
+    if empty_names:
+        print(f"\nWarning: Found {len(empty_names)} jobs with empty names at rows: {[i+2 for i in empty_names]}")  # +2 for 1-based + header
 
 
 if __name__ == '__main__':

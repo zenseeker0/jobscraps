@@ -327,7 +327,7 @@ class JobScraper:
                 
                 try:
                     # Get initial count
-                    initial_count = working_scraper.db.get_all_jobs().shape[0]
+                    initial_count = working_scraper.db.get_jobs_count()
                     console.info(f"Initial job count in working database: {initial_count}")
                     
                     # Run cleaning workflows in optimized order (fastest deletions first)
@@ -336,7 +336,7 @@ class JobScraper:
                     console.info("1. Deleting jobs by salary thresholds (fastest, removes most jobs)...")
                     working_cleaner.delete_jobs_by_salary()
                     
-                    remaining_after_salary = working_scraper.db.get_all_jobs().shape[0]
+                    remaining_after_salary = working_scraper.db.get_jobs_count()
                     step_time = time.time() - step_start
                     console.info(f"   Jobs remaining after salary filter: {remaining_after_salary:,} ({step_time:.1f}s)")
                     
@@ -344,7 +344,7 @@ class JobScraper:
                     console.info("2. Deleting jobs by company patterns...")
                     working_cleaner.delete_jobs_by_company()
                     
-                    remaining_after_company = working_scraper.db.get_all_jobs().shape[0]
+                    remaining_after_company = working_scraper.db.get_jobs_count()
                     step_time = time.time() - step_start
                     console.info(f"   Jobs remaining after company filter: {remaining_after_company:,} ({step_time:.1f}s)")
                     
@@ -352,7 +352,7 @@ class JobScraper:
                     console.info("3. Deleting jobs by title patterns...")
                     working_cleaner.delete_jobs_by_title()
                     
-                    remaining_after_title = working_scraper.db.get_all_jobs().shape[0]
+                    remaining_after_title = working_scraper.db.get_jobs_count()
                     step_time = time.time() - step_start
                     console.info(f"   Jobs remaining after title filter: {remaining_after_title:,} ({step_time:.1f}s)")
                     
@@ -361,7 +361,7 @@ class JobScraper:
                     duplicates_deleted = working_cleaner._process_duplicates_auto()
                     
                     # Get final counts
-                    final_count = working_scraper.db.get_all_jobs().shape[0]
+                    final_count = working_scraper.db.get_jobs_count()
                     removed_count = initial_count - final_count
                     removal_percentage = (removed_count / initial_count * 100) if initial_count > 0 else 0
                     duplicate_time = time.time() - step_start

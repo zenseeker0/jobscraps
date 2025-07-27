@@ -1,0 +1,427 @@
+{
+  "jobs": [
+    {
+      "name": "Professional Services Consultant (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Boulder, CO",
+        "google_search_term": "Professional Services Consultant jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Professional Services Consultant (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Professional Services Consultant",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Professional Services Consultant jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Boulder, CO",
+        "google_search_term": "(Partner Enablement) OR (Partner Onboarding) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Partner Enablement and Onboarding (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Partner Enablement) OR (Partner Onboarding)",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote (Partner Enablement) OR (Partner Onboarding) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Boulder, CO",
+        "google_search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Consultant (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant)",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote (Implementation Consultant) OR (Integration Consultant) OR (Deployment Consultant) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Boulder, CO",
+        "google_search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Specialist (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist)",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote (Implementation Specialist) OR (Integration Specialist) OR (Deployment Specialist) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Boulder, CO",
+        "google_search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Implementation, Integration, Deployment Engineer (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "(Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer)",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote (Implementation Engineer) OR (Integration Engineer) OR (Deployment Engineer) jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Program Manager (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Program Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Program Manager (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Program Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Technical Program Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Data Analyst (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Data Analyst jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Data Analyst (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Data Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Data Analyst jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Operations Analyst (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Operations Analyst jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Operations Analyst (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Operations Analyst",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Operations Analyst jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Solutions Consultant (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Boulder, CO",
+        "google_search_term": "Solutions Consultant jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Solutions Consultant (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Solutions Consultant",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Solutions Consultant jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Technical Account Manager (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Technical Account Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Technical Account Manager (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Technical Account Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Technical Account Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    },
+    {
+      "name": "Customer Success Manager (Boulder, Local)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Customer Success Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500,
+        "distance": 25
+      }
+    },
+    {
+      "name": "Customer Success Manager (Boulder, Remote)",
+      "enabled": true,
+      "parameters": {
+        "site_name": [
+          "indeed",
+          "linkedin",
+          "google"
+        ],
+        "search_term": "Customer Success Manager",
+        "location": "Boulder, CO",
+        "google_search_term": "Remote Customer Success Manager jobs near Boulder CO since yesterday",
+        "country_indeed": "USA",
+        "is_remote": true,
+        "linkedin_fetch_description": true,
+        "hours_old": 24,
+        "results_wanted": 1500
+      }
+    }
+  ],
+  "global": {
+    "description_format": "markdown",
+    "enforce_annual_salary": true,
+    "verbose": 2
+  }
+}
