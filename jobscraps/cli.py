@@ -91,6 +91,42 @@ def delete_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000
         raise typer.Exit(code=1)
     get_orchestrator(ctx).data_cleaner.delete_jobs_by_salary(min_sal, max_sal)
 
+# NEW EXCLUSION COMMANDS
+@app.command("mark-excluded-by-ids")
+def mark_excluded_by_ids(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File containing job IDs"), reason: str = typer.Option("manual", help="Exclusion reason")):
+    """Mark jobs as excluded using IDs from a file (preserves data)."""
+    get_orchestrator(ctx).data_cleaner.mark_excluded_by_ids(file, reason)
+
+@app.command("mark-excluded-by-company")
+def mark_excluded_by_company(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with company patterns"), reason: str = typer.Option("company_filter", help="Exclusion reason")):
+    """Mark jobs as excluded by company patterns (preserves data)."""
+    get_orchestrator(ctx).data_cleaner.mark_excluded_by_company(file, reason)
+
+@app.command("mark-excluded-by-title")
+def mark_excluded_by_title(ctx: typer.Context, file: Optional[str] = typer.Argument(None, help="File with title patterns"), reason: str = typer.Option("title_filter", help="Exclusion reason")):
+    """Mark jobs as excluded by title patterns (preserves data)."""
+    get_orchestrator(ctx).data_cleaner.mark_excluded_by_title(file, reason)
+
+@app.command("mark-excluded-by-salary")
+def mark_excluded_by_salary(ctx: typer.Context, thresholds: str = typer.Argument("70000,90000", help="MIN,MAX salary thresholds"), reason: str = typer.Option("salary_filter", help="Exclusion reason")):
+    """Mark jobs as excluded with salaries below thresholds (preserves data)."""
+    try:
+        min_sal, max_sal = map(int, thresholds.split(','))
+    except ValueError:
+        typer.echo("Invalid salary format. Use MIN,MAX")
+        raise typer.Exit(code=1)
+    get_orchestrator(ctx).data_cleaner.mark_excluded_by_salary(min_sal, max_sal, reason)
+
+@app.command("apply-filtering-rules")
+def apply_filtering_rules(ctx: typer.Context):
+    """Apply all filtering rules from config files to mark jobs as excluded."""
+    get_orchestrator(ctx).data_cleaner.apply_filtering_rules()
+
+@app.command("unmark-excluded")
+def unmark_excluded(ctx: typer.Context, reason: Optional[str] = typer.Option(None, help="Only unmark jobs excluded for this reason")):
+    """Remove exclusion marks from jobs (makes them visible again)."""
+    get_orchestrator(ctx).data_cleaner.unmark_excluded(reason)
+
 @app.command("backup-reset")
 def backup_reset(ctx: typer.Context):
     """Backup the database and clear all data."""
