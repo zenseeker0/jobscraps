@@ -66,80 +66,129 @@ class JobDatabase(BackupMixin):
             return cursor.fetchone()[0]
 
     def create_tables(self) -> None:
+        """Create all database tables, indexes, and views for complete schema."""
         self._ensure_connection()
+        
+        # Helper function to execute with rollback protection
+        def safe_execute(cursor, query, description="operation"):
+            try:
+                cursor.execute(query)
+                return True
+            except Exception as exc:
+                logger.warning("%s warning: %s", description, exc)
+                try:
+                    self.conn.rollback()
+                except:
+                    pass
+                return False
+        
         with self.conn.cursor() as cursor:
-            cursor.execute(
-                """
-            CREATE TABLE IF NOT EXISTS scraped_jobs (
-                id TEXT PRIMARY KEY,
-                site TEXT,
-                job_url TEXT,
-                job_url_direct TEXT,
-                title TEXT,
-                company TEXT,
-                location TEXT,
-                date_posted TEXT,
-                job_type TEXT,
-                salary_source TEXT,
-                interval TEXT,
-                min_amount DECIMAL(12,2),
-                max_amount DECIMAL(12,2),
-                currency TEXT,
-                is_remote BOOLEAN,
-                job_level TEXT,
-                job_function TEXT,
-                listing_type TEXT,
-                emails TEXT,
-                description TEXT,
-                company_industry TEXT,
-                company_url TEXT,
-                company_logo TEXT,
-                company_url_direct TEXT,
-                company_addresses TEXT,
-                company_num_employees TEXT,
-                company_revenue TEXT,
-                company_description TEXT,
-                skills TEXT,
-                experience_range TEXT,
-                company_rating TEXT,
-                company_reviews_count TEXT,
-                vacancy_count TEXT,
-                work_from_home_type TEXT,
-                date_scraped TIMESTAMP,
-                search_query TEXT
-            )
-            """
-            )
-            cursor.execute(
-                """
-            CREATE TABLE IF NOT EXISTS search_sessions (
-                id SERIAL PRIMARY KEY,
-                start_time TIMESTAMP,
-                end_time TIMESTAMP,
-                status TEXT
-            )
-            """
-            )
-            cursor.execute(
-                """
-            CREATE TABLE IF NOT EXISTS search_history (
-                id SERIAL PRIMARY KEY,
-                session_id INTEGER REFERENCES search_sessions(id),
-                search_query TEXT,
-                parameters TEXT,
-                new_jobs_inserted INTEGER,
-                duration_seconds NUMERIC,
-                site_breakdown JSONB,
-                duplicate_breakdown JSONB,
-                remote_jobs_count INTEGER,
-                avg_salary NUMERIC(12,2),
-                timestamp TIMESTAMP,
-                jobs_found INTEGER
-            )
-            """
-            )
-            cursor.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm")
-            index_queries = [
+            # Create main tables - these are fast operations
+            logger.info("Creating/verifying main tables...")
+            
+            safe_execute(cursor, """
+                CREATE TABLE IF NOT EXISTS scraped_jobs (
+                    id TEXT PRIMARY KEY,
+                    site TEXT,
+                    job_url TEXT,
+                    job_url_direct TEXT,
+                    title TEXT,
+                    company TEXT,
+                    location TEXT,
+                    date_posted TEXT,
+                    job_type TEXT,
+                    salary_source TEXT,
+                    interval TEXT,
+                    min_amount DECIMAL(12,2),
+                    max_amount DECIMAL(12,2),
+                    currency TEXT,
+                    is_remote BOOLEAN,
+                    job_level TEXT,
+                    job_function TEXT,
+                    listing_type TEXT,
+                    emails TEXT,
+                    description TEXT,
+                    company_industry TEXT,
+                    company_url TEXT,
+                    company_logo TEXT,
+                    company_url_direct TEXT,
+                    company_addresses TEXT,
+                    company_num_employees TEXT,
+                    company_revenue TEXT,
+                    company_description TEXT,
+                    skills TEXT,
+                    experience_range TEXT,
+                    company_rating TEXT,
+                    company_reviews_count TEXT,
+                    vacancy_count TEXT,
+                    work_from_home_type TEXT,
+                    date_scraped TIMESTAMP,
+                    search_query TEXT
+                )
+            """, "scraped_jobs table creation")
+            
+            safe_execute(cursor, """
+                CREATE TABLE IF NOT EXISTS search_sessions (
+                    id SERIAL PRIMARY KEY,
+                    start_time TIMESTAMP,
+                    end_time TIMESTAMP,
+                    status TEXT
+                )
+            """, "search_sessions table creation")
+            
+            safe_execute(cursor, """
+                CREATE TABLE IF NOT EXISTS search_history (
+                    id SERIAL PRIMARY KEY,
+                    session_id INTEGER REFERENCES search_sessions(id),
+                    search_query TEXT,
+                    parameters TEXT,
+                    new_jobs_inserted INTEGER,
+                    duration_seconds NUMERIC,
+                    site_breakdown JSONB,
+                    duplicate_breakdown JSONB,
+                    remote_jobs_count INTEGER,
+                    avg_salary NUMERIC(12,2),
+                    timestamp TIMESTAMP,
+                    jobs_found INTEGER
+                )
+            """, "search_history table creation")
+            
+            # Create user metadata tables
+            safe_execute(cursor, """
+                CREATE TABLE IF NOT EXISTS job_user_metadata (
+                    job_id TEXT PRIMARY KEY,
+                    reviewed BOOLEAN DEFAULT false,
+                    status VARCHAR(20),
+                    user_notes TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    excluded BOOLEAN DEFAULT false,
+                    exclusion_reason TEXT
+                )
+            """, "job_user_metadata table creation")
+            
+            safe_execute(cursor, """
+                CREATE TABLE IF NOT EXISTS company_user_metadata (
+                    company_name TEXT PRIMARY KEY,
+                    status VARCHAR(20),
+                    notes TEXT,
+                    appeal_factors TEXT,
+                    application_history JSONB,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """, "company_user_metadata table creation")
+            
+            # Create extensions
+            safe_execute(cursor, "CREATE EXTENSION IF NOT EXISTS pg_trgm", "pg_trgm extension")
+            
+            self.conn.commit()
+            logger.info("Main tables created/verified successfully")
+            
+            # Create basic indexes (fast operations)
+            logger.info("Creating/verifying basic indexes...")
+            basic_indexes = [
+                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_id ON scraped_jobs(id)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_title ON scraped_jobs(title)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_company ON scraped_jobs(company)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_location ON scraped_jobs(location)",
@@ -148,23 +197,230 @@ class JobDatabase(BackupMixin):
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_posted ON scraped_jobs(date_posted)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_date_scraped ON scraped_jobs(date_scraped)",
                 "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_search_query ON scraped_jobs(search_query)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_search_query_lower ON scraped_jobs(LOWER(search_query))",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_title_company ON scraped_jobs(title, company)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_company_location ON scraped_jobs(company, location)",
-                "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_search_query ON search_history(search_query)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_timestamp ON search_history(timestamp)",
                 "CREATE INDEX IF NOT EXISTS idx_search_history_session_id ON search_history(session_id)",
-                "CREATE INDEX IF NOT EXISTS idx_search_history_site_breakdown ON search_history USING gin (site_breakdown)",
-                "CREATE INDEX IF NOT EXISTS idx_search_history_duplicate_breakdown ON search_history USING gin (duplicate_breakdown)",
+                "CREATE INDEX IF NOT EXISTS idx_job_metadata_status ON job_user_metadata(status)",
+                "CREATE INDEX IF NOT EXISTS idx_job_metadata_reviewed ON job_user_metadata(reviewed)",
+                "CREATE INDEX IF NOT EXISTS idx_job_metadata_excluded ON job_user_metadata(excluded)",
+                "CREATE INDEX IF NOT EXISTS idx_company_metadata_status ON company_user_metadata(status)",
             ]
-            for query in index_queries:
-                try:
-                    cursor.execute(query)
-                except Exception as exc:  # pylint: disable=broad-except
-                    logger.warning("Index creation warning: %s", exc)
+            
+            for query in basic_indexes:
+                safe_execute(cursor, query, "basic index creation")
+            
             self.conn.commit()
-            logger.info("Database tables and indexes created/verified successfully")
+            logger.info("Basic indexes created/verified successfully")
+            
+            # Create expensive indexes only if they don't exist (these can timeout on large datasets)
+            logger.info("Checking expensive indexes...")
+            expensive_indexes = [
+                ("idx_scraped_jobs_description_gin", "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_description_gin ON scraped_jobs USING gin (description gin_trgm_ops)"),
+                ("scraped_jobs_title_idx", "CREATE INDEX IF NOT EXISTS scraped_jobs_title_idx ON scraped_jobs USING gin (title gin_trgm_ops)"),
+                ("idx_scraped_jobs_search_query_lower", "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_search_query_lower ON scraped_jobs(LOWER(search_query))"),
+                ("idx_scraped_jobs_title_company", "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_title_company ON scraped_jobs(title, company)"),
+                ("idx_scraped_jobs_company_location", "CREATE INDEX IF NOT EXISTS idx_scraped_jobs_company_location ON scraped_jobs(company, location)"),
+                ("idx_search_history_site_breakdown", "CREATE INDEX IF NOT EXISTS idx_search_history_site_breakdown ON search_history USING gin (site_breakdown)"),
+                ("idx_search_history_duplicate_breakdown", "CREATE INDEX IF NOT EXISTS idx_search_history_duplicate_breakdown ON search_history USING gin (duplicate_breakdown)"),
+            ]
+            
+            for index_name, query in expensive_indexes:
+                # Check if index already exists
+                cursor.execute("""
+                    SELECT 1 FROM pg_indexes 
+                    WHERE indexname = %s AND tablename IN ('scraped_jobs', 'search_history')
+                """, (index_name,))
+                
+                if cursor.fetchone() is None:
+                    logger.info("Creating expensive index: %s (this may take a while...)", index_name)
+                    if safe_execute(cursor, query, f"expensive index {index_name}"):
+                        try:
+                            self.conn.commit()
+                            logger.info("Successfully created index: %s", index_name)
+                        except Exception as e:
+                            logger.warning("Failed to commit index %s: %s", index_name, e)
+                            try:
+                                self.conn.rollback()
+                            except:
+                                pass
+                    else:
+                        logger.warning("Skipped problematic index: %s", index_name)
+                else:
+                    logger.info("Index %s already exists, skipping", index_name)
+            
+            # Create all views
+            logger.info("Creating/updating database views...")
+            
+            # Main job board view with metadata
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_main AS
+                SELECT 
+                    s.id,
+                    s.site,
+                    s.job_url,
+                    s.job_url_direct,
+                    s.title,
+                    s.company,
+                    s.location,
+                    s.date_posted,
+                    s.job_type,
+                    s.salary_source,
+                    s.interval,
+                    s.min_amount,
+                    s.max_amount,
+                    s.currency,
+                    s.is_remote,
+                    s.job_level,
+                    s.job_function,
+                    s.listing_type,
+                    s.emails,
+                    s.description,
+                    s.company_industry,
+                    s.company_url,
+                    s.company_logo,
+                    s.company_url_direct,
+                    s.company_addresses,
+                    s.company_num_employees,
+                    s.company_revenue,
+                    s.company_description,
+                    s.skills,
+                    s.experience_range,
+                    s.company_rating,
+                    s.company_reviews_count,
+                    s.vacancy_count,
+                    s.work_from_home_type,
+                    s.date_scraped,
+                    s.search_query,
+                    COALESCE(jum.status, 'unreviewed') AS status,
+                    jum.user_notes,
+                    COALESCE(jum.reviewed, false) AS reviewed,
+                    COALESCE(jum.excluded, false) AS excluded,
+                    jum.exclusion_reason
+                FROM scraped_jobs s
+                LEFT JOIN job_user_metadata jum ON s.id = jum.job_id
+                WHERE COALESCE(jum.excluded, false) = false
+            """, "job_board_main view creation")
+            
+            # Job details view (same as main but doesn't filter exclusions)
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_details AS
+                SELECT 
+                    s.id,
+                    s.site,
+                    s.job_url,
+                    s.job_url_direct,
+                    s.title,
+                    s.company,
+                    s.location,
+                    s.date_posted,
+                    s.job_type,
+                    s.salary_source,
+                    s.interval,
+                    s.min_amount,
+                    s.max_amount,
+                    s.currency,
+                    s.is_remote,
+                    s.job_level,
+                    s.job_function,
+                    s.listing_type,
+                    s.emails,
+                    s.description,
+                    s.company_industry,
+                    s.company_url,
+                    s.company_logo,
+                    s.company_url_direct,
+                    s.company_addresses,
+                    s.company_num_employees,
+                    s.company_revenue,
+                    s.company_description,
+                    s.skills,
+                    s.experience_range,
+                    s.company_rating,
+                    s.company_reviews_count,
+                    s.vacancy_count,
+                    s.work_from_home_type,
+                    s.date_scraped,
+                    s.search_query,
+                    COALESCE(jum.status, 'unreviewed') AS status,
+                    jum.user_notes,
+                    COALESCE(jum.reviewed, false) AS reviewed,
+                    COALESCE(jum.excluded, false) AS excluded,
+                    jum.exclusion_reason
+                FROM scraped_jobs s
+                LEFT JOIN job_user_metadata jum ON s.id = jum.job_id
+                WHERE COALESCE(jum.excluded, false) = false
+            """, "job_details view creation")
+            
+            # Filtered views
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_applied AS
+                SELECT * FROM job_board_main
+                WHERE status = 'applied'
+            """, "job_board_applied view creation")
+            
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_needs_review AS
+                SELECT * FROM job_board_main
+                WHERE reviewed = false
+            """, "job_board_needs_review view creation")
+            
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_remote AS
+                SELECT * FROM job_board_main
+                WHERE is_remote = true
+            """, "job_board_remote view creation")
+            
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_with_salary AS
+                SELECT * FROM job_board_main
+                WHERE min_amount IS NOT NULL OR max_amount IS NOT NULL
+            """, "job_board_with_salary view creation")
+            
+            # Export view (includes all columns)
+            safe_execute(cursor, """
+                CREATE OR REPLACE VIEW job_board_export AS
+                SELECT * FROM job_board_main
+            """, "job_board_export view creation")
+            
+            # Create updated_at trigger function and triggers
+            logger.info("Creating/updating database triggers...")
+            
+            safe_execute(cursor, """
+                CREATE OR REPLACE FUNCTION update_updated_at_column()
+                RETURNS TRIGGER AS 
+                $$
+                BEGIN
+                    NEW.updated_at = CURRENT_TIMESTAMP;
+                    RETURN NEW;
+                END;
+                $$ 
+                LANGUAGE plpgsql
+            """, "update_updated_at_column function creation")
+            
+            safe_execute(cursor, """
+                DROP TRIGGER IF EXISTS update_job_user_metadata_updated_at ON job_user_metadata
+            """, "job_user_metadata trigger drop")
+            
+            safe_execute(cursor, """
+                CREATE TRIGGER update_job_user_metadata_updated_at
+                    BEFORE UPDATE ON job_user_metadata
+                    FOR EACH ROW
+                    EXECUTE FUNCTION update_updated_at_column()
+            """, "job_user_metadata trigger creation")
+            
+            safe_execute(cursor, """
+                DROP TRIGGER IF EXISTS update_company_user_metadata_updated_at ON company_user_metadata
+            """, "company_user_metadata trigger drop")
+            
+            safe_execute(cursor, """
+                CREATE TRIGGER update_company_user_metadata_updated_at
+                    BEFORE UPDATE ON company_user_metadata
+                    FOR EACH ROW
+                    EXECUTE FUNCTION update_updated_at_column()
+            """, "company_user_metadata trigger creation")
+            
+            self.conn.commit()
+            logger.info("Database tables, indexes, views, and triggers created/verified successfully")
 
     def insert_jobs(
         self, jobs_df: pd.DataFrame, search_query: str
@@ -526,6 +782,212 @@ class JobDatabase(BackupMixin):
             logger.error("Error deleting jobs by %s: %s", field, exc)
             return 0
 
+    def mark_jobs_excluded_by_ids(self, job_ids: List[str], reason: str = "manual") -> int:
+        """Mark jobs as excluded by their IDs (preserves data) - OPTIMIZED."""
+        self._ensure_connection()
+        try:
+            if not job_ids:
+                logger.warning("No job IDs provided")
+                return 0
+
+            with self.conn.cursor() as cursor:
+                # Batch operation using execute_values
+                batch_data = [(job_id, True, reason, True) for job_id in job_ids]
+                
+                psycopg2.extras.execute_values(
+                    cursor,
+                    """
+                    INSERT INTO job_user_metadata (job_id, excluded, exclusion_reason, reviewed, created_at, updated_at)
+                    VALUES %s
+                    ON CONFLICT (job_id) DO UPDATE SET
+                        excluded = EXCLUDED.excluded,
+                        exclusion_reason = EXCLUDED.exclusion_reason,
+                        reviewed = EXCLUDED.reviewed,
+                        updated_at = CURRENT_TIMESTAMP
+                    """,
+                    batch_data,
+                    template="(%s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)",
+                    page_size=1000
+                )
+                
+                rows_marked = cursor.rowcount
+                self.conn.commit()
+            
+            logger.info("Marked %s jobs as excluded by ID (reason: %s)", rows_marked, reason)
+            return rows_marked
+            
+        except Exception as exc:
+            self.conn.rollback()
+            logger.error("Error marking jobs as excluded by IDs: %s", exc)
+            return 0
+
+    def mark_jobs_excluded_by_field(self, field: str, patterns: List[str], reason: str) -> int:
+        """Mark jobs as excluded by field patterns (preserves data) - OPTIMIZED."""
+        self._ensure_connection()
+        try:
+            if not patterns:
+                logger.warning("No patterns provided")
+                return 0
+
+            valid_fields = {"company", "title"}
+            if field not in valid_fields:
+                logger.error("Invalid field name: %s", field)
+                return 0
+
+            # Separate wildcard patterns from exact matches
+            wildcard_patterns = [p for p in patterns if '%' in p]
+            exact_patterns = [p for p in patterns if '%' not in p]
+
+            all_matching_ids = set()
+            
+            with self.conn.cursor() as cursor:
+                
+                # Process wildcard patterns in batch using ANY()
+                if wildcard_patterns:
+                    query = sql.SQL("SELECT DISTINCT id FROM scraped_jobs WHERE {} ILIKE ANY(%s)").format(
+                        sql.Identifier(field)
+                    )
+                    cursor.execute(query, (wildcard_patterns,))
+                    wildcard_matches = {row[0] for row in cursor.fetchall()}
+                    all_matching_ids.update(wildcard_matches)
+                    logger.info("Found %d jobs matching %d wildcard patterns", len(wildcard_matches), len(wildcard_patterns))
+
+                # Process exact patterns in batch using ANY() with LOWER()
+                if exact_patterns:
+                    # Convert to lowercase for comparison
+                    exact_patterns_lower = [p.lower() for p in exact_patterns]
+                    query = sql.SQL("SELECT DISTINCT id FROM scraped_jobs WHERE LOWER({}) = ANY(%s)").format(
+                        sql.Identifier(field)
+                    )
+                    cursor.execute(query, (exact_patterns_lower,))
+                    exact_matches = {row[0] for row in cursor.fetchall()}
+                    all_matching_ids.update(exact_matches)
+                    logger.info("Found %d jobs matching %d exact patterns", len(exact_matches), len(exact_patterns))
+
+                # Batch insert/update all matching jobs at once
+                if all_matching_ids:
+                    # Convert to list for batch processing
+                    matching_ids_list = list(all_matching_ids)
+                    
+                    # Process in batches of 1000 to avoid memory issues
+                    batch_size = 1000
+                    total_processed = 0
+                    
+                    for i in range(0, len(matching_ids_list), batch_size):
+                        batch = matching_ids_list[i:i + batch_size]
+                        
+                        # Prepare batch data for INSERT...ON CONFLICT
+                        batch_data = [(job_id, True, reason, True) for job_id in batch]
+                        
+                        # Single batch operation
+                        psycopg2.extras.execute_values(
+                            cursor,
+                            """
+                            INSERT INTO job_user_metadata (job_id, excluded, exclusion_reason, reviewed, created_at, updated_at)
+                            VALUES %s
+                            ON CONFLICT (job_id) DO UPDATE SET
+                                excluded = EXCLUDED.excluded,
+                                exclusion_reason = EXCLUDED.exclusion_reason,
+                                reviewed = EXCLUDED.reviewed,
+                                updated_at = CURRENT_TIMESTAMP
+                            """,
+                            batch_data,
+                            template="(%s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)",
+                            page_size=1000
+                        )
+                        
+                        total_processed += len(batch)
+                        if len(matching_ids_list) > batch_size:
+                            logger.info("Processed %d/%d jobs...", total_processed, len(matching_ids_list))
+
+                self.conn.commit()
+            
+            rows_marked = len(all_matching_ids)
+            logger.info("Marked %s jobs as excluded by %s patterns (reason: %s)", rows_marked, field, reason)
+            logger.info("  - Wildcard patterns: %d", len(wildcard_patterns))
+            logger.info("  - Exact patterns: %d", len(exact_patterns))
+            return rows_marked
+            
+        except Exception as exc:
+            self.conn.rollback()
+            logger.error("Error marking jobs as excluded by %s: %s", field, exc)
+            return 0
+
+    def mark_jobs_excluded_by_salary(self, min_threshold: int = 70000, max_threshold: int = 90000, reason: str = "salary_filter") -> int:
+        """Mark jobs as excluded with salaries below thresholds (preserves data) - OPTIMIZED."""
+        self._ensure_connection()
+        try:
+            with self.conn.cursor() as cursor:
+                # Single query to find all matching jobs and insert/update in one operation
+                cursor.execute("""
+                    INSERT INTO job_user_metadata (job_id, excluded, exclusion_reason, reviewed, created_at, updated_at)
+                    SELECT 
+                        s.id,
+                        true,
+                        %s,
+                        true,
+                        CURRENT_TIMESTAMP,
+                        CURRENT_TIMESTAMP
+                    FROM scraped_jobs s
+                    LEFT JOIN job_user_metadata jum ON s.id = jum.job_id
+                    WHERE (s.min_amount IS NOT NULL AND s.min_amount != 0 AND s.min_amount < %s AND s.max_amount < %s) 
+                       OR (s.min_amount IS NOT NULL AND s.min_amount >= %s AND s.max_amount IS NOT NULL AND s.max_amount < %s)
+                    ON CONFLICT (job_id) DO UPDATE SET
+                        excluded = true,
+                        exclusion_reason = EXCLUDED.exclusion_reason,
+                        reviewed = true,
+                        updated_at = CURRENT_TIMESTAMP
+                """, (reason, min_threshold, max_threshold, min_threshold, max_threshold))
+                
+                rows_marked = cursor.rowcount
+                self.conn.commit()
+            
+            logger.info(
+                "Marked %s jobs as excluded with salaries below thresholds (min: %s, max: %s, reason: %s)",
+                rows_marked, min_threshold, max_threshold, reason
+            )
+            return rows_marked
+            
+        except Exception as exc:
+            self.conn.rollback()
+            logger.error("Error marking jobs as excluded by salary: %s", exc)
+            return 0
+
+    def unmark_jobs_excluded(self, reason: Optional[str] = None) -> int:
+        """Remove exclusion marks from jobs (makes them visible again)."""
+        self._ensure_connection()
+        try:
+            rows_unmarked = 0
+            with self.conn.cursor() as cursor:
+                if reason:
+                    # Unmark only jobs excluded for specific reason
+                    cursor.execute("""
+                        UPDATE job_user_metadata 
+                        SET excluded = false, exclusion_reason = NULL, updated_at = CURRENT_TIMESTAMP
+                        WHERE excluded = true AND exclusion_reason = %s
+                    """, (reason,))
+                else:
+                    # Unmark all excluded jobs
+                    cursor.execute("""
+                        UPDATE job_user_metadata 
+                        SET excluded = false, exclusion_reason = NULL, updated_at = CURRENT_TIMESTAMP
+                        WHERE excluded = true
+                    """)
+                
+                rows_unmarked = cursor.rowcount
+                self.conn.commit()
+            
+            if reason:
+                logger.info("Unmarked %s jobs excluded for reason: %s", rows_unmarked, reason)
+            else:
+                logger.info("Unmarked %s jobs (all exclusions removed)", rows_unmarked)
+            return rows_unmarked
+            
+        except Exception as exc:
+            self.conn.rollback()
+            logger.error("Error unmarking excluded jobs: %s", exc)
+            return 0
+
     def close(self) -> None:
         if self.conn and not self.conn.closed:
             self.conn.close()
@@ -555,4 +1017,3 @@ def get_connection(
 ) -> JobDatabase:
     """Convenience wrapper for ConnectionPool.get_connection."""
     return ConnectionPool.get_connection(config_path, database_type)
-
